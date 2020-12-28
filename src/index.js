@@ -1,17 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const startApp = () => {
+    const canvas = document.getElementById('canvas');
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    const engine = new BABYLON.Engine(canvas, true);
+
+    const createScene = () => {
+        const scene = new BABYLON.Scene(engine);
+        scene.clearColor = new BABYLON.Color3.Green();
+
+        // create the camera
+        const camera = new BABYLON.FreeCamera('camera', new BABYLON.Vector3(0,0,1), scene);
+        camera.setTarget(BABYLON.Vector3.Zero());
+
+        const box = BABYLON.Mesh.CreateBox('Box', 4.0, scene);
+        return scene;
+    }
+
+    const scene = createScene();
+
+    engine.runRenderLoop(() => {
+        scene.render();
+    });
+
+}
+
+window.addEventListener('DOMContentLoaded', startApp);
