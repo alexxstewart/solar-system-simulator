@@ -1,4 +1,3 @@
-
 // constants
 const MERCURY_ORBIT = 6;
 const VENUS_ORBIT = 10;
@@ -6,9 +5,22 @@ const EARTH_ORBIT = 15;
 const MARS_ORBIT = 20;
 const JUPITER_ORBIT = 30;
 const SATURN_ORBIT = 40;
-const NEPTUNE_ORBIT = 6;
-const URANUS_ORBIT = 6;
+const URANUS_ORBIT = 50;
+const NEPTUNE_ORBIT = 60;
 const EARTH_MOON_ORBIT = 1.5;
+
+const printInformationTab = (id) => {
+    console.log(id);
+}
+
+const readData = () => {
+    let data = null;
+    fetch("./data/data.json")
+  .then(response => response.json())
+  .then(json => {
+      data = JSON.parse(json)});
+  console.log(data);
+}
 
 
 const startApp = () => {
@@ -21,8 +33,9 @@ const startApp = () => {
         scene.clearColor = new BABYLON.Color3.Black();
 
         // create the camera
-        const camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI / 2, 12, BABYLON.Vector3.Zero(), scene);
+        const camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI / 2, 12, BABYLON.Vector3(100,100,100), scene);
         camera.attachControl(canvas, true);
+        camera.position = new BABYLON.Vector3(15,15,15)
 
         // sun light
         const light0 = new BABYLON.PointLight("Omni0", new BABYLON.Vector3(0, 0, 0), scene);
@@ -32,10 +45,12 @@ const startApp = () => {
         const light1 = new BABYLON.HemisphericLight("HemiLight", new BABYLON.Vector3(0, 100, 100), scene);
 
         // create a mesh ground
-    	const ref = BABYLON.Mesh.CreateGround("gnd", 100, 100, 100, scene);
+    	const ref = BABYLON.Mesh.CreateGround("gnd", 150, 150, 200, scene);
 	    ref.material = new BABYLON.StandardMaterial("gmat", scene);
         ref.material.wireframe = true;
         ref.material.alpha = 0.05;
+
+        //const button = BABYLON.GUI.Button.CreateSimpleButton("but", "Click Me")
 
         // create the planets
         const sun = BABYLON.Mesh.CreateSphere("sphere", 32, 5, scene);
@@ -46,6 +61,8 @@ const startApp = () => {
         const mars = BABYLON.Mesh.CreateSphere("sphere", 32, 1, scene);
         const jupiter = BABYLON.Mesh.CreateSphere("sphere", 32, 2.5, scene);
         const saturn = BABYLON.Mesh.CreateSphere("sphere", 32, 2, scene);
+        const uranus = BABYLON.Mesh.CreateSphere("sphere", 32, 1.5, scene);
+        const neptune = BABYLON.Mesh.CreateSphere("sphere", 32, 1.5, scene);
 
         // set mesh ids for each planet
         sun.idNumber = 0;
@@ -55,7 +72,9 @@ const startApp = () => {
         mars.idNumber = 4; 
         jupiter.idNumber = 5; 
         saturn.idNumber = 6;
-        earthMoon.idNumber = 7;  
+        uranus.idNumber = 7;
+        neptune.idNumber = 8;
+        earthMoon.idNumber = 9;  
 
         // make the moon orbit earth
         earthMoon.position.x = EARTH_MOON_ORBIT;
@@ -66,26 +85,32 @@ const startApp = () => {
         sun.material.diffuseTexture = new BABYLON.Texture("style/textures/sun.jpg", scene);
         sun.material.emissiveColor = new BABYLON.Color3(1, 1, 0);
 
-        mercury.material = new BABYLON.StandardMaterial("sunmaterial", scene);
+        mercury.material = new BABYLON.StandardMaterial("mercurymaterial", scene);
         mercury.material.diffuseTexture = new BABYLON.Texture("style/textures/mercury.jpg", scene);
 
-        venus.material = new BABYLON.StandardMaterial("sunmaterial", scene);
+        venus.material = new BABYLON.StandardMaterial("venusmaterial", scene);
         venus.material.diffuseTexture = new BABYLON.Texture("style/textures/venus.jpg", scene);
 
         earth.material = new BABYLON.StandardMaterial("earthMat", scene);
         earth.material.diffuseTexture = new BABYLON.Texture("style/textures/earth.jpg", scene);
 
-        earthMoon.material = new BABYLON.StandardMaterial("earthMat", scene);
+        earthMoon.material = new BABYLON.StandardMaterial("earthMoonMat", scene);
         earthMoon.material.diffuseTexture = new BABYLON.Texture("style/textures/earthMoon.jpg", scene);
 
-        mars.material = new BABYLON.StandardMaterial("sunmaterial", scene);
+        mars.material = new BABYLON.StandardMaterial("marsmaterial", scene);
         mars.material.diffuseTexture = new BABYLON.Texture("style/textures/mars.jpg", scene);
 
-        jupiter.material = new BABYLON.StandardMaterial("sunmaterial", scene);
+        jupiter.material = new BABYLON.StandardMaterial("jupitermaterial", scene);
         jupiter.material.diffuseTexture = new BABYLON.Texture("style/textures/jupiter.jpg", scene);
 
-        saturn.material = new BABYLON.StandardMaterial("sunmaterial", scene);
+        saturn.material = new BABYLON.StandardMaterial("saturnmaterial", scene);
         saturn.material.diffuseTexture = new BABYLON.Texture("style/textures/saturn.jpg", scene);
+
+        uranus.material = new BABYLON.StandardMaterial("uranusmaterial", scene);
+        uranus.material.diffuseTexture = new BABYLON.Texture("style/textures/uranus.jpg", scene);
+
+        neptune.material = new BABYLON.StandardMaterial("neptunematerial", scene);
+        neptune.material.diffuseTexture = new BABYLON.Texture("style/textures/neptune.jpg", scene);
 
         const saturnRings = BABYLON.Mesh.CreateTorus("sphere", 3.5, 0.8, 40, scene);
         saturnRings.scaling.y = 0.01;
@@ -105,7 +130,10 @@ const startApp = () => {
         jupiterOrbit.scaling.y = 0.01;
         const saturnOrbit = BABYLON.Mesh.CreateTorus("sphere", SATURN_ORBIT * 2, 0.01, 80, scene);
         saturnOrbit.scaling.y = 0.01;
-        
+        const uranusOrbit = BABYLON.Mesh.CreateTorus("sphere", URANUS_ORBIT * 2, 0.01, 80, scene);
+        uranusOrbit.scaling.y = 0.01;
+        const neptuneOrbit = BABYLON.Mesh.CreateTorus("sphere", NEPTUNE_ORBIT * 2, 0.01, 80, scene);
+        neptuneOrbit.scaling.y = 0.01;
         // set alphas
         let earthAlpha = Math.PI;
         let mercuryAlpha = Math.PI;
@@ -114,6 +142,8 @@ const startApp = () => {
         let JupiterAlpha = Math.PI;
         let saturnAlpha = Math.PI;
         let earthMoonAlpha = Math.PI;
+        let uranusAlpha = Math.PI;
+        let neptuneAlpha = Math.PI;
 
         scene.beforeRender = () => {
 
@@ -124,6 +154,8 @@ const startApp = () => {
             mars.position = new BABYLON.Vector3(MARS_ORBIT * Math.sin(marsAlpha), sun.position.y, MARS_ORBIT * Math.cos(marsAlpha));
             jupiter.position = new BABYLON.Vector3(JUPITER_ORBIT * Math.sin(JupiterAlpha), sun.position.y, JUPITER_ORBIT * Math.cos(JupiterAlpha));
             saturn.position = new BABYLON.Vector3(SATURN_ORBIT * Math.sin(saturnAlpha), sun.position.y, SATURN_ORBIT * Math.cos(saturnAlpha));
+            uranus.position = new BABYLON.Vector3(URANUS_ORBIT * Math.sin(uranusAlpha), sun.position.y, URANUS_ORBIT * Math.cos(uranusAlpha));
+            neptune.position = new BABYLON.Vector3(NEPTUNE_ORBIT * Math.sin(neptuneAlpha), sun.position.y, NEPTUNE_ORBIT * Math.cos(neptuneAlpha));
             saturnRings.position = new BABYLON.Vector3(SATURN_ORBIT * Math.sin(saturnAlpha), sun.position.y, SATURN_ORBIT * Math.cos(saturnAlpha));
             earthMoon.position = earth.position;
         
@@ -141,6 +173,8 @@ const startApp = () => {
             marsAlpha += 0.002;
             JupiterAlpha += 0.0009;
             saturnAlpha += 0.0005;
+            uranusAlpha += 0.0002;
+            neptuneAlpha += 0.0001;
         }
 
         return scene;
@@ -152,7 +186,7 @@ const startApp = () => {
         const pick = scene.pick(scene.pointerX, scene.pointerY);
         if(pick.pickedMesh != null) {
             if(pick.pickedMesh.name == 'sphere'){
-                console.log(pick.pickedMesh.idNumber);
+                printInformationTab(pick.pickedMesh.idNumber);
             }
         }
     })
@@ -162,5 +196,7 @@ const startApp = () => {
     });
 
 }
+
+readData();
 
 window.addEventListener('DOMContentLoaded', startApp);

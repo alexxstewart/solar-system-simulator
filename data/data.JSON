@@ -1,0 +1,30 @@
+{
+    "1": {
+        "title": "Sun",
+        "info": "Very Hot"
+    },
+    "2": {
+        "title": "Mercury",
+        "info": "1st planet from the sun"
+    },
+    "3": {
+        "title": "Venus",
+        "info": "2nd planet from the sun"
+    },
+    "4": {
+        "title": "Earth",
+        "info": "3rd planet from the sun"
+    },
+    "5": {
+        "title": "Mars",
+        "info": "4th planet from the sun"
+    },
+    "6": {
+        "title": "Jupiter",
+        "info": "5th planet from the sun"
+    },
+    "7": {
+        "title": "Saturn",
+        "info": "6th planet from the sun"
+    }
+}
