@@ -82,14 +82,14 @@ const startApp = () => {
         const light1 = new BABYLON.HemisphericLight("HemiLight", new BABYLON.Vector3(0, 100, 100), scene);
 
         // create a mesh ground
-    	const ref = BABYLON.Mesh.CreateGround("gnd", 150, 150, 200, scene);
+    	const ref = BABYLON.Mesh.CreateGround("gnd", 300, 300, 200, scene);
 	    ref.material = new BABYLON.StandardMaterial("gmat", scene);
         ref.material.wireframe = true;
-        ref.material.alpha = 0.05;
+        ref.material.alpha = 0.02;
 
         // create the stars background
         
-        const starbox = BABYLON.MeshBuilder.CreateBox("starSphere", {size: 200}, scene);
+        //const starbox = BABYLON.MeshBuilder.CreateBox("starSphere", {size: 300}, scene);
         
         /*var starboxMaterial = new BABYLON.StandardMaterial("starSphere", scene);
         starboxMaterial.reflectionTexture = new BABYLON.SphereTexture("style/textures/stars.jpg", scene);
@@ -98,14 +98,23 @@ const startApp = () => {
         starbox.material = starboxMaterial;
 
         */
+
+        /*
         const backgroundMaterial = new BABYLON.StandardMaterial("starSphere", scene);
         backgroundMaterial.backFaceCulling = false;
-        backgroundMaterial.reflectionTexture = new BABYLON.CubeTexture("style/textures/stars.jpg", scene);
+        backgroundMaterial.reflectionTexture = new BABYLON.CubeTexture("style/textures/starpic4/stars8k.jpg", scene);
         backgroundMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
         backgroundMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
         backgroundMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
         starbox.material = backgroundMaterial;
         //const button = BABYLON.GUI.Button.CreateSimpleButton("but", "Click Me")
+        */
+
+        const skySphere = BABYLON.MeshBuilder.CreateSphere("Dome", {slice: 0, diameter: 500}, scene);
+        const skySphereMaterial = new BABYLON.StandardMaterial("skySphereMaterial", scene);
+        skySphereMaterial.diffuseTexture = new BABYLON.Texture("style/textures/starpic4/star.jpg", scene);
+        skySphereMaterial.backFaceCulling = false;
+        skySphere.material = skySphereMaterial;
 
         // create the planets
         const sun = BABYLON.Mesh.CreateSphere("sphere", 32, 5, scene);
