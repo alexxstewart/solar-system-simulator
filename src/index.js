@@ -8,6 +8,8 @@ const SATURN_ORBIT = 40;
 const URANUS_ORBIT = 50;
 const NEPTUNE_ORBIT = 60;
 const EARTH_MOON_ORBIT = 1.5;
+const ASTEROID_BELT_ORBIT_MIN = 23;
+const ASTEROID_BELT_ORBIT_MAX = 27;
 
 const printInformationTab = (id) => {
     console.log(id);
@@ -20,6 +22,41 @@ const readData = () => {
   .then(json => {
       data = JSON.parse(json)});
   console.log(data);
+}
+
+const createAsteroidBelt = (scene, asteroidBeltDistance) => {
+    let asteroids = [];
+
+    for(let i = 0; i < 100; i++){
+        
+        // generate asteroid values
+        const asteroidSize = (Math.random() * (0.1 - 0.01) + 0.01) * 10;
+        const asteroidOrbitDistance = Math.random() * (ASTEROID_BELT_ORBIT_MAX - ASTEROID_BELT_ORBIT_MIN) + ASTEROID_BELT_ORBIT_MIN;
+        // generate random asteroid starting position between 0 and 2*PI
+        const asteroidAlpha = Math.random() * 2 * Math.PI;
+
+        const asteroid = BABYLON.Mesh.CreateSphere("sphere", 16, asteroidSize, scene);
+        //asteroid.material = new BABYLON.StandardMaterial("asteroid", scene);
+        //asteroid.material.diffuseTexture = new BABYLON.Texture("style/textures/earthMoon.jpg", scene);
+        
+        // set properties
+        asteroid.orbitDistance = asteroidOrbitDistance;
+        asteroid.alpha = asteroidAlpha;
+
+        // add asteroid to array
+        asteroids.push(asteroid);
+    }
+
+    return asteroids;
+}
+
+const printAsteroids = (asteroidsList) => {
+    for(let i = 0; i < asteroidsList.length; i++){
+        const asteroid = asteroidsList[i];
+        //console.log(asteroid);
+        asteroid.position = new BABYLON.Vector3(asteroid.orbitDistance * Math.sin(asteroid.asteroidAlpha), asteroid.position.y, asteroid.orbitDistance * Math.cos(asteroid.asteroidAlpha));
+        asteroid.asteroidAlpha = asteroid.asteroidAlpha + 0.001
+    }
 }
 
 
@@ -50,6 +87,24 @@ const startApp = () => {
         ref.material.wireframe = true;
         ref.material.alpha = 0.05;
 
+        // create the stars background
+        
+        const starbox = BABYLON.MeshBuilder.CreateBox("starSphere", {size: 200}, scene);
+        
+        /*var starboxMaterial = new BABYLON.StandardMaterial("starSphere", scene);
+        starboxMaterial.reflectionTexture = new BABYLON.SphereTexture("style/textures/stars.jpg", scene);
+        starboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+        starboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+        starbox.material = starboxMaterial;
+
+        */
+        const backgroundMaterial = new BABYLON.StandardMaterial("starSphere", scene);
+        backgroundMaterial.backFaceCulling = false;
+        backgroundMaterial.reflectionTexture = new BABYLON.CubeTexture("style/textures/stars.jpg", scene);
+        backgroundMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+        backgroundMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+        backgroundMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+        starbox.material = backgroundMaterial;
         //const button = BABYLON.GUI.Button.CreateSimpleButton("but", "Click Me")
 
         // create the planets
@@ -134,6 +189,10 @@ const startApp = () => {
         uranusOrbit.scaling.y = 0.01;
         const neptuneOrbit = BABYLON.Mesh.CreateTorus("sphere", NEPTUNE_ORBIT * 2, 0.01, 80, scene);
         neptuneOrbit.scaling.y = 0.01;
+
+        // create asteroid belt
+        const asteroidsList = createAsteroidBelt(scene);
+
         // set alphas
         let earthAlpha = Math.PI;
         let mercuryAlpha = Math.PI;
@@ -158,6 +217,9 @@ const startApp = () => {
             neptune.position = new BABYLON.Vector3(NEPTUNE_ORBIT * Math.sin(neptuneAlpha), sun.position.y, NEPTUNE_ORBIT * Math.cos(neptuneAlpha));
             saturnRings.position = new BABYLON.Vector3(SATURN_ORBIT * Math.sin(saturnAlpha), sun.position.y, SATURN_ORBIT * Math.cos(saturnAlpha));
             earthMoon.position = earth.position;
+
+            //print the asteroids
+            printAsteroids(asteroidsList)
         
             //rotate the planets
             earth.rotation.y += 0.01;
