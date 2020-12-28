@@ -56,6 +56,9 @@ const startApp = () => {
         saturn.material = new BABYLON.StandardMaterial("sunmaterial", scene);
         saturn.material.diffuseTexture = new BABYLON.Texture("style/textures/saturn.jpg", scene);
 
+        const saturnRings = BABYLON.Mesh.CreateTorus("sphere", 2,0.5,40, scene);
+        saturnRings.scaling.y = 0.01;
+        
         let earthAlpha = Math.PI;
         let mercuryAlpha = Math.PI;
         let venusAlpha = Math.PI;
@@ -71,6 +74,7 @@ const startApp = () => {
             mars.position = new BABYLON.Vector3(20 * Math.sin(marsAlpha), sun.position.y, 20 * Math.cos(marsAlpha));
             jupiter.position = new BABYLON.Vector3(30 * Math.sin(JupiterAlpha), sun.position.y, 30 * Math.cos(JupiterAlpha));
             saturn.position = new BABYLON.Vector3(40 * Math.sin(saturnAlpha), sun.position.y, 40 * Math.cos(saturnAlpha));
+            saturnRings.position = new BABYLON.Vector3(40 * Math.sin(saturnAlpha), sun.position.y, 40 * Math.cos(saturnAlpha));
             
 
             //rotate the planets
