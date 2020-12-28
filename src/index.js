@@ -8,6 +8,7 @@ const JUPITER_ORBIT = 30;
 const SATURN_ORBIT = 40;
 const NEPTUNE_ORBIT = 6;
 const URANUS_ORBIT = 6;
+const EARTH_MOON_ORBIT = 1.5;
 
 
 const startApp = () => {
@@ -45,6 +46,10 @@ const startApp = () => {
         const mars = BABYLON.Mesh.CreateSphere("sphere", 32, 1, scene);
         const jupiter = BABYLON.Mesh.CreateSphere("sphere", 32, 2.5, scene);
         const saturn = BABYLON.Mesh.CreateSphere("sphere", 32, 2, scene);
+
+        // make the moon orbit earth
+        earthMoon.position.x = EARTH_MOON_ORBIT;
+        earthMoon.bakeCurrentTransformIntoVertices();
 
         // add color to the planets
         sun.material = new BABYLON.StandardMaterial("sunmaterial", scene);
@@ -91,6 +96,7 @@ const startApp = () => {
         const saturnOrbit = BABYLON.Mesh.CreateTorus("sphere", SATURN_ORBIT * 2, 0.01, 80, scene);
         saturnOrbit.scaling.y = 0.01;
         
+        // set alphas
         let earthAlpha = Math.PI;
         let mercuryAlpha = Math.PI;
         let venusAlpha = Math.PI;
@@ -109,12 +115,11 @@ const startApp = () => {
             jupiter.position = new BABYLON.Vector3(JUPITER_ORBIT * Math.sin(JupiterAlpha), sun.position.y, JUPITER_ORBIT * Math.cos(JupiterAlpha));
             saturn.position = new BABYLON.Vector3(SATURN_ORBIT * Math.sin(saturnAlpha), sun.position.y, SATURN_ORBIT * Math.cos(saturnAlpha));
             saturnRings.position = new BABYLON.Vector3(SATURN_ORBIT * Math.sin(saturnAlpha), sun.position.y, SATURN_ORBIT * Math.cos(saturnAlpha));
-            earthMoon.position = new BABYLON.Vector3(10 * Math.sin(earthMoonAlpha), earth.position.y, 10 * Math.cos(earthMoonAlpha));
-
+            earthMoon.position = earth.position;
         
             //rotate the planets
             earth.rotation.y += 0.01;
-            earthMoon.rotation.y += 5;
+            earthMoon.rotation.y += 0.02;
             saturnRings.rotation.y += 3;
             earthMoon.rotation.y -= 0.01
             sun.rotation.y += 0.003;
@@ -126,8 +131,6 @@ const startApp = () => {
             marsAlpha += 0.002;
             JupiterAlpha += 0.0009;
             saturnAlpha += 0.0005;
-            earthMoonAlpha += 0.01;
-
         }
 
         return scene;
