@@ -33,19 +33,28 @@ const startApp = () => {
 
         // add color to the planets
         sun.material = new BABYLON.StandardMaterial("sunmaterial", scene);
-        sun.material.diffuseColor = new BABYLON.Color3(1,1,0);
+        sun.material.diffuseTexture = new BABYLON.Texture("style/textures/sun.jpg", scene);
+
+        mercury.material = new BABYLON.StandardMaterial("sunmaterial", scene);
+        mercury.material.diffuseTexture = new BABYLON.Texture("style/textures/mercury.jpg", scene);
 
         venus.material = new BABYLON.StandardMaterial("sunmaterial", scene);
-        venus.material.diffuseColor = new BABYLON.Color3(1,0,0);
+        venus.material.diffuseTexture = new BABYLON.Texture("style/textures/venus.jpg", scene);
 
-        earth.material = new BABYLON.StandardMaterial("sunmaterial", scene);
-        earth.material.diffuseColor = new BABYLON.Color3(0,0,1);
+        earth.material = new BABYLON.StandardMaterial("earthMat", scene);
+        earth.material.diffuseTexture = new BABYLON.Texture("style/textures/earth.jpg", scene);
+
+        earthMoon.material = new BABYLON.StandardMaterial("earthMat", scene);
+        earthMoon.material.diffuseTexture = new BABYLON.Texture("style/textures/earthMoon.jpg", scene);
 
         mars.material = new BABYLON.StandardMaterial("sunmaterial", scene);
-        mars.material.diffuseColor = new BABYLON.Color3(1,0,0);
+        mars.material.diffuseTexture = new BABYLON.Texture("style/textures/mars.jpg", scene);
 
         jupiter.material = new BABYLON.StandardMaterial("sunmaterial", scene);
-        jupiter.material.diffuseColor = new BABYLON.Color3(0.8,0.7,0.3);
+        jupiter.material.diffuseTexture = new BABYLON.Texture("style/textures/jupiter.jpg", scene);
+
+        saturn.material = new BABYLON.StandardMaterial("sunmaterial", scene);
+        saturn.material.diffuseTexture = new BABYLON.Texture("style/textures/saturn.jpg", scene);
 
         let earthAlpha = Math.PI;
         let mercuryAlpha = Math.PI;
@@ -65,7 +74,7 @@ const startApp = () => {
             
 
             //rotate the planets
-            earth.rotation.y += 1;
+            earth.rotation.y += 0.01;
             earthMoon.rotation.y += 5;
 
             // increment the alpha
