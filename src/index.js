@@ -47,6 +47,16 @@ const startApp = () => {
         const jupiter = BABYLON.Mesh.CreateSphere("sphere", 32, 2.5, scene);
         const saturn = BABYLON.Mesh.CreateSphere("sphere", 32, 2, scene);
 
+        // set mesh ids for each planet
+        sun.idNumber = 0;
+        mercury.idNumber = 1;
+        venus.idNumber = 2;
+        earth.idNumber = 3; 
+        mars.idNumber = 4; 
+        jupiter.idNumber = 5; 
+        saturn.idNumber = 6;
+        earthMoon.idNumber = 7;  
+
         // make the moon orbit earth
         earthMoon.position.x = EARTH_MOON_ORBIT;
         earthMoon.bakeCurrentTransformIntoVertices();
@@ -137,6 +147,15 @@ const startApp = () => {
     }
 
     const scene = createScene();
+
+    window.addEventListener('click', () => {
+        const pick = scene.pick(scene.pointerX, scene.pointerY);
+        if(pick.pickedMesh != null) {
+            if(pick.pickedMesh.name == 'sphere'){
+                console.log(pick.pickedMesh.idNumber);
+            }
+        }
+    })
 
     engine.runRenderLoop(() => {
         scene.render();
