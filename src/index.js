@@ -31,6 +31,22 @@ const startApp = () => {
         const jupiter = BABYLON.Mesh.CreateSphere("sphere", 32, 1.2, scene);
         const saturn = BABYLON.Mesh.CreateSphere("sphere", 32, 0.9, scene);
 
+        // add color to the planets
+        sun.material = new BABYLON.StandardMaterial("sunmaterial", scene);
+        sun.material.diffuseColor = new BABYLON.Color3(1,1,0);
+
+        venus.material = new BABYLON.StandardMaterial("sunmaterial", scene);
+        venus.material.diffuseColor = new BABYLON.Color3(1,0,0);
+
+        earth.material = new BABYLON.StandardMaterial("sunmaterial", scene);
+        earth.material.diffuseColor = new BABYLON.Color3(0,0,1);
+
+        mars.material = new BABYLON.StandardMaterial("sunmaterial", scene);
+        mars.material.diffuseColor = new BABYLON.Color3(1,0,0);
+
+        jupiter.material = new BABYLON.StandardMaterial("sunmaterial", scene);
+        jupiter.material.diffuseColor = new BABYLON.Color3(0.8,0.7,0.3);
+
         let earthAlpha = Math.PI;
         let mercuryAlpha = Math.PI;
         let venusAlpha = Math.PI;
