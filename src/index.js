@@ -1,4 +1,15 @@
 
+// constants
+const MERCURY_ORBIT = 6;
+const VENUS_ORBIT = 10;
+const EARTH_ORBIT = 15;
+const MARS_ORBIT = 20;
+const JUPITER_ORBIT = 30;
+const SATURN_ORBIT = 40;
+const NEPTUNE_ORBIT = 6;
+const URANUS_ORBIT = 6;
+
+
 const startApp = () => {
     const canvas = document.getElementById('canvas');
 
@@ -65,6 +76,20 @@ const startApp = () => {
         saturnRings.scaling.y = 0.01;
         saturnRings.material = new BABYLON.StandardMaterial("sunmaterial", scene);
         saturnRings.material.diffuseTexture = new BABYLON.Texture("style/textures/saturn.jpg", scene);
+
+        // show orbital lines
+        const mercuryOrbit = BABYLON.Mesh.CreateTorus("sphere", MERCURY_ORBIT * 2, 0.01, 80, scene);
+        mercuryOrbit.scaling.y = 0.01;
+        const venusOrbit = BABYLON.Mesh.CreateTorus("sphere", VENUS_ORBIT * 2, 0.01, 80, scene);
+        venusOrbit.scaling.y = 0.01;
+        const earthOrbit = BABYLON.Mesh.CreateTorus("sphere", EARTH_ORBIT * 2, 0.01, 80, scene);
+        earthOrbit.scaling.y = 0.01;
+        const marsOrbit = BABYLON.Mesh.CreateTorus("sphere", MARS_ORBIT * 2, 0.01, 80, scene);
+        marsOrbit.scaling.y = 0.01;
+        const jupiterOrbit = BABYLON.Mesh.CreateTorus("sphere", JUPITER_ORBIT * 2, 0.01, 80, scene);
+        jupiterOrbit.scaling.y = 0.01;
+        const saturnOrbit = BABYLON.Mesh.CreateTorus("sphere", SATURN_ORBIT * 2, 0.01, 80, scene);
+        saturnOrbit.scaling.y = 0.01;
         
         let earthAlpha = Math.PI;
         let mercuryAlpha = Math.PI;
@@ -75,15 +100,15 @@ const startApp = () => {
         let earthMoonAlpha = Math.PI;
 
         scene.beforeRender = () => {
+
             // calculate the orbits of the planets
-            mercury.position = new BABYLON.Vector3(6 * Math.sin(mercuryAlpha), sun.position.y, 6 * Math.cos(mercuryAlpha));
-            venus.position = new BABYLON.Vector3(10 * Math.sin(venusAlpha), sun.position.y, 10 * Math.cos(venusAlpha));
-            earth.position = new BABYLON.Vector3(15 * Math.sin(earthAlpha), sun.position.y, 15 * Math.cos(earthAlpha));
-            mars.position = new BABYLON.Vector3(20 * Math.sin(marsAlpha), sun.position.y, 20 * Math.cos(marsAlpha));
-            jupiter.position = new BABYLON.Vector3(30 * Math.sin(JupiterAlpha), sun.position.y, 30 * Math.cos(JupiterAlpha));
-            saturn.position = new BABYLON.Vector3(40 * Math.sin(saturnAlpha), sun.position.y, 40 * Math.cos(saturnAlpha));
-            saturnRings.position = new BABYLON.Vector3(40 * Math.sin(saturnAlpha), sun.position.y, 40 * Math.cos(saturnAlpha));
-            //saturnRings.rotate(0.025, 0, BABYLON.Space.WORLD);
+            mercury.position = new BABYLON.Vector3(MERCURY_ORBIT * Math.sin(mercuryAlpha), sun.position.y, MERCURY_ORBIT * Math.cos(mercuryAlpha));
+            venus.position = new BABYLON.Vector3(VENUS_ORBIT * Math.sin(venusAlpha), sun.position.y, VENUS_ORBIT * Math.cos(venusAlpha));
+            earth.position = new BABYLON.Vector3(EARTH_ORBIT * Math.sin(earthAlpha), sun.position.y, EARTH_ORBIT * Math.cos(earthAlpha));
+            mars.position = new BABYLON.Vector3(MARS_ORBIT * Math.sin(marsAlpha), sun.position.y, MARS_ORBIT * Math.cos(marsAlpha));
+            jupiter.position = new BABYLON.Vector3(JUPITER_ORBIT * Math.sin(JupiterAlpha), sun.position.y, JUPITER_ORBIT * Math.cos(JupiterAlpha));
+            saturn.position = new BABYLON.Vector3(SATURN_ORBIT * Math.sin(saturnAlpha), sun.position.y, SATURN_ORBIT * Math.cos(saturnAlpha));
+            saturnRings.position = new BABYLON.Vector3(SATURN_ORBIT * Math.sin(saturnAlpha), sun.position.y, SATURN_ORBIT * Math.cos(saturnAlpha));
             earthMoon.position = new BABYLON.Vector3(10 * Math.sin(earthMoonAlpha), earth.position.y, 10 * Math.cos(earthMoonAlpha));
 
         
