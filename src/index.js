@@ -77,20 +77,17 @@ const startApp = () => {
         let lastCameraLocation = null;
 
         window.addEventListener('mousewheel', (event) => {
-            console.log('scroll event');
             // get the cameras distance from the center
             const cp = camera.position;
             const cameraDistance = Math.sqrt( (cp.x ** 2) + (cp.y ** 2) + (cp.z ** 2) );
-            console.log(cameraDistance);
-            if(cameraDistance > 230){
+
+            if(cameraDistance > (STARS_IMAGE_DIAMETER / 2 - 50)){
                 // if the scroll wheel direction is out then keep changing the camera position to 244 otherwise allow the scroll
                 if(event.wheelDelta < 0){
-                    console.log('deny scroll out');
-                    console.log(lastCameraLocation);
-                    camera.position = new BABYLON.Vector3(lastCameraLocation.x - 5,lastCameraLocation.y -5,lastCameraLocation.z - 5);
+                    // we want the camera to keep the same angle that it was previously so we multiply the vector with a scalar value
+                    const scalar = 0.95;
+                    camera.position = new BABYLON.Vector3(lastCameraLocation.x * scalar,lastCameraLocation.y * scalar,lastCameraLocation.z * scalar);
                 }
-                //camera.inputs.remove(camera.inputs.attached.mousewheel);
-            }else{
             }
         })
 
