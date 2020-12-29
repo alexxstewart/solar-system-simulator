@@ -64,12 +64,19 @@ const showPlanetInfo = (planetId) => {
     stackPanel.addControl(titleText);
 
     // create the exit button
-    const exitButton = new BABYLON.GUI.Button('exitButton');
+    const exitButton = new BABYLON.GUI.Button.CreateImageOnlyButton('exitbutton', 'style/textures/exit.png');
     exitButton.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
     exitButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
     exitButton.height = "30px";
-    exitButton.width = "40px";
+    exitButton.width = "30px";
+    exitButton.background = "orangered";
+    
+    // on exit button click remove planetInfoContainer from base container
+    exitButton.onPointerDownObservable.add(() => {
+        _baseContainer.removeControl(container);
+    });
     container.addControl(exitButton);
+
     
     // add the planet info section
     const text = new BABYLON.GUI.TextBlock();
