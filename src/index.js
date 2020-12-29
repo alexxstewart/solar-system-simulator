@@ -91,6 +91,12 @@ const startApp = () => {
             }
         })
 
+        // create the music to play 
+        const music = new BABYLON.Sound("Music", "/style/music/ME - Galaxy Map Theme.mp3", scene, () => music.play(), {
+            loop: true,
+            autoplay: true
+        });
+
         // sun light
         const light0 = new BABYLON.PointLight("Omni0", new BABYLON.Vector3(0, 0, 0), scene);
         light0.diffuse = new BABYLON.Color3(1, 1, 1);
