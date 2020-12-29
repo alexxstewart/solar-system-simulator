@@ -38,7 +38,6 @@ const changeVolumeSlider = (baseContainer, music) => {
 
 const showPlanetInfo = (planetId) => {
     const planetData = getPlanetData()[planetId];
-    console.log(planetData);
 
     const container = new BABYLON.GUI.Rectangle('planetInfoContainer');
     container.width = "50%";
@@ -50,7 +49,6 @@ const showPlanetInfo = (planetId) => {
     // create stack panel to store text elements
     const stackPanel = new BABYLON.GUI.StackPanel('stackPanel');  
     container.addControl(stackPanel);
-    console.log(stackPanel.isVertical);
 
     // add the title element
     const titleText = new BABYLON.GUI.TextBlock('titletext');
@@ -77,13 +75,12 @@ const showPlanetInfo = (planetId) => {
     });
     container.addControl(exitButton);
 
-    
     // add the planet info section
     const text = new BABYLON.GUI.TextBlock();
     text.text = planetData.info;
     text.color = "black";
     text.size = "30px";
-    text.width = "100px";
+    text.width = "500px";
     text.height = "100px";
     stackPanel.addControl(text);
     

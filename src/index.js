@@ -19,11 +19,15 @@ const printInformationTab = (id) => {
 }
 
 const readData = () => {
-    fetch("./data/data.json")
-    .then(response => response.json())
-    .then((json) => {
-        planetData = json;
-    });
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "./data/data.json");
+    xhr.addEventListener('load', processJSON);
+    xhr.send();
+
+    function processJSON(event) {
+        const json = this.responseText;
+        planetData = JSON.parse(json);
+    }
 }
 
 const getPlanetData = () => {
