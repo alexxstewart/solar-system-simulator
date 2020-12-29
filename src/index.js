@@ -60,6 +60,19 @@ const printAsteroids = (asteroidsList) => {
     }
 }
 
+const printGUI = (scene) => {
+    
+    var advancedTexture = new BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+
+    var button = new BABYLON.GUI.Button.CreateSimpleButton("but", "Click Me");
+    button.width = 0.2;
+    button.height = "40px";
+    button.color = "white";
+    button.background = "green";
+    advancedTexture.addControl(button);
+
+}
+
 
 const startApp = () => {
     const canvas = document.getElementById('canvas');
@@ -96,6 +109,9 @@ const startApp = () => {
             loop: true,
             autoplay: true
         });
+
+        //gui practice
+        printGUI(scene);
 
         // sun light
         const light0 = new BABYLON.PointLight("Omni0", new BABYLON.Vector3(0, 0, 0), scene);
@@ -249,6 +265,7 @@ const startApp = () => {
             neptuneAlpha += 0.0001;
 
             lastCameraLocation = camera.position;
+
         }
 
         return scene;
@@ -261,6 +278,7 @@ const startApp = () => {
         if(pick.pickedMesh != null) {
             if(pick.pickedMesh.name == 'sphere'){
                 printInformationTab(pick.pickedMesh.idNumber);
+                printGUI(scene);
             }
         }
     })
