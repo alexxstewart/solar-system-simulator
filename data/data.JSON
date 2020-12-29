@@ -1,29 +1,29 @@
 {
-    "1": {
+    "0": {
         "title": "Sun",
         "info": "Very Hot"
     },
-    "2": {
+    "1": {
         "title": "Mercury",
         "info": "1st planet from the sun"
     },
-    "3": {
+    "2": {
         "title": "Venus",
         "info": "2nd planet from the sun"
     },
-    "4": {
+    "3": {
         "title": "Earth",
         "info": "3rd planet from the sun"
     },
-    "5": {
+    "4": {
         "title": "Mars",
         "info": "4th planet from the sun"
     },
-    "6": {
+    "5": {
         "title": "Jupiter",
         "info": "5th planet from the sun"
     },
-    "7": {
+    "6": {
         "title": "Saturn",
         "info": "6th planet from the sun"
     }

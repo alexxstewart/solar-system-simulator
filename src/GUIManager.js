@@ -1,5 +1,3 @@
-
-
 const changeVolumeSlider = (baseContainer, music) => {
     
     // create a rectangle element to hold the slider and the image
@@ -33,4 +31,9 @@ const changeVolumeSlider = (baseContainer, music) => {
 
     container.addControl(musicSlider)
     baseContainer.addControl(container); 
+}
+
+const showPlanetInfo = (planetId) => {
+    const planetData = getPlanetData()[planetId];
+    console.log(planetData);
 }

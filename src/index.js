@@ -12,17 +12,23 @@ const ASTEROID_BELT_ORBIT_MIN = 23;
 const ASTEROID_BELT_ORBIT_MAX = 27;
 const STARS_IMAGE_DIAMETER = 500;
 
+let planetData = null;
+
 const printInformationTab = (id) => {
     console.log(id);
 }
 
 const readData = () => {
-    let data = null;
     fetch("./data/data.json")
-  .then(response => response.json())
-  .then(json => {
-      data = JSON.parse(json)});
-  console.log(data);
+    .then(response => response.json())
+    .then((json) => {
+        planetData = json;
+    });
+}
+
+const getPlanetData = () => {
+    console.log(planetData);
+    return planetData;
 }
 
 const createAsteroidBelt = (scene, asteroidBeltDistance) => {
@@ -72,7 +78,7 @@ const startApp = () => {
         // create the camera
         const camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI / 2, 12, BABYLON.Vector3(100,100,100), scene);
         camera.attachControl(canvas, true);
-        camera.position = new BABYLON.Vector3(15,15,15)
+        camera.position = new BABYLON.Vector3( 5, 8, -30)
         let lastCameraLocation = null;
 
         window.addEventListener('mousewheel', (event) => {
@@ -95,6 +101,7 @@ const startApp = () => {
             loop: true,
             autoplay: true
         });
+        music.setVolume(0.5);
 
         // create the base for the gui to be printed on
         const advancedTexture = new BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
@@ -209,15 +216,15 @@ const startApp = () => {
         const asteroidsList = createAsteroidBelt(scene);
 
         // set alphas
-        let earthAlpha = Math.PI;
-        let mercuryAlpha = Math.PI;
-        let venusAlpha = Math.PI;
-        let marsAlpha = Math.PI;
-        let JupiterAlpha = Math.PI;
-        let saturnAlpha = Math.PI;
-        let earthMoonAlpha = Math.PI;
-        let uranusAlpha = Math.PI;
-        let neptuneAlpha = Math.PI;
+        let earthAlpha = 2 * Math.PI;
+        let mercuryAlpha = 2 * Math.PI;
+        let venusAlpha = 2 * Math.PI;
+        let marsAlpha = 2 * Math.PI;
+        let JupiterAlpha =2 * Math.PI;
+        let saturnAlpha = 2 * Math.PI;
+        let earthMoonAlpha = 2 * Math.PI;
+        let uranusAlpha = 2 * Math.PI;
+        let neptuneAlpha = 2 * Math.PI;
 
         scene.beforeRender = () => {
 
@@ -266,8 +273,7 @@ const startApp = () => {
         const pick = scene.pick(scene.pointerX, scene.pointerY);
         if(pick.pickedMesh != null) {
             if(pick.pickedMesh.name == 'sphere'){
-                printInformationTab(pick.pickedMesh.idNumber);
-                printGUI(scene);
+                showPlanetInfo(pick.pickedMesh.idNumber);
             }
         }
     })
