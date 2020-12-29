@@ -10,6 +10,7 @@ const NEPTUNE_ORBIT = 60;
 const EARTH_MOON_ORBIT = 1.5;
 const ASTEROID_BELT_ORBIT_MIN = 23;
 const ASTEROID_BELT_ORBIT_MAX = 27;
+const STARS_IMAGE_DIAMETER = 500;
 
 const printInformationTab = (id) => {
     console.log(id);
@@ -73,6 +74,25 @@ const startApp = () => {
         const camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI / 2, 12, BABYLON.Vector3(100,100,100), scene);
         camera.attachControl(canvas, true);
         camera.position = new BABYLON.Vector3(15,15,15)
+        let lastCameraLocation = null;
+
+        window.addEventListener('mousewheel', (event) => {
+            console.log('scroll event');
+            // get the cameras distance from the center
+            const cp = camera.position;
+            const cameraDistance = Math.sqrt( (cp.x ** 2) + (cp.y ** 2) + (cp.z ** 2) );
+            console.log(cameraDistance);
+            if(cameraDistance > 230){
+                // if the scroll wheel direction is out then keep changing the camera position to 244 otherwise allow the scroll
+                if(event.wheelDelta < 0){
+                    console.log('deny scroll out');
+                    console.log(lastCameraLocation);
+                    camera.position = new BABYLON.Vector3(lastCameraLocation.x - 5,lastCameraLocation.y -5,lastCameraLocation.z - 5);
+                }
+                //camera.inputs.remove(camera.inputs.attached.mousewheel);
+            }else{
+            }
+        })
 
         // sun light
         const light0 = new BABYLON.PointLight("Omni0", new BABYLON.Vector3(0, 0, 0), scene);
@@ -88,29 +108,7 @@ const startApp = () => {
         ref.material.alpha = 0.02;
 
         // create the stars background
-        
-        //const starbox = BABYLON.MeshBuilder.CreateBox("starSphere", {size: 300}, scene);
-        
-        /*var starboxMaterial = new BABYLON.StandardMaterial("starSphere", scene);
-        starboxMaterial.reflectionTexture = new BABYLON.SphereTexture("style/textures/stars.jpg", scene);
-        starboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
-        starboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-        starbox.material = starboxMaterial;
-
-        */
-
-        /*
-        const backgroundMaterial = new BABYLON.StandardMaterial("starSphere", scene);
-        backgroundMaterial.backFaceCulling = false;
-        backgroundMaterial.reflectionTexture = new BABYLON.CubeTexture("style/textures/starpic4/stars8k.jpg", scene);
-        backgroundMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
-        backgroundMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
-        backgroundMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-        starbox.material = backgroundMaterial;
-        //const button = BABYLON.GUI.Button.CreateSimpleButton("but", "Click Me")
-        */
-
-        const skySphere = BABYLON.MeshBuilder.CreateSphere("Dome", {slice: 0, diameter: 500}, scene);
+        const skySphere = BABYLON.MeshBuilder.CreateSphere("Sphere", {slice: 0, diameter: STARS_IMAGE_DIAMETER}, scene);
         const skySphereMaterial = new BABYLON.StandardMaterial("skySphereMaterial", scene);
         skySphereMaterial.diffuseTexture = new BABYLON.Texture("style/textures/starpic4/star.jpg", scene);
         skySphereMaterial.backFaceCulling = false;
@@ -246,6 +244,8 @@ const startApp = () => {
             saturnAlpha += 0.0005;
             uranusAlpha += 0.0002;
             neptuneAlpha += 0.0001;
+
+            lastCameraLocation = camera.position;
         }
 
         return scene;
