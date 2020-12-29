@@ -1,5 +1,8 @@
+let _baseContainer = null;
+
 const changeVolumeSlider = (baseContainer, music) => {
     
+    _baseContainer = baseContainer;
     // create a rectangle element to hold the slider and the image
     const container = new BABYLON.GUI.Rectangle();
     container.width = "200px";
@@ -36,4 +39,45 @@ const changeVolumeSlider = (baseContainer, music) => {
 const showPlanetInfo = (planetId) => {
     const planetData = getPlanetData()[planetId];
     console.log(planetData);
+
+    const container = new BABYLON.GUI.Rectangle('planetInfoContainer');
+    container.width = "50%";
+    container.heigth = "100%";
+    container.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+    container.background = "grey";
+    _baseContainer.addControl(container);
+
+    // create stack panel to store text elements
+    const stackPanel = new BABYLON.GUI.StackPanel('stackPanel');  
+    container.addControl(stackPanel);
+    console.log(stackPanel.isVertical);
+
+    // add the title element
+    const titleText = new BABYLON.GUI.TextBlock('titletext');
+    titleText.text = planetData.title;
+    titleText.color = "black";
+    titleText.size = "30px";
+    titleText.background = "white";
+    titleText.width = "100px";
+    titleText.height = "200px";
+    titleText.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+    stackPanel.addControl(titleText);
+
+    // create the exit button
+    const exitButton = new BABYLON.GUI.Button('exitButton');
+    exitButton.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+    exitButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+    exitButton.height = "30px";
+    exitButton.width = "40px";
+    container.addControl(exitButton);
+    
+    // add the planet info section
+    const text = new BABYLON.GUI.TextBlock();
+    text.text = planetData.info;
+    text.color = "black";
+    text.size = "30px";
+    text.width = "100px";
+    text.height = "100px";
+    stackPanel.addControl(text);
+    
 }
