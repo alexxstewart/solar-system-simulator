@@ -1,0 +1,82 @@
+{
+    "0": {
+        "planetName": "mercury",
+        "planetSegments": "32",
+        "radius": "1",
+        "urlPath": "style/textures/mercury.jpg",
+        "orbit": "15",
+        "alpha": "6.28",
+        "alphaIncrement": "0.003",
+        "rotation": "0.01"
+    },
+    "1": {
+        "planetName": "venus",
+        "planetSegments": "32",
+        "radius": "1",
+        "urlPath": "style/textures/venus.jpg",
+        "orbit": "15",
+        "alpha": "6.28",
+        "alphaIncrement": "0.003",
+        "rotation": "0.01"
+    },
+    "2": {
+        "planetName": "earth",
+        "planetSegments": "32",
+        "radius": "1",
+        "urlPath": "style/textures/earth.jpg",
+        "orbit": "15",
+        "alpha": "6.28",
+        "alphaIncrement": "0.003",
+        "rotation": "0.01"
+    },
+    "3": {
+        "planetName": "mars",
+        "planetSegments": "32",
+        "radius": "1",
+        "urlPath": "style/textures/mars.jpg",
+        "orbit": "15",
+        "alpha": "6.28",
+        "alphaIncrement": "0.003",
+        "rotation": "0.01"
+    },
+    "4": {
+        "planetName": "jupiter",
+        "planetSegments": "32",
+        "radius": "1",
+        "urlPath": "style/textures/jupiter.jpg",
+        "orbit": "15",
+        "alpha": "6.28",
+        "alphaIncrement": "0.003",
+        "rotation": "0.01"
+    },
+    "5": {
+        "planetName": "saturn",
+        "planetSegments": "32",
+        "radius": "1",
+        "urlPath": "style/textures/saturn.jpg",
+        "orbit": "15",
+        "alpha": "6.28",
+        "alphaIncrement": "0.003",
+        "rotation": "0.01"
+    },
+    "6": {
+        "planetName": "uranus",
+        "planetSegments": "32",
+        "radius": "1",
+        "urlPath": "style/textures/uranus.jpg",
+        "orbit": "15",
+        "alpha": "6.28",
+        "alphaIncrement": "0.003",
+        "rotation": "0.01"
+    },
+    "7": {
+        "planetName": "neptune",
+        "planetSegments": "32",
+        "radius": "1",
+        "urlPath": "style/textures/neptune.jpg",
+        "orbit": "15",
+        "alpha": "6.28",
+        "alphaIncrement": "0.003",
+        "rotation": "0.01"
+    }
+}
