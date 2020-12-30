@@ -1,5 +1,9 @@
 let _baseContainer = null;
 
+/*===============================================================
+    GUI volume control slider
+  ===============================================================
+  */
 const changeVolumeSlider = (baseContainer, music) => {
     
     _baseContainer = baseContainer;
@@ -36,8 +40,11 @@ const changeVolumeSlider = (baseContainer, music) => {
     baseContainer.addControl(container); 
 }
 
+/*===============================================================
+    GUI planet information tab
+  ===============================================================*/
 const showPlanetInfo = (planetId) => {
-    const planetData = getPlanetData()[planetId];
+    const planetData = getPlanetInfoData()[planetId];
 
     const container = new BABYLON.GUI.Rectangle('planetInfoContainer');
     container.width = "50%";

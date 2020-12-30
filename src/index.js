@@ -12,6 +12,7 @@ const ASTEROID_BELT_ORBIT_MIN = 23;
 const ASTEROID_BELT_ORBIT_MAX = 27;
 const STARS_IMAGE_DIAMETER = 500;
 
+let planetInfoData = null;
 let planetData = null;
 
 const printInformationTab = (id) => {
@@ -19,20 +20,26 @@ const printInformationTab = (id) => {
 }
 
 const readData = () => {
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", "./data/data.json");
-    xhr.addEventListener('load', processJSON);
+
+    // read planet info data
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "./data/planetInfo.json");
+    xhr.addEventListener('load', (event) => {
+        planetInfoData = JSON.parse(event.currentTarget.responseText);
+    });
     xhr.send();
 
-    function processJSON(event) {
-        const json = this.responseText;
-        planetData = JSON.parse(json);
-    }
+    // read planet data
+    xhr = new XMLHttpRequest();
+    xhr.open("GET", "./data/planetData.json");
+    xhr.addEventListener('load', (event) => {
+        planetData = JSON.parse(event.currentTarget.responseText);
+    });
+    xhr.send();
 }
 
-const getPlanetData = () => {
-    console.log(planetData);
-    return planetData;
+const getPlanetInfoData = () => {
+    return planetInfoData;
 }
 
 const createAsteroidBelt = (scene, asteroidBeltDistance) => {
