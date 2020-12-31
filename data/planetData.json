@@ -7,8 +7,8 @@
         "orbit": "0",
         "alpha": "0",
         "alphaIncrement": "0",
-        "rotation": "0.01",
-        "rotationIncrement": "0.01"
+        "rotation": "0.001",
+        "rotationIncrement": "0.001"
     },
     "1": {
         "planetName": "mercury",
@@ -17,9 +17,9 @@
         "urlPath": "style/textures/mercury.jpg",
         "orbit": "6",
         "alpha": "6.28",
-        "alphaIncrement": "0.0003",
-        "rotation": "0.01",
-        "rotationIncrement": "0.01"
+        "alphaIncrement": "0.003",
+        "rotation": "0.001",
+        "rotationIncrement": "0.001"
     },
     "2": {
         "planetName": "venus",
@@ -28,9 +28,9 @@
         "urlPath": "style/textures/venus.jpg",
         "orbit": "10",
         "alpha": "6.28",
-        "alphaIncrement": "0.0003",
-        "rotation": "0.01",
-        "rotationIncrement": "0.01"
+        "alphaIncrement": "0.002",
+        "rotation": "0.001",
+        "rotationIncrement": "0.001"
     },
     "3": {
         "planetName": "earth",
@@ -39,7 +39,7 @@
         "urlPath": "style/textures/earth.jpg",
         "orbit": "15",
         "alpha": "6.28",
-        "alphaIncrement": "0.0003",
+        "alphaIncrement": "0.002",
         "rotation": "0.01",
         "rotationIncrement": "0.01"
     },
@@ -50,18 +50,18 @@
         "urlPath": "style/textures/mars.jpg",
         "orbit": "20",
         "alpha": "6.28",
-        "alphaIncrement": "0.0003",
+        "alphaIncrement": "0.0015",
         "rotation": "0.01",
         "rotationIncrement": "0.01"
     },
     "5": {
         "planetName": "jupiter",
         "planetSegments": "32",
-        "radius": "2",
+        "radius": "2.5",
         "urlPath": "style/textures/jupiter.jpg",
         "orbit": "30",
         "alpha": "6.28",
-        "alphaIncrement": "0.0003",
+        "alphaIncrement": "0.0009",
         "rotation": "0.01",
         "rotationIncrement": "0.01"
     },
@@ -72,29 +72,29 @@
         "urlPath": "style/textures/saturn.jpg",
         "orbit": "40",
         "alpha": "6.28",
-        "alphaIncrement": "0.0003",
+        "alphaIncrement": "0.0007",
         "rotation": "0.01",
         "rotationIncrement": "0.01"
     },
     "7": {
         "planetName": "uranus",
         "planetSegments": "32",
-        "radius": "2",
+        "radius": "1.8",
         "urlPath": "style/textures/uranus.jpg",
         "orbit": "50",
         "alpha": "6.28",
-        "alphaIncrement": "0.0003",
+        "alphaIncrement": "0.0006",
         "rotation": "0.01",
         "rotationIncrement": "0.01"
     },
     "8": {
         "planetName": "neptune",
         "planetSegments": "32",
-        "radius": "2",
+        "radius": "1.6",
         "urlPath": "style/textures/neptune.jpg",
         "orbit": "60",
         "alpha": "6.28",
-        "alphaIncrement": "0.0003",
+        "alphaIncrement": "0.0005",
         "rotation": "0.01",
         "rotationIncrement": "0.01"
     }
