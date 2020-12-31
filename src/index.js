@@ -85,7 +85,7 @@ const startApp = () => {
         //Print GUI elements
         changeVolumeSlider(advancedTexture, music);
 
-        // sun light
+        // creat light coming out of the sun
         const light0 = new BABYLON.PointLight("Omni0", new BABYLON.Vector3(0, 0, 0), scene);
         light0.diffuse = new BABYLON.Color3(1, 1, 1);
 
@@ -106,26 +106,16 @@ const startApp = () => {
         skySphere.material = skySphereMaterial;
 
         // create the planets
-        const sun = BABYLON.Mesh.CreateSphere("sphere", 32, 0.5, scene);
         const earthMoon = BABYLON.Mesh.CreateSphere("sphere", 32, 0.5, scene);
-
 
         // make the moon orbit earth
         earthMoon.position.x = EARTH_MOON_ORBIT;
         earthMoon.bakeCurrentTransformIntoVertices();
 
-        // add color to the planets
-        sun.material = new BABYLON.StandardMaterial("sunmaterial", scene);
-        sun.material.diffuseTexture = new BABYLON.Texture("style/textures/sun.jpg", scene);
-        sun.material.emissiveColor = new BABYLON.Color3(1, 1, 0);
-
         const saturnRings = BABYLON.Mesh.CreateTorus("sphere", 3.5, 0.8, 40, scene);
         saturnRings.scaling.y = 0.01;
         saturnRings.material = new BABYLON.StandardMaterial("sunmaterial", scene);
         saturnRings.material.diffuseTexture = new BABYLON.Texture("style/textures/saturn.jpg", scene);
-
-        // create asteroid belt
-        //const asteroidsList = createAsteroidBelt(scene);
 
         // create an array storing references to planets
         const planets = [];
@@ -140,6 +130,11 @@ const startApp = () => {
             planet.material = new BABYLON.StandardMaterial(`${p.planetName}material`, scene);
             planet.material.diffuseTexture = new BABYLON.Texture(p.urlPath, scene);
 
+            if(i == 0){
+                // the sun has a light source so
+                planet.material.emissiveColor = new BABYLON.Color3(1, 1, 0);
+            }
+
             // set the alpha and alpha increment of the planet
             planet.alpha = parseFloat(p.alpha);
             planet.alphaIncrement = parseFloat(p.alphaIncrement);
@@ -148,7 +143,7 @@ const startApp = () => {
             // set the rotation and the rotation increment of the planet
             planet.rotationIncrement = parseFloat(p.rotationIncrement);
 
-            // add the planet to the planet array
+            // add the planet to the planets array
             planets.push(planet);
 
             // create the torus for the orbit path visual
@@ -161,18 +156,16 @@ const startApp = () => {
             // loop over the planets in the array
             for(let i in planets){
                 const p = planets[i];
-                p.position = new BABYLON.Vector3(p.orbit * Math.sin(p.alpha), sun.position.y, p.orbit * Math.cos(p.alpha));
+                p.position = new BABYLON.Vector3(p.orbit * Math.sin(p.alpha), 0, p.orbit * Math.cos(p.alpha));
                 p.alpha += p.alphaIncrement;
                 p.rotation.y += p.rotationIncrement;
             }
 
-            saturnRings.position = new BABYLON.Vector3(planets[5].orbit * Math.sin(planets[5].alpha), sun.position.y, planets[5].orbit * Math.cos(planets[5].alpha));
-            earthMoon.position = planets[2].position;
+            saturnRings.position = new BABYLON.Vector3(planets[6].orbit * Math.sin(planets[6].alpha), 0, planets[6].orbit * Math.cos(planets[6].alpha));
+            earthMoon.position = planets[3].position;
         
             earthMoon.rotation.y += 0.02;
             saturnRings.rotation.y += 3;
-            earthMoon.rotation.y -= 0.01
-            sun.rotation.y += 0.003;
 
             lastCameraLocation = camera.position;
         }
