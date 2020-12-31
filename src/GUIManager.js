@@ -4,7 +4,7 @@ let _baseContainer = null;
     GUI volume control slider
   ===============================================================
   */
-const changeVolumeSlider = (baseContainer, music) => {
+export const changeVolumeSlider = (baseContainer, music) => {
     
     _baseContainer = baseContainer;
     // create a rectangle element to hold the slider and the image
@@ -43,7 +43,7 @@ const changeVolumeSlider = (baseContainer, music) => {
 /*===============================================================
     GUI planet information tab
   ===============================================================*/
-const showPlanetInfo = (planetId) => {
+export const showPlanetInfo = (planetId) => {
     const planetData = getPlanetInfoData()[planetId];
 
     const container = new BABYLON.GUI.Rectangle('planetInfoContainer');

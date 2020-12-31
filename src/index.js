@@ -1,3 +1,5 @@
+import { changeVolumeSlider, showPlanetInfo } from './GUIManager.js'
+
 // constants
 const MERCURY_ORBIT = 6;
 const VENUS_ORBIT = 10;
@@ -14,10 +16,6 @@ const STARS_IMAGE_DIAMETER = 500;
 
 let planetInfoData = null;
 let planetData = null;
-
-const printInformationTab = (id) => {
-    console.log(id);
-}
 
 const readData = () => {
 
@@ -43,44 +41,6 @@ const readData = () => {
 
 readData();
 
-const getPlanetInfoData = () => {
-    return planetInfoData;
-}
-
-const createAsteroidBelt = (scene, asteroidBeltDistance) => {
-    let asteroids = [];
-
-    for(let i = 0; i < 100; i++){
-        
-        // generate asteroid values
-        const asteroidSize = (Math.random() * (0.1 - 0.01) + 0.01) * 10;
-        const asteroidOrbitDistance = Math.random() * (ASTEROID_BELT_ORBIT_MAX - ASTEROID_BELT_ORBIT_MIN) + ASTEROID_BELT_ORBIT_MIN;
-        // generate random asteroid starting position between 0 and 2*PI
-        const asteroidAlpha = Math.random() * 2 * Math.PI;
-
-        const asteroid = BABYLON.Mesh.CreateSphere("sphere", 16, asteroidSize, scene);
-        //asteroid.material = new BABYLON.StandardMaterial("asteroid", scene);
-        //asteroid.material.diffuseTexture = new BABYLON.Texture("style/textures/earthMoon.jpg", scene);
-        
-        // set properties
-        asteroid.orbitDistance = asteroidOrbitDistance;
-        asteroid.alpha = asteroidAlpha;
-
-        // add asteroid to array
-        asteroids.push(asteroid);
-    }
-
-    return asteroids;
-}
-
-const printAsteroids = (asteroidsList) => {
-    for(let i = 0; i < asteroidsList.length; i++){
-        const asteroid = asteroidsList[i];
-        //console.log(asteroid);
-        asteroid.position = new BABYLON.Vector3(asteroid.orbitDistance * Math.sin(asteroid.asteroidAlpha), asteroid.position.y, asteroid.orbitDistance * Math.cos(asteroid.asteroidAlpha));
-        asteroid.asteroidAlpha = asteroid.asteroidAlpha + 0.001
-    }
-}
 
 const startApp = () => {
     const canvas = document.getElementById('canvas');
@@ -211,6 +171,7 @@ const startApp = () => {
         saturnRings.material.diffuseTexture = new BABYLON.Texture("style/textures/saturn.jpg", scene);
 
         // show orbital lines
+        /*
         const mercuryOrbit = BABYLON.Mesh.CreateTorus("sphere", MERCURY_ORBIT * 2, 0.01, 80, scene);
         mercuryOrbit.scaling.y = 0.01;
         const venusOrbit = BABYLON.Mesh.CreateTorus("sphere", VENUS_ORBIT * 2, 0.01, 80, scene);
@@ -227,9 +188,9 @@ const startApp = () => {
         uranusOrbit.scaling.y = 0.01;
         const neptuneOrbit = BABYLON.Mesh.CreateTorus("sphere", NEPTUNE_ORBIT * 2, 0.01, 80, scene);
         neptuneOrbit.scaling.y = 0.01;
-
+        */
         // create asteroid belt
-        const asteroidsList = createAsteroidBelt(scene);
+        //const asteroidsList = createAsteroidBelt(scene);
 
         // set alphas
         let earthAlpha = 2 * Math.PI;
@@ -242,14 +203,44 @@ const startApp = () => {
         let uranusAlpha = 2 * Math.PI;
         let neptuneAlpha = 2 * Math.PI;
 
+        // create an array storing references to planets
+        const planets = [];
+
         // loop over the planet data stored in planetData
-        for(let i = 0; i < planetData.length; i++){
-            console.log(planetData[i]);
+        for(let i in planetData){
+            const p = planetData[i];
+            const planet = BABYLON.Mesh.CreateSphere("sphere", p.planetSegments, p.radius, scene);
+            planet.idNumber = i;
+
+            // assign a material to the planets
+            planet.material = new BABYLON.StandardMaterial(`${p.planetName}material`, scene);
+            planet.material.diffuseTexture = new BABYLON.Texture(p.urlPath, scene);
+
+            // set the alpha and alpha increment of the planet
+            planet.alpha = parseFloat(p.alpha);
+            planet.alphaIncrement = parseFloat(p.alphaIncrement);
+            planet.orbit = parseFloat(p.orbit);
+
+            // set the rotation and the rotation increment of the planet
+            planet.rotationIncrement = parseFloat(p.rotationIncrement);
+
+            // add the planet to the planet array
+            planets.push(planet);
+
+            // create the torus for the orbit path visual
+            const orbitVisual = BABYLON.Mesh.CreateTorus("sphere", planet.orbit * 2, 0.01, 80, scene);
+            orbitVisual.scaling.y = 0.01;
         }
-        console.log(planetData);
 
         scene.beforeRender = () => {
 
+            // loop over the planets in the array
+            for(let i in planets){
+                const p = planets[i];
+                p.position = new BABYLON.Vector3(p.orbit * Math.sin(p.alpha), sun.position.y, p.orbit * Math.cos(p.alpha));
+                p.alpha += p.alphaIncrement;
+                p.rotation.y += p.rotationIncrement;
+            }
             // calculate the orbits of the planets
             mercury.position = new BABYLON.Vector3(MERCURY_ORBIT * Math.sin(mercuryAlpha), sun.position.y, MERCURY_ORBIT * Math.cos(mercuryAlpha));
             venus.position = new BABYLON.Vector3(VENUS_ORBIT * Math.sin(venusAlpha), sun.position.y, VENUS_ORBIT * Math.cos(venusAlpha));
@@ -263,7 +254,7 @@ const startApp = () => {
             earthMoon.position = earth.position;
 
             //print the asteroids
-            printAsteroids(asteroidsList)
+            //printAsteroids(asteroidsList)
         
             //rotate the planets
             earth.rotation.y += 0.01;
@@ -307,3 +298,41 @@ const startApp = () => {
 }
 
 window.addEventListener('DOMContentLoaded', readData);
+
+
+/*
+const createAsteroidBelt = (scene, asteroidBeltDistance) => {
+    let asteroids = [];
+
+    for(let i = 0; i < 100; i++){
+        
+        // generate asteroid values
+        const asteroidSize = (Math.random() * (0.1 - 0.01) + 0.01) * 10;
+        const asteroidOrbitDistance = Math.random() * (ASTEROID_BELT_ORBIT_MAX - ASTEROID_BELT_ORBIT_MIN) + ASTEROID_BELT_ORBIT_MIN;
+        // generate random asteroid starting position between 0 and 2*PI
+        const asteroidAlpha = Math.random() * 2 * Math.PI;
+
+        const asteroid = BABYLON.Mesh.CreateSphere("sphere", 16, asteroidSize, scene);
+        //asteroid.material = new BABYLON.StandardMaterial("asteroid", scene);
+        //asteroid.material.diffuseTexture = new BABYLON.Texture("style/textures/earthMoon.jpg", scene);
+        
+        // set properties
+        asteroid.orbitDistance = asteroidOrbitDistance;
+        asteroid.alpha = asteroidAlpha;
+
+        // add asteroid to array
+        asteroids.push(asteroid);
+    }
+
+    return asteroids;
+}
+
+const printAsteroids = (asteroidsList) => {
+    for(let i = 0; i < asteroidsList.length; i++){
+        const asteroid = asteroidsList[i];
+        //console.log(asteroid);
+        asteroid.position = new BABYLON.Vector3(asteroid.orbitDistance * Math.sin(asteroid.asteroidAlpha), asteroid.position.y, asteroid.orbitDistance * Math.cos(asteroid.asteroidAlpha));
+        asteroid.asteroidAlpha = asteroid.asteroidAlpha + 0.001
+    }
+}
+*/
