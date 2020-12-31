@@ -34,9 +34,14 @@ const readData = () => {
     xhr.open("GET", "./data/planetData.json");
     xhr.addEventListener('load', (event) => {
         planetData = JSON.parse(event.currentTarget.responseText);
+
+        // after the content has loaded start the application
+        startApp();
     });
     xhr.send();
 }
+
+readData();
 
 const getPlanetInfoData = () => {
     return planetInfoData;
@@ -237,6 +242,12 @@ const startApp = () => {
         let uranusAlpha = 2 * Math.PI;
         let neptuneAlpha = 2 * Math.PI;
 
+        // loop over the planet data stored in planetData
+        for(let i = 0; i < planetData.length; i++){
+            console.log(planetData[i]);
+        }
+        console.log(planetData);
+
         scene.beforeRender = () => {
 
             // calculate the orbits of the planets
@@ -295,6 +306,4 @@ const startApp = () => {
 
 }
 
-readData();
-
-window.addEventListener('DOMContentLoaded', startApp);
+window.addEventListener('DOMContentLoaded', readData);
