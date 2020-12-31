@@ -106,28 +106,9 @@ const startApp = () => {
         skySphere.material = skySphereMaterial;
 
         // create the planets
-        const sun = BABYLON.Mesh.CreateSphere("sphere", 32, 5, scene);
-        const earth = BABYLON.Mesh.CreateSphere("sphere", 32, 1, scene);
+        const sun = BABYLON.Mesh.CreateSphere("sphere", 32, 0.5, scene);
         const earthMoon = BABYLON.Mesh.CreateSphere("sphere", 32, 0.5, scene);
-        const mercury = BABYLON.Mesh.CreateSphere("sphere", 32, 1, scene);
-        const venus = BABYLON.Mesh.CreateSphere("sphere", 32, 1, scene);
-        const mars = BABYLON.Mesh.CreateSphere("sphere", 32, 1, scene);
-        const jupiter = BABYLON.Mesh.CreateSphere("sphere", 32, 2.5, scene);
-        const saturn = BABYLON.Mesh.CreateSphere("sphere", 32, 2, scene);
-        const uranus = BABYLON.Mesh.CreateSphere("sphere", 32, 1.5, scene);
-        const neptune = BABYLON.Mesh.CreateSphere("sphere", 32, 1.5, scene);
 
-        // set mesh ids for each planet
-        sun.idNumber = 0;
-        mercury.idNumber = 1;
-        venus.idNumber = 2;
-        earth.idNumber = 3; 
-        mars.idNumber = 4; 
-        jupiter.idNumber = 5; 
-        saturn.idNumber = 6;
-        uranus.idNumber = 7;
-        neptune.idNumber = 8;
-        earthMoon.idNumber = 9;  
 
         // make the moon orbit earth
         earthMoon.position.x = EARTH_MOON_ORBIT;
@@ -138,70 +119,13 @@ const startApp = () => {
         sun.material.diffuseTexture = new BABYLON.Texture("style/textures/sun.jpg", scene);
         sun.material.emissiveColor = new BABYLON.Color3(1, 1, 0);
 
-        mercury.material = new BABYLON.StandardMaterial("mercurymaterial", scene);
-        mercury.material.diffuseTexture = new BABYLON.Texture("style/textures/mercury.jpg", scene);
-
-        venus.material = new BABYLON.StandardMaterial("venusmaterial", scene);
-        venus.material.diffuseTexture = new BABYLON.Texture("style/textures/venus.jpg", scene);
-
-        earth.material = new BABYLON.StandardMaterial("earthMat", scene);
-        earth.material.diffuseTexture = new BABYLON.Texture("style/textures/earth.jpg", scene);
-
-        earthMoon.material = new BABYLON.StandardMaterial("earthMoonMat", scene);
-        earthMoon.material.diffuseTexture = new BABYLON.Texture("style/textures/earthMoon.jpg", scene);
-
-        mars.material = new BABYLON.StandardMaterial("marsmaterial", scene);
-        mars.material.diffuseTexture = new BABYLON.Texture("style/textures/mars.jpg", scene);
-
-        jupiter.material = new BABYLON.StandardMaterial("jupitermaterial", scene);
-        jupiter.material.diffuseTexture = new BABYLON.Texture("style/textures/jupiter.jpg", scene);
-
-        saturn.material = new BABYLON.StandardMaterial("saturnmaterial", scene);
-        saturn.material.diffuseTexture = new BABYLON.Texture("style/textures/saturn.jpg", scene);
-
-        uranus.material = new BABYLON.StandardMaterial("uranusmaterial", scene);
-        uranus.material.diffuseTexture = new BABYLON.Texture("style/textures/uranus.jpg", scene);
-
-        neptune.material = new BABYLON.StandardMaterial("neptunematerial", scene);
-        neptune.material.diffuseTexture = new BABYLON.Texture("style/textures/neptune.jpg", scene);
-
         const saturnRings = BABYLON.Mesh.CreateTorus("sphere", 3.5, 0.8, 40, scene);
         saturnRings.scaling.y = 0.01;
         saturnRings.material = new BABYLON.StandardMaterial("sunmaterial", scene);
         saturnRings.material.diffuseTexture = new BABYLON.Texture("style/textures/saturn.jpg", scene);
 
-        // show orbital lines
-        /*
-        const mercuryOrbit = BABYLON.Mesh.CreateTorus("sphere", MERCURY_ORBIT * 2, 0.01, 80, scene);
-        mercuryOrbit.scaling.y = 0.01;
-        const venusOrbit = BABYLON.Mesh.CreateTorus("sphere", VENUS_ORBIT * 2, 0.01, 80, scene);
-        venusOrbit.scaling.y = 0.01;
-        const earthOrbit = BABYLON.Mesh.CreateTorus("sphere", EARTH_ORBIT * 2, 0.01, 80, scene);
-        earthOrbit.scaling.y = 0.01;
-        const marsOrbit = BABYLON.Mesh.CreateTorus("sphere", MARS_ORBIT * 2, 0.01, 80, scene);
-        marsOrbit.scaling.y = 0.01;
-        const jupiterOrbit = BABYLON.Mesh.CreateTorus("sphere", JUPITER_ORBIT * 2, 0.01, 80, scene);
-        jupiterOrbit.scaling.y = 0.01;
-        const saturnOrbit = BABYLON.Mesh.CreateTorus("sphere", SATURN_ORBIT * 2, 0.01, 80, scene);
-        saturnOrbit.scaling.y = 0.01;
-        const uranusOrbit = BABYLON.Mesh.CreateTorus("sphere", URANUS_ORBIT * 2, 0.01, 80, scene);
-        uranusOrbit.scaling.y = 0.01;
-        const neptuneOrbit = BABYLON.Mesh.CreateTorus("sphere", NEPTUNE_ORBIT * 2, 0.01, 80, scene);
-        neptuneOrbit.scaling.y = 0.01;
-        */
         // create asteroid belt
         //const asteroidsList = createAsteroidBelt(scene);
-
-        // set alphas
-        let earthAlpha = 2 * Math.PI;
-        let mercuryAlpha = 2 * Math.PI;
-        let venusAlpha = 2 * Math.PI;
-        let marsAlpha = 2 * Math.PI;
-        let JupiterAlpha =2 * Math.PI;
-        let saturnAlpha = 2 * Math.PI;
-        let earthMoonAlpha = 2 * Math.PI;
-        let uranusAlpha = 2 * Math.PI;
-        let neptuneAlpha = 2 * Math.PI;
 
         // create an array storing references to planets
         const planets = [];
@@ -241,40 +165,16 @@ const startApp = () => {
                 p.alpha += p.alphaIncrement;
                 p.rotation.y += p.rotationIncrement;
             }
-            // calculate the orbits of the planets
-            mercury.position = new BABYLON.Vector3(MERCURY_ORBIT * Math.sin(mercuryAlpha), sun.position.y, MERCURY_ORBIT * Math.cos(mercuryAlpha));
-            venus.position = new BABYLON.Vector3(VENUS_ORBIT * Math.sin(venusAlpha), sun.position.y, VENUS_ORBIT * Math.cos(venusAlpha));
-            earth.position = new BABYLON.Vector3(EARTH_ORBIT * Math.sin(earthAlpha), sun.position.y, EARTH_ORBIT * Math.cos(earthAlpha));
-            mars.position = new BABYLON.Vector3(MARS_ORBIT * Math.sin(marsAlpha), sun.position.y, MARS_ORBIT * Math.cos(marsAlpha));
-            jupiter.position = new BABYLON.Vector3(JUPITER_ORBIT * Math.sin(JupiterAlpha), sun.position.y, JUPITER_ORBIT * Math.cos(JupiterAlpha));
-            saturn.position = new BABYLON.Vector3(SATURN_ORBIT * Math.sin(saturnAlpha), sun.position.y, SATURN_ORBIT * Math.cos(saturnAlpha));
-            uranus.position = new BABYLON.Vector3(URANUS_ORBIT * Math.sin(uranusAlpha), sun.position.y, URANUS_ORBIT * Math.cos(uranusAlpha));
-            neptune.position = new BABYLON.Vector3(NEPTUNE_ORBIT * Math.sin(neptuneAlpha), sun.position.y, NEPTUNE_ORBIT * Math.cos(neptuneAlpha));
-            saturnRings.position = new BABYLON.Vector3(SATURN_ORBIT * Math.sin(saturnAlpha), sun.position.y, SATURN_ORBIT * Math.cos(saturnAlpha));
-            earthMoon.position = earth.position;
 
-            //print the asteroids
-            //printAsteroids(asteroidsList)
+            saturnRings.position = new BABYLON.Vector3(planets[5].orbit * Math.sin(planets[5].alpha), sun.position.y, planets[5].orbit * Math.cos(planets[5].alpha));
+            earthMoon.position = planets[2].position;
         
-            //rotate the planets
-            earth.rotation.y += 0.01;
             earthMoon.rotation.y += 0.02;
             saturnRings.rotation.y += 3;
             earthMoon.rotation.y -= 0.01
             sun.rotation.y += 0.003;
 
-            // increment the alpha
-            mercuryAlpha += 0.005;
-            venusAlpha += 0.004;
-            earthAlpha += 0.003;
-            marsAlpha += 0.002;
-            JupiterAlpha += 0.0009;
-            saturnAlpha += 0.0005;
-            uranusAlpha += 0.0002;
-            neptuneAlpha += 0.0001;
-
             lastCameraLocation = camera.position;
-
         }
 
         return scene;

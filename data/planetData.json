@@ -2,7 +2,7 @@
     "0": {
         "planetName": "mercury",
         "planetSegments": "32",
-        "radius": "4",
+        "radius": "1",
         "urlPath": "style/textures/mercury.jpg",
         "orbit": "6",
         "alpha": "6.28",
@@ -13,7 +13,7 @@
     "1": {
         "planetName": "venus",
         "planetSegments": "32",
-        "radius": "2",
+        "radius": "1",
         "urlPath": "style/textures/venus.jpg",
         "orbit": "10",
         "alpha": "6.28",
@@ -24,7 +24,7 @@
     "2": {
         "planetName": "earth",
         "planetSegments": "32",
-        "radius": "3",
+        "radius": "1",
         "urlPath": "style/textures/earth.jpg",
         "orbit": "15",
         "alpha": "6.28",
@@ -35,7 +35,7 @@
     "3": {
         "planetName": "mars",
         "planetSegments": "32",
-        "radius": "7",
+        "radius": "1",
         "urlPath": "style/textures/mars.jpg",
         "orbit": "20",
         "alpha": "6.28",
@@ -46,7 +46,7 @@
     "4": {
         "planetName": "jupiter",
         "planetSegments": "32",
-        "radius": "4",
+        "radius": "2",
         "urlPath": "style/textures/jupiter.jpg",
         "orbit": "30",
         "alpha": "6.28",
@@ -57,7 +57,7 @@
     "5": {
         "planetName": "saturn",
         "planetSegments": "32",
-        "radius": "5",
+        "radius": "2",
         "urlPath": "style/textures/saturn.jpg",
         "orbit": "40",
         "alpha": "6.28",
@@ -68,7 +68,7 @@
     "6": {
         "planetName": "uranus",
         "planetSegments": "32",
-        "radius": "6",
+        "radius": "2",
         "urlPath": "style/textures/uranus.jpg",
         "orbit": "50",
         "alpha": "6.28",
@@ -79,9 +79,20 @@
     "7": {
         "planetName": "neptune",
         "planetSegments": "32",
-        "radius": "1",
+        "radius": "2",
         "urlPath": "style/textures/neptune.jpg",
         "orbit": "60",
+        "alpha": "6.28",
+        "alphaIncrement": "0.003",
+        "rotation": "0.01",
+        "rotationIncrement": "0.01"
+    },
+    "8": {
+        "planetName": "neptune",
+        "planetSegments": "32",
+        "radius": "2",
+        "urlPath": "style/textures/earthMoon.jpg",
+        "orbit": "1.5",
         "alpha": "6.28",
         "alphaIncrement": "0.003",
         "rotation": "0.01",
