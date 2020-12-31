@@ -97,5 +97,16 @@
         "alphaIncrement": "0.0005",
         "rotation": "0.01",
         "rotationIncrement": "0.01"
+    },
+    "9": {
+        "planetName": "earthMoon",
+        "planetSegments": "32",
+        "radius": "0.4",
+        "urlPath": "style/textures/earthMoon.jpg",
+        "orbit": "0.05",
+        "alpha": "0",
+        "alphaIncrement": "0",
+        "rotation": "0.01",
+        "rotationIncrement": "0.01"
     }
 }

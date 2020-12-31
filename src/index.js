@@ -105,13 +105,6 @@ const startApp = () => {
         skySphereMaterial.backFaceCulling = false;
         skySphere.material = skySphereMaterial;
 
-        // create the planets
-        const earthMoon = BABYLON.Mesh.CreateSphere("sphere", 32, 0.5, scene);
-
-        // make the moon orbit earth
-        earthMoon.position.x = EARTH_MOON_ORBIT;
-        earthMoon.bakeCurrentTransformIntoVertices();
-
         const saturnRings = BABYLON.Mesh.CreateTorus("sphere", 3.5, 0.8, 40, scene);
         saturnRings.scaling.y = 0.01;
         saturnRings.material = new BABYLON.StandardMaterial("sunmaterial", scene);
@@ -133,6 +126,11 @@ const startApp = () => {
             if(i == 0){
                 // the sun has a light source so
                 planet.material.emissiveColor = new BABYLON.Color3(1, 1, 0);
+            }else if(i == 9){
+                // creating the moon
+                planet.position.x = planets[3].orbit;
+                planet.bakeCurrentTransformIntoVertices();
+                planet.position.x = 0;
             }
 
             // set the alpha and alpha increment of the planet
@@ -159,12 +157,14 @@ const startApp = () => {
                 p.position = new BABYLON.Vector3(p.orbit * Math.sin(p.alpha), 0, p.orbit * Math.cos(p.alpha));
                 p.alpha += p.alphaIncrement;
                 p.rotation.y += p.rotationIncrement;
+
+                if(i == 9){
+                    // printing the moon
+                    p.position = planets[3].position;
+                }
             }
 
             saturnRings.position = new BABYLON.Vector3(planets[6].orbit * Math.sin(planets[6].alpha), 0, planets[6].orbit * Math.cos(planets[6].alpha));
-            earthMoon.position = planets[3].position;
-        
-            earthMoon.rotation.y += 0.02;
             saturnRings.rotation.y += 3;
 
             lastCameraLocation = camera.position;
