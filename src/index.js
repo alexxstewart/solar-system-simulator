@@ -6,6 +6,12 @@ const STARS_IMAGE_DIAMETER = 500;
 let planetInfoData = null;
 let planetData = null;
 
+let focusCameraOnPlanet = false;
+let focusCameraOnPlanetId = -1;
+
+// create an array storing references to planets
+let planets = [];
+
 const readData = () => {
 
     // read planet info data
@@ -29,7 +35,6 @@ const readData = () => {
 }
 
 readData();
-
 
 const startApp = () => {
     const canvas = document.getElementById('canvas');
@@ -100,14 +105,14 @@ const startApp = () => {
         saturnRings.material = new BABYLON.StandardMaterial("sunmaterial", scene);
         saturnRings.material.diffuseTexture = new BABYLON.Texture("style/textures/saturn.jpg", scene);
 
-        // create an array storing references to planets
-        const planets = [];
+        planets = [];
 
         // loop over the planet data stored in planetData
         for(let i in planetData){
             const p = planetData[i];
             const planet = BABYLON.Mesh.CreateSphere("sphere", p.planetSegments, p.radius, scene);
             planet.idNumber = i;
+            planet.radius = parseInt(p.radius);
 
             // assign a material to the planets
             planet.material = new BABYLON.StandardMaterial(`${p.planetName}material`, scene);
@@ -151,6 +156,7 @@ const startApp = () => {
                 if(i == 9){
                     // printing the moon
                     p.position = planets[3].position;
+                    //console.log(planets[3].position);
                     //console.log(p.orbit);
                 }else if(i == 6){ 
                     p.rotation.y = 0;
@@ -158,8 +164,13 @@ const startApp = () => {
             }
 
             saturnRings.position = new BABYLON.Vector3(planets[6].orbit * Math.sin(planets[6].alpha), 0, planets[6].orbit * Math.cos(planets[6].alpha));
-            //saturnRings.rotation.y += 3;
 
+            if(focusCameraOnPlanet){
+                //console.log(focusCameraOnPlanetId);
+                const p = planets[focusCameraOnPlanetId];
+                const alphaChange = 0.01 / p.radius;
+                camera.position = new BABYLON.Vector3((p.orbit + p.radius + 1) * Math.sin(p.alpha + alphaChange), 0, (p.orbit + p.radius + 1) * Math.cos(p.alpha + alphaChange))
+            }
             lastCameraLocation = camera.position;
         }
 
@@ -173,6 +184,10 @@ const startApp = () => {
         if(pick.pickedMesh != null) {
             if(pick.pickedMesh.name == 'sphere'){
                 showPlanetInfo(pick.pickedMesh.idNumber, planetInfoData);
+
+                // we want to focus the camera on the planet
+                focusCameraOnPlanet = true;
+                focusCameraOnPlanetId = pick.pickedMesh.idNumber;
             }
         }
     })

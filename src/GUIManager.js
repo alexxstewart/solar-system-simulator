@@ -91,5 +91,5 @@ export const showPlanetInfo = (planetId, planetDataArray) => {
     text.width = "500px";
     text.height = "100px";
     stackPanel.addControl(text);
-    
+    console.log(container);
 }
