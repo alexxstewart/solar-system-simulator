@@ -15,3 +15,9 @@ export const renderPlanets = (planets) => {
         }
     }
 } 
+
+export const renderCamera = (planets, id, camera) => {
+    const p = planets[id];
+    const alphaChange = 0.01 / p.radius;
+    camera.position = new BABYLON.Vector3((p.orbit + p.radius + 1) * Math.sin(p.alpha + alphaChange), 0, (p.orbit + p.radius + 1) * Math.cos(p.alpha + alphaChange))
+}

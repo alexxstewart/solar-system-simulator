@@ -1,6 +1,6 @@
 import { changeVolumeSlider, showPlanetInfo } from './GUIManager.js'
 import { createLighting, createGroundMesh, createSkyImage, createPlanets } from './createOnScreenAssets.js'
-import { renderPlanets } from './planetRenderer.js'
+import { renderPlanets, renderCamera } from './renderer.js'
 import loadJSON from './readData.js'
 
 // constants
@@ -18,7 +18,7 @@ function init() {
         let {planets, planetsInfo} = response;
         planetData = planets;
         planetInfoData = planetsInfo;
-        
+
         // after loading the data we start the app
         startApp();
     });
@@ -86,10 +86,7 @@ const startApp = () => {
             saturnRings.position = new BABYLON.Vector3(planets[6].orbit * Math.sin(planets[6].alpha), 0, planets[6].orbit * Math.cos(planets[6].alpha));
 
             if(focusCameraOnPlanet){
-                //console.log(focusCameraOnPlanetId);
-                const p = planets[focusCameraOnPlanetId];
-                const alphaChange = 0.01 / p.radius;
-                camera.position = new BABYLON.Vector3((p.orbit + p.radius + 1) * Math.sin(p.alpha + alphaChange), 0, (p.orbit + p.radius + 1) * Math.cos(p.alpha + alphaChange))
+                renderCamera(planets, focusCameraOnPlanetId, camera);
             }
             lastCameraLocation = camera.position;
         }
