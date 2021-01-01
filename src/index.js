@@ -1,17 +1,6 @@
 import { changeVolumeSlider, showPlanetInfo } from './GUIManager.js'
 
 // constants
-const MERCURY_ORBIT = 6;
-const VENUS_ORBIT = 10;
-const EARTH_ORBIT = 15;
-const MARS_ORBIT = 20;
-const JUPITER_ORBIT = 30;
-const SATURN_ORBIT = 40;
-const URANUS_ORBIT = 50;
-const NEPTUNE_ORBIT = 60;
-const EARTH_MOON_ORBIT = 1.5;
-const ASTEROID_BELT_ORBIT_MIN = 23;
-const ASTEROID_BELT_ORBIT_MAX = 27;
 const STARS_IMAGE_DIAMETER = 500;
 
 let planetInfoData = null;
@@ -72,7 +61,7 @@ const startApp = () => {
             }
         })
 
-        // create the music to play 
+        // create the music to play and set the default volume to 0.5
         const music = new BABYLON.Sound("Music", "/style/music/ME - Galaxy Map Theme.mp3", scene, () => music.play(), {
             loop: true,
             autoplay: true
@@ -106,6 +95,7 @@ const startApp = () => {
         skySphere.material = skySphereMaterial;
 
         const saturnRings = BABYLON.Mesh.CreateTorus("sphere", 3.5, 0.8, 40, scene);
+        saturnRings.addRotation(0,0,10);
         saturnRings.scaling.y = 0.01;
         saturnRings.material = new BABYLON.StandardMaterial("sunmaterial", scene);
         saturnRings.material.diffuseTexture = new BABYLON.Texture("style/textures/saturn.jpg", scene);
@@ -123,16 +113,6 @@ const startApp = () => {
             planet.material = new BABYLON.StandardMaterial(`${p.planetName}material`, scene);
             planet.material.diffuseTexture = new BABYLON.Texture(p.urlPath, scene);
 
-            if(i == 0){
-                // the sun has a light source so
-                planet.material.emissiveColor = new BABYLON.Color3(1, 1, 0);
-            }else if(i == 9){
-                // creating the moon
-                planet.position.x = planets[3].orbit;
-                planet.bakeCurrentTransformIntoVertices();
-                planet.position.x = 0;
-            }
-
             // set the alpha and alpha increment of the planet
             planet.alpha = parseFloat(p.alpha);
             planet.alphaIncrement = parseFloat(p.alphaIncrement);
@@ -141,11 +121,22 @@ const startApp = () => {
             // set the rotation and the rotation increment of the planet
             planet.rotationIncrement = parseFloat(p.rotationIncrement);
 
+            if(i == 0){
+                // the sun has a light source so
+                planet.material.emissiveColor = new BABYLON.Color3(1, 1, 0);
+            }else if(i == 6){
+                planet.addRotation(0,0,10);
+            }else if(i == 9){
+                // creating the moon
+                planet.position.x = planet.orbit;
+                planet.bakeCurrentTransformIntoVertices();
+            }
+
             // add the planet to the planets array
             planets.push(planet);
 
             // create the torus for the orbit path visual
-            const orbitVisual = BABYLON.Mesh.CreateTorus("sphere", planet.orbit * 2, 0.01, 80, scene);
+            const orbitVisual = BABYLON.Mesh.CreateTorus("orbitCircle", planet.orbit * 2, 0.01, 80, scene);
             orbitVisual.scaling.y = 0.01;
         }
 
@@ -157,15 +148,17 @@ const startApp = () => {
                 p.position = new BABYLON.Vector3(p.orbit * Math.sin(p.alpha), 0, p.orbit * Math.cos(p.alpha));
                 p.alpha += p.alphaIncrement;
                 p.rotation.y += p.rotationIncrement;
-
                 if(i == 9){
                     // printing the moon
                     p.position = planets[3].position;
+                    //console.log(p.orbit);
+                }else if(i == 6){ 
+                    p.rotation.y = 0;
                 }
             }
 
             saturnRings.position = new BABYLON.Vector3(planets[6].orbit * Math.sin(planets[6].alpha), 0, planets[6].orbit * Math.cos(planets[6].alpha));
-            saturnRings.rotation.y += 3;
+            //saturnRings.rotation.y += 3;
 
             lastCameraLocation = camera.position;
         }
@@ -179,7 +172,7 @@ const startApp = () => {
         const pick = scene.pick(scene.pointerX, scene.pointerY);
         if(pick.pickedMesh != null) {
             if(pick.pickedMesh.name == 'sphere'){
-                showPlanetInfo(pick.pickedMesh.idNumber);
+                showPlanetInfo(pick.pickedMesh.idNumber, planetInfoData);
             }
         }
     })
@@ -191,41 +184,3 @@ const startApp = () => {
 }
 
 window.addEventListener('DOMContentLoaded', readData);
-
-
-/*
-const createAsteroidBelt = (scene, asteroidBeltDistance) => {
-    let asteroids = [];
-
-    for(let i = 0; i < 100; i++){
-        
-        // generate asteroid values
-        const asteroidSize = (Math.random() * (0.1 - 0.01) + 0.01) * 10;
-        const asteroidOrbitDistance = Math.random() * (ASTEROID_BELT_ORBIT_MAX - ASTEROID_BELT_ORBIT_MIN) + ASTEROID_BELT_ORBIT_MIN;
-        // generate random asteroid starting position between 0 and 2*PI
-        const asteroidAlpha = Math.random() * 2 * Math.PI;
-
-        const asteroid = BABYLON.Mesh.CreateSphere("sphere", 16, asteroidSize, scene);
-        //asteroid.material = new BABYLON.StandardMaterial("asteroid", scene);
-        //asteroid.material.diffuseTexture = new BABYLON.Texture("style/textures/earthMoon.jpg", scene);
-        
-        // set properties
-        asteroid.orbitDistance = asteroidOrbitDistance;
-        asteroid.alpha = asteroidAlpha;
-
-        // add asteroid to array
-        asteroids.push(asteroid);
-    }
-
-    return asteroids;
-}
-
-const printAsteroids = (asteroidsList) => {
-    for(let i = 0; i < asteroidsList.length; i++){
-        const asteroid = asteroidsList[i];
-        //console.log(asteroid);
-        asteroid.position = new BABYLON.Vector3(asteroid.orbitDistance * Math.sin(asteroid.asteroidAlpha), asteroid.position.y, asteroid.orbitDistance * Math.cos(asteroid.asteroidAlpha));
-        asteroid.asteroidAlpha = asteroid.asteroidAlpha + 0.001
-    }
-}
-*/

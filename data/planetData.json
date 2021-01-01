@@ -103,7 +103,7 @@
         "planetSegments": "32",
         "radius": "0.4",
         "urlPath": "style/textures/earthMoon.jpg",
-        "orbit": "0.05",
+        "orbit": "1.5",
         "alpha": "0",
         "alphaIncrement": "0",
         "rotation": "0.01",
