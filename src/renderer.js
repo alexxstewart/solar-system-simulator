@@ -18,6 +18,8 @@ export const renderPlanets = (planets) => {
     }
 } 
 
+let lastMeshHighlighted = null;
+
 export const renderCamera = (planets, id, camera) => {
     const p = planets[id];
     let alphaChange = 0;
@@ -34,4 +36,24 @@ export const renderCamera = (planets, id, camera) => {
     }
 
     camera.position = new BABYLON.Vector3((p.orbit + p.radius + distanceChange) * Math.sin(p.alpha + alphaChange), 0, (p.orbit + p.radius +distanceChange) * Math.cos(p.alpha + alphaChange))
+}
+
+export const highlightLayerLogic = (scene, highlightLayer, planets) => {
+    // this section here is determining whether a planet needs to be highlighted or not
+    const pick = scene.pick(scene.pointerX, scene.pointerY);
+    if(pick.pickedMesh != null) {
+        if(pick.pickedMesh.name == 'sphere'){
+            const currentMesh = planets[pick.pickedMesh.idNumber];
+            if(lastMeshHighlighted != currentMesh){
+                highlightLayer.addMesh(currentMesh, BABYLON.Color3.White());
+                highlightLayer.innerGlow = false;
+                lastMeshHighlighted = currentMesh;
+            }
+        }
+    }else{
+        if(lastMeshHighlighted != null){
+            highlightLayer.removeAllMeshes();
+            lastMeshHighlighted = null;
+        }
+    }
 }

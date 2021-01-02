@@ -1,14 +1,14 @@
 import { changeVolumeSlider, showPlanetInfo } from './GUIManager.js';
 import { createLighting, createGroundMesh, createSkyImage, createPlanets } from './createOnScreenAssets.js';
-import { renderPlanets, renderCamera } from './renderer.js';
-import { loadJSON } from './readData.js';
+import { renderPlanets, renderCamera, highlightLayerLogic } from './renderer.js';
+import loadJSON from './readData.js';
 
 // constants
 const STARS_IMAGE_DIAMETER = 300;
 
 let focusCameraOnPlanet = false;
 let focusCameraOnPlanetId = -1;
-let lastMeshHighlighted = null;
+let blockPlanetClick = false;
 
 let planetData = null;
 let planetInfoData = null;
@@ -49,7 +49,7 @@ const startApp = () => {
         let lastCameraLocation = null;
 
         // create the highlighting layer
-        const hightlight = new BABYLON.HighlightLayer("hl1", scene);
+        const hightlightLayer = new BABYLON.HighlightLayer("hl1", scene);
 
         window.addEventListener('mousewheel', (event) => {
             // get the cameras distance from the center
@@ -90,26 +90,16 @@ const startApp = () => {
             renderPlanets(planets);
 
             if(focusCameraOnPlanet){
-                renderCamera(planets, focusCameraOnPlanetId, camera);
-            }else{
+                // remove the highlight
+                hightlightLayer.removeAllMeshes();
                 
-                // this section here is determining whether a planet needs to be highlighted or not
-                const pick = scene.pick(scene.pointerX, scene.pointerY);
-                if(pick.pickedMesh != null) {
-                    if(pick.pickedMesh.name == 'sphere'){
-                        const currentMesh = planets[pick.pickedMesh.idNumber];
-                        if(lastMeshHighlighted != currentMesh){
-                            hightlight.addMesh(currentMesh, BABYLON.Color3.White());
-                            hightlight.innerGlow = false;
-                            lastMeshHighlighted = currentMesh;
-                        }
-                    }
-                }else{
-                    if(lastMeshHighlighted != null){
-                        hightlight.removeAllMeshes();
-                        lastMeshHighlighted = null;
-                    }
-                }
+                renderCamera(planets, focusCameraOnPlanetId, camera);
+                // block the user from clicking on any other planets while in focused mode
+                blockPlanetClick = true;
+            }else{
+                // allow for highlighting of planets
+                highlightLayerLogic(scene, hightlightLayer, planets);
+                blockPlanetClick = false;
             }
 
             lastCameraLocation = camera.position;
@@ -123,7 +113,7 @@ const startApp = () => {
     window.addEventListener('click', () => {
         const pick = scene.pick(scene.pointerX, scene.pointerY);
         if(pick.pickedMesh != null) {
-            if(pick.pickedMesh.name == 'sphere'){
+            if(pick.pickedMesh.name == 'sphere' && !blockPlanetClick){
                 showPlanetInfo(pick.pickedMesh.idNumber, planetInfoData, revertCamera);
 
                 // we want to focus the camera on the planet
