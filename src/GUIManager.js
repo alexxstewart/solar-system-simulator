@@ -1,5 +1,9 @@
 let _baseContainer = null;
 
+// constants
+const INFO_SECTION_BACKGROUND_COLOR = "#3d3d3d";
+const INFO_CONTAINER_WIDTH = "30%";
+
 /*===============================================================
     GUI volume control slider
   ===============================================================
@@ -45,26 +49,44 @@ export const changeVolumeSlider = (baseContainer, music) => {
   ===============================================================*/
 export const showPlanetInfo = (planetId, planetDataArray, revertCamera) => {
 
+    const titleStyle = _baseContainer.createStyle();
+    titleStyle.fontSize = 40;
+    titleStyle.fontFamily = "Verdana";
+
+    const textStyle = _baseContainer.createStyle();
+    textStyle.fontSize = 20;
+    textStyle.fontFamily = "Verdana"
+
+    console.log(planetDataArray);
     const planetData = planetDataArray[planetId];
-    
-    const container = new BABYLON.GUI.Rectangle('planetInfoContainer');
-    container.width = "50%";
-    container.heigth = "100%";
-    container.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-    container.background = "grey";
-    _baseContainer.addControl(container);
+
+    const leftContainer = new BABYLON.GUI.Rectangle('leftPlanetInfoContainer');
+    leftContainer.width = INFO_CONTAINER_WIDTH;
+    leftContainer.heigth = "110%";
+    leftContainer.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+    leftContainer.background = INFO_SECTION_BACKGROUND_COLOR;
+    _baseContainer.addControl(leftContainer);
+
+    const rightContainer = new BABYLON.GUI.Rectangle('rightPlanetInfoContainer');
+    rightContainer.width = INFO_CONTAINER_WIDTH;
+    rightContainer.heigth = "100%";
+    rightContainer.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+    rightContainer.background = INFO_SECTION_BACKGROUND_COLOR;
+    rightContainer.border = null;
+    _baseContainer.addControl(rightContainer);
 
     // create stack panel to store text elements
     const stackPanel = new BABYLON.GUI.StackPanel('stackPanel');  
-    container.addControl(stackPanel);
+    leftContainer.addControl(stackPanel);
 
     // add the title element
     const titleText = new BABYLON.GUI.TextBlock('titletext');
     titleText.text = planetData.title;
-    titleText.color = "black";
-    titleText.size = "30px";
+    titleText.color = "white";
+    titleText.size = "100%";
+    titleText.style = titleStyle;
     titleText.background = "white";
-    titleText.width = "100px";
+    titleText.width = "100%";
     titleText.height = "200px";
     titleText.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
     stackPanel.addControl(titleText);
@@ -79,17 +101,20 @@ export const showPlanetInfo = (planetId, planetDataArray, revertCamera) => {
     
     // on exit button click remove planetInfoContainer from base container
     exitButton.onPointerDownObservable.add(() => {
-        _baseContainer.removeControl(container);
+        _baseContainer.removeControl(leftContainer);
+        _baseContainer.removeControl(rightContainer);
         revertCamera();
     });
-    container.addControl(exitButton);
+    leftContainer.addControl(exitButton);
 
     // add the planet info section
     const text = new BABYLON.GUI.TextBlock();
     text.text = planetData.info;
-    text.color = "black";
-    text.size = "30px";
-    text.width = "500px";
-    text.height = "100px";
+    text.color = "white";
+    //text.size = "100%";
+    text.style = textStyle;
+    text.width = "100%";
+    text.height = "600px";
+    text.background = "blue";
     stackPanel.addControl(text);
 }

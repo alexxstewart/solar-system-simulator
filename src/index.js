@@ -31,6 +31,7 @@ const revertCamera = () => {
     camera.position = new BABYLON.Vector3( 5, 8, -30);
     focusCameraOnPlanet = false;
     focusCameraOnPlanetId = -1;
+    camera.attachControl(canvas, true);
 }
 
 const startApp = () => {
@@ -92,7 +93,7 @@ const startApp = () => {
             if(focusCameraOnPlanet){
                 // remove the highlight
                 hightlightLayer.removeAllMeshes();
-                
+
                 renderCamera(planets, focusCameraOnPlanetId, camera);
                 // block the user from clicking on any other planets while in focused mode
                 blockPlanetClick = true;
@@ -116,9 +117,10 @@ const startApp = () => {
             if(pick.pickedMesh.name == 'sphere' && !blockPlanetClick){
                 showPlanetInfo(pick.pickedMesh.idNumber, planetInfoData, revertCamera);
 
-                // we want to focus the camera on the planet
+                // we want to focus the camera on the planet and not allow the user to move the camera
                 focusCameraOnPlanet = true;
                 focusCameraOnPlanetId = pick.pickedMesh.idNumber;
+                camera.detachControl(canvas);
             }
         }
     })
