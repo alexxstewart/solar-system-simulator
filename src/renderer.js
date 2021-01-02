@@ -20,6 +20,18 @@ export const renderPlanets = (planets) => {
 
 export const renderCamera = (planets, id, camera) => {
     const p = planets[id];
-    const alphaChange = 0.01 / p.radius;
-    camera.position = new BABYLON.Vector3((p.orbit + p.radius + 1) * Math.sin(p.alpha + alphaChange), 0, (p.orbit + p.radius + 1) * Math.cos(p.alpha + alphaChange))
+    let alphaChange = 0;
+    let distanceChange = 0;
+
+    if(id == 0 || id == 5){    
+        distanceChange = 3;
+    }else if( id == 1 || id == 2 || id == 3 || id == 4 ){
+        distanceChange = 1;
+    }else if(id == 6){
+        distanceChange = 4;       
+    }else if(id == 7 || id == 8){
+        distanceChange = 2;       
+    }
+
+    camera.position = new BABYLON.Vector3((p.orbit + p.radius + distanceChange) * Math.sin(p.alpha + alphaChange), 0, (p.orbit + p.radius +distanceChange) * Math.cos(p.alpha + alphaChange))
 }

@@ -44,9 +44,9 @@ export const changeVolumeSlider = (baseContainer, music) => {
     GUI planet information tab
   ===============================================================*/
 export const showPlanetInfo = (planetId, planetDataArray) => {
-    const planetData = planetDataArray[planetId];
+    console.log(planetId);
     console.log(planetDataArray);
-
+    const planetData = planetDataArray[planetId];
     const container = new BABYLON.GUI.Rectangle('planetInfoContainer');
     container.width = "50%";
     container.heigth = "100%";
@@ -91,5 +91,4 @@ export const showPlanetInfo = (planetId, planetDataArray) => {
     text.width = "500px";
     text.height = "100px";
     stackPanel.addControl(text);
-    console.log(container);
 }

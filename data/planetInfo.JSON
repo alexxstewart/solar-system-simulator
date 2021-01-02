@@ -26,5 +26,13 @@
     "6": {
         "title": "Saturn",
         "info": "6th planet from the sun"
+    },
+    "7": {
+        "title": "Uranus",
+        "info": "7th planet from the sun"
+    },
+    "8": {
+        "title": "Neptune",
+        "info": "8th planet from the sun"
     }
 }
