@@ -15,6 +15,7 @@ export const createGroundMesh = (scene) => {
 	ref.material = new BABYLON.StandardMaterial("gmat", scene);
     ref.material.wireframe = true;
     ref.material.alpha = 0.02;
+    ref.isPickable = false;
 }
 
 export const createSkyImage = (scene) => {
@@ -24,6 +25,7 @@ export const createSkyImage = (scene) => {
     skySphereMaterial.diffuseTexture = new BABYLON.Texture("style/textures/starpic4/star.jpg", scene);
     skySphereMaterial.backFaceCulling = false;
     skySphere.material = skySphereMaterial;
+    skySphere.isPickable = false;
 }
 
 export const createPlanets = (scene, planetData) => {

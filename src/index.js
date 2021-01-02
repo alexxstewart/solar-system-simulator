@@ -8,6 +8,7 @@ const STARS_IMAGE_DIAMETER = 300;
 
 let focusCameraOnPlanet = false;
 let focusCameraOnPlanetId = -1;
+let lastMeshHighlighted = null;
 
 let planetData = null;
 let planetInfoData = null;
@@ -35,7 +36,7 @@ const revertCamera = () => {
 const startApp = () => {
 
     const canvas = document.getElementById('canvas');
-    const engine = new BABYLON.Engine(canvas, true);
+    const engine = new BABYLON.Engine(canvas, true, {stencil: true});
 
     const createScene = () => {
         const scene = new BABYLON.Scene(engine);
@@ -46,6 +47,9 @@ const startApp = () => {
         camera.attachControl(canvas, true);
         camera.position = new BABYLON.Vector3( 5, 8, -30);
         let lastCameraLocation = null;
+
+        // create the highlighting layer
+        const hightlight = new BABYLON.HighlightLayer("hl1", scene);
 
         window.addEventListener('mousewheel', (event) => {
             // get the cameras distance from the center
@@ -87,7 +91,28 @@ const startApp = () => {
 
             if(focusCameraOnPlanet){
                 renderCamera(planets, focusCameraOnPlanetId, camera);
+            }else{
+                // we always need to check where the mouse position is
+
+                const pick = scene.pick(scene.pointerX, scene.pointerY);
+                if(pick.pickedMesh != null) {
+                    if(pick.pickedMesh.name == 'sphere'){
+                        const currentMesh = planets[pick.pickedMesh.idNumber];
+                        if(lastMeshHighlighted != currentMesh){
+                            hightlight.addMesh(currentMesh, BABYLON.Color3.White());
+                            hightlight.innerGlow = false;
+                            lastMeshHighlighted = currentMesh;
+                            console.log('highlighting mesh');
+                        }
+                    }
+                }else{
+                    if(lastMeshHighlighted != null){
+                        hightlight.removeAllMeshes();
+                        lastMeshHighlighted = null;
+                    }
+                }
             }
+
             lastCameraLocation = camera.position;
         }
 
@@ -108,6 +133,7 @@ const startApp = () => {
             }
         }
     })
+
 
     engine.runRenderLoop(() => {
         scene.render();
