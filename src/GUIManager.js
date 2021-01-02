@@ -43,7 +43,7 @@ export const changeVolumeSlider = (baseContainer, music) => {
 /*===============================================================
     GUI planet information tab
   ===============================================================*/
-export const showPlanetInfo = (planetId, planetDataArray) => {
+export const showPlanetInfo = (planetId, planetDataArray, revertCamera) => {
     console.log(planetId);
     console.log(planetDataArray);
     const planetData = planetDataArray[planetId];
@@ -80,6 +80,7 @@ export const showPlanetInfo = (planetId, planetDataArray) => {
     // on exit button click remove planetInfoContainer from base container
     exitButton.onPointerDownObservable.add(() => {
         _baseContainer.removeControl(container);
+        revertCamera();
     });
     container.addControl(exitButton);
 

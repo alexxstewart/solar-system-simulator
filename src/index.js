@@ -13,6 +13,8 @@ let planetData = null;
 let planetInfoData = null;
 let planets = [];
 
+let camera = null;
+
 function init() {
     loadJSON(function(response) {
         let {planets, planetsInfo} = response;
@@ -22,6 +24,12 @@ function init() {
         // after loading the data we start the app
         startApp();
     });
+}
+
+const revertCamera = () => {
+    camera.position = new BABYLON.Vector3( 5, 8, -30);
+    focusCameraOnPlanet = false;
+    focusCameraOnPlanetId = -1;
 }
 
 const startApp = () => {
@@ -34,9 +42,9 @@ const startApp = () => {
         scene.clearColor = new BABYLON.Color3.Black();
 
         // create the camera
-        const camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI / 2, 12, BABYLON.Vector3(100,100,100), scene);
+        camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI / 2, 12, BABYLON.Vector3(100,100,100), scene);
         camera.attachControl(canvas, true);
-        camera.position = new BABYLON.Vector3( 5, 8, -30)
+        camera.position = new BABYLON.Vector3( 5, 8, -30);
         let lastCameraLocation = null;
 
         window.addEventListener('mousewheel', (event) => {
@@ -92,7 +100,7 @@ const startApp = () => {
         const pick = scene.pick(scene.pointerX, scene.pointerY);
         if(pick.pickedMesh != null) {
             if(pick.pickedMesh.name == 'sphere'){
-                showPlanetInfo(pick.pickedMesh.idNumber, planetInfoData);
+                showPlanetInfo(pick.pickedMesh.idNumber, planetInfoData, revertCamera);
 
                 // we want to focus the camera on the planet
                 focusCameraOnPlanet = true;
