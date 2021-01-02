@@ -57,3 +57,17 @@ export const highlightLayerLogic = (scene, highlightLayer, planets) => {
         }
     }
 }
+
+export const checkCameraPosition = (camera, lastCameraLocation, STARS_IMAGE_DIAMETER) => {
+    const cp = camera.position;
+    const cameraDistance = Math.sqrt( (cp.x ** 2) + (cp.y ** 2) + (cp.z ** 2) );
+
+    if(cameraDistance > (STARS_IMAGE_DIAMETER / 2 - 50)){
+        // we want the camera to keep the same angle that it was previously so we multiply the vector with a scalar value
+        const scalar = 0.90;
+        camera.position = new BABYLON.Vector3(lastCameraLocation.x * scalar,lastCameraLocation.y * scalar,lastCameraLocation.z * scalar);
+    }else if(cameraDistance < 5){
+        const scalar = 2.5;
+        camera.position = new BABYLON.Vector3(lastCameraLocation.x * scalar,lastCameraLocation.y * scalar,lastCameraLocation.z * scalar);
+    }
+}

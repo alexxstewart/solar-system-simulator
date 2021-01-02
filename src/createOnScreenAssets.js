@@ -20,7 +20,7 @@ export const createGroundMesh = (scene) => {
 
 export const createSkyImage = (scene) => {
     // create the stars background
-    const skySphere = BABYLON.MeshBuilder.CreateSphere("Sphere", {slice: 0, diameter: STARS_IMAGE_DIAMETER}, scene);
+    const skySphere = BABYLON.MeshBuilder.CreateSphere("Sphere", {diameter: STARS_IMAGE_DIAMETER}, scene);
     const skySphereMaterial = new BABYLON.StandardMaterial("skySphereMaterial", scene);
     skySphereMaterial.diffuseTexture = new BABYLON.Texture("style/textures/starpic4/star.jpg", scene);
     skySphereMaterial.backFaceCulling = false;

@@ -1,7 +1,7 @@
 let _baseContainer = null;
 
 // constants
-const INFO_SECTION_BACKGROUND_COLOR = "#3d3d3d";
+const INFO_SECTION_BACKGROUND_COLOR = "#1f1f1f";
 const INFO_CONTAINER_WIDTH = "30%";
 
 /*===============================================================
@@ -65,6 +65,7 @@ export const showPlanetInfo = (planetId, planetDataArray, revertCamera) => {
     leftContainer.heigth = "110%";
     leftContainer.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
     leftContainer.background = INFO_SECTION_BACKGROUND_COLOR;
+    leftContainer.alpha = 0.5;
     _baseContainer.addControl(leftContainer);
 
     const rightContainer = new BABYLON.GUI.Rectangle('rightPlanetInfoContainer');
@@ -88,6 +89,7 @@ export const showPlanetInfo = (planetId, planetDataArray, revertCamera) => {
     titleText.background = "white";
     titleText.width = "100%";
     titleText.height = "200px";
+    titleText.alpha = 1.0;
     titleText.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
     stackPanel.addControl(titleText);
 
@@ -105,7 +107,7 @@ export const showPlanetInfo = (planetId, planetDataArray, revertCamera) => {
         _baseContainer.removeControl(rightContainer);
         revertCamera();
     });
-    leftContainer.addControl(exitButton);
+    rightContainer.addControl(exitButton);
 
     // add the planet info section
     const text = new BABYLON.GUI.TextBlock();
