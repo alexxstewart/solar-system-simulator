@@ -58,6 +58,8 @@ export const createPlanets = (scene, planetData) => {
             // creating the moon
             planet.position.x = planet.orbit;
             planet.bakeCurrentTransformIntoVertices();
+        }else if(i == 10){
+            break;
         }
 
         // add the planet to the planets array
@@ -67,6 +69,19 @@ export const createPlanets = (scene, planetData) => {
         const orbitVisual = BABYLON.Mesh.CreateTorus("orbitCircle", planet.orbit * 2, 0.01, 80, scene);
         orbitVisual.scaling.y = 0.01;
     }
+
+    // create the saturn rings and append them onto the array
+    const saturnRings = BABYLON.Mesh.CreateTorus("torus", 3.5, 0.8, 40, scene);
+    saturnRings.addRotation(0,0,10);
+    saturnRings.scaling.y = 0.01;
+    saturnRings.material = new BABYLON.StandardMaterial("saturnMaterial", scene);
+    saturnRings.material.diffuseTexture = new BABYLON.Texture("style/textures/saturn.jpg", scene);
+    saturnRings.idNumber = 10;
+    saturnRings.alpha = 0;
+    saturnRings.alphaIncrement = 0;
+    saturnRings.rotationIncrement = 0;
+
+    planets.push(saturnRings);
 
     return planets;
 }

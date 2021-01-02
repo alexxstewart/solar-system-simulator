@@ -108,5 +108,19 @@
         "alphaIncrement": "0",
         "rotation": "0.01",
         "rotationIncrement": "0.01"
+    },
+    "10": {
+        "planetName": "saturnRings",
+        "planetSegments": "32",
+        "radius": "0.4",
+        "urlPath": "style/textures/saturn.jpg",
+        "orbit": "1.5",
+        "alpha": "0",
+        "alphaIncrement": "0",
+        "rotation": "0",
+        "diameter": "3.5",
+        "thickness": "0.8",
+        "tessellation": "40",
+        "rotationZ": "10"
     }
 }

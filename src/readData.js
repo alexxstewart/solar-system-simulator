@@ -16,7 +16,6 @@ function loadJSON(callback) {
         planets = JSON.parse(event.currentTarget.responseText);
 
         // after the content has loaded start the application
-        console.log('loaded');
         callback({planets, planetsInfo});
     });
     xhr.send();

@@ -6,12 +6,14 @@ export const renderPlanets = (planets) => {
         p.alpha += p.alphaIncrement;
         p.rotation.y += p.rotationIncrement;
         if(i == 9){
-            // printing the moon
+            // print earth moon
             p.position = planets[3].position;
-            //console.log(planets[3].position);
-            //console.log(p.orbit);
         }else if(i == 6){ 
+            // print saturn
             p.rotation.y = 0;
+        }else if(i == 10){
+            // print saturn rings
+            p.position = planets[6].position;
         }
     }
 } 

@@ -71,19 +71,11 @@ const startApp = () => {
         createSkyImage();
         createGroundMesh();
 
-        const saturnRings = BABYLON.Mesh.CreateTorus("sphere", 3.5, 0.8, 40, scene);
-        saturnRings.addRotation(0,0,10);
-        saturnRings.scaling.y = 0.01;
-        saturnRings.material = new BABYLON.StandardMaterial("sunmaterial", scene);
-        saturnRings.material.diffuseTexture = new BABYLON.Texture("style/textures/saturn.jpg", scene);
-
         planets = createPlanets(scene, planetData);
-        console.log(planetData);
+
         scene.beforeRender = () => {
 
             renderPlanets(planets);
-
-            saturnRings.position = new BABYLON.Vector3(planets[6].orbit * Math.sin(planets[6].alpha), 0, planets[6].orbit * Math.cos(planets[6].alpha));
 
             if(focusCameraOnPlanet){
                 renderCamera(planets, focusCameraOnPlanetId, camera);
