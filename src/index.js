@@ -1,7 +1,7 @@
-import { changeVolumeSlider, showPlanetInfo } from './GUIManager.js'
-import { createLighting, createGroundMesh, createSkyImage, createPlanets } from './createOnScreenAssets.js'
-import { renderPlanets, renderCamera } from './renderer.js'
-import loadJSON from './readData.js'
+import { changeVolumeSlider, showPlanetInfo } from './GUIManager.js';
+import { createLighting, createGroundMesh, createSkyImage, createPlanets } from './createOnScreenAssets.js';
+import { renderPlanets, renderCamera } from './renderer.js';
+import { loadJSON } from './readData.js';
 
 // constants
 const STARS_IMAGE_DIAMETER = 300;
@@ -92,8 +92,8 @@ const startApp = () => {
             if(focusCameraOnPlanet){
                 renderCamera(planets, focusCameraOnPlanetId, camera);
             }else{
-                // we always need to check where the mouse position is
-
+                
+                // this section here is determining whether a planet needs to be highlighted or not
                 const pick = scene.pick(scene.pointerX, scene.pointerY);
                 if(pick.pickedMesh != null) {
                     if(pick.pickedMesh.name == 'sphere'){
@@ -102,7 +102,6 @@ const startApp = () => {
                             hightlight.addMesh(currentMesh, BABYLON.Color3.White());
                             hightlight.innerGlow = false;
                             lastMeshHighlighted = currentMesh;
-                            console.log('highlighting mesh');
                         }
                     }
                 }else{
