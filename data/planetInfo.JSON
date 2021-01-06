@@ -1,8 +1,8 @@
 {
     "0": {
         "title": "The Sun",
-        "info": "The Sun is the star at the center of our Solar System. It is a nearly perfect sphere of hot plasma heated to incandescence by nuclear fusion reactions in its core, radiating the energy mainly as visible light and infrared radiation",
-        "facts": "Distance from sun: 0.4 AU or 59,840,000 km"
+        "info": "The Sun is the star at the center of our Solar System. It is a nearly perfect sphere of hot plasma heated to incandescence by nuclear fusion reactions in its core, radiating the energy mainly as visible light and infrared radiation. It is by far the most important source of energy for life on Earth. Its",
+        "facts": "Average Distance from Earth: 1 AU | Time Taken For Light To Travel To Earth (At Light Speed): 8 minutes 19 seconds | Average Distance From Milky Way Core: 2.7 x 10<sup>17</sup>km or 29,000 light-years | Galactic Orbital Period: 2.25-2.5 x 10<sup>8</sup> years | Velocity: 220 km/s (around the milky way core). \n 20 km/s (relative to average velocity of stars in stellar neighborhood). \n 370 km/s (relative to cosmic microwave background) | Average Diameter: 1,392,684 km (54 x Earth) | Volume: 1.41 x 10<sup>18</sup> (1,300,000 x Earth) | Mass: 1.9885 x 10<sup>30</sup> kg (333,000 x Earth) | Surface Gravity: 274 m/s (28 x Earth) | Escape Velocity: 617.7 km/s (28 x Earth) | Temperature (Core): 1.57 x 10<sup>7</sup> K (15699726.85 <sup>o</sup>C)"
     },
     "1": {
         "title": "Mercury",
