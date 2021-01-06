@@ -75,7 +75,8 @@ export const showPlanetInfo = (planetId, planetDataArray, revertCamera) => {
 
     // create the exit button for the right container
     const exitButton = document.createElement('button');
-    exitButton.setAttribute('id', 'gui-exit-button');
+    exitButton.setAttribute('class', 'close');
+
     exitButton.addEventListener('click', () => {
         // remove the content inside of the containers
         leftParentDiv.parentNode.removeChild(leftParentDiv);
@@ -84,7 +85,30 @@ export const showPlanetInfo = (planetId, planetDataArray, revertCamera) => {
         revertCamera();
     });
 
+    // create the content for the right content div
+
+    // parse the facts into an array
+    const planetFactsArray = planet.facts.split('|');
+    
+    // create a title
+    const rightTitle = document.createElement('h3');
+    rightTitle.innerHTML = 'Facts';
+
+    const list = document.createElement('ul');
+    list.setAttribute('id', 'right-list-section');
+
+    planetFactsArray.forEach((item, index) => {
+        const listElement = document.createElement('li');
+        console.log(planetFactsArray[index]);
+        listElement.innerHTML = `<b>${item}</b>`;
+        listElement.setAttribute('id', 'list-text');
+        list.appendChild(listElement);
+    });
+
+    // add content to the right container
     rightParentDiv.appendChild(exitButton);
+    rightParentDiv.appendChild(rightTitle);
+    rightParentDiv.appendChild(list);
     
     // add the left and right containers to the parent div
     parentDiv.appendChild(rightParentDiv);

@@ -1,38 +1,47 @@
 {
     "0": {
         "title": "The Sun",
-        "info": "The Sun is the star at the center of \nour Solar System. It is a nearly perfect \nsphere of hot plasma heated to \nincandescence by nuclear fusion \nreactions in its core, radiating the energy \nmainly as visible light and infrared \nradiation"
+        "info": "The Sun is the star at the center of \nour Solar System. It is a nearly perfect \nsphere of hot plasma heated to \nincandescence by nuclear fusion \nreactions in its core, radiating the energy \nmainly as visible light and infrared \nradiation",
+        "facts": "Distance from sun: 0.4 AU or 59,840,000 km"
     },
     "1": {
         "title": "Mercury",
-        "info": "1st planet from the sun"
+        "info": "1st planet from the sun",
+        "facts": "Distance from sun: 0.4 AU or 59,840,000 km | Orbital Period: 87.9691 days | Average Orbital Speed: 47.362 km/s | "
     },
     "2": {
         "title": "Venus",
-        "info": "2nd planet from the sun"
+        "info": "2nd planet from the sun",
+        "facts": "Distance from sun: 0.4 AU or 59,840,000 km"
     },
     "3": {
         "title": "Earth",
-        "info": "3rd planet from the sun"
+        "info": "3rd planet from the sun",
+        "facts": "Distance from sun: 0.4 AU or 59,840,000 km"
     },
     "4": {
         "title": "Mars",
-        "info": "4th planet from the sun"
+        "info": "4th planet from the sun",
+        "facts": "Distance from sun: 0.4 AU or 59,840,000 km"
     },
     "5": {
         "title": "Jupiter",
-        "info": "5th planet from the sun"
+        "info": "5th planet from the sun",
+        "facts": "Distance from sun: 0.4 AU or 59,840,000 km"
     },
     "6": {
         "title": "Saturn",
-        "info": "6th planet from the sun"
+        "info": "6th planet from the sun",
+        "facts": "Distance from sun: 0.4 AU or 59,840,000 km"
     },
     "7": {
         "title": "Uranus",
-        "info": "7th planet from the sun"
+        "info": "7th planet from the sun",
+        "facts": "Distance from sun: 0.4 AU or 59,840,000 km"
     },
     "8": {
         "title": "Neptune",
-        "info": "8th planet from the sun"
+        "info": "8th planet from the sun",
+        "facts": "Distance from sun: 0.4 AU or 59,840,000 km / Distance from sun: 0.4 AU or 59,840,000 km / Distance from sun: 0.4 AU or 59,840,000 km"
     }
 }

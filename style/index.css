@@ -1,11 +1,14 @@
 * {
     background-color: black;
     overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 canvas {
     width: 100%;
     height: 100%;
+    outline: none;
 }
 
 p, h2 {
@@ -18,17 +21,40 @@ h2 {
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     position: relative;
     left: 10%;
-    font-size: 2rem;
-    padding: 0px 50px;
+    font-size: 4rem;
+    padding: 5%;
+}
+
+h3 {
+    color: aliceblue;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    position: relative;
+    top: 0%;
+    left: 15%;
+    width: 70%;
+    font-size: 3rem;
+    padding: 5%;
+    background-color: rgb(44, 44, 44);
 }
 
 p {
     color: aliceblue;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 1.5rem;
-    padding: 0px 50px;
     position: relative;
     left: 10%;
+}
+
+ul {
+    color: aliceblue;
+    background-color: rgb(44, 44, 44);
+}
+
+li {
+    color: aliceblue;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.5rem;
+    background-color: rgb(44, 44, 44);
 }
 
 #left-canvas-ui {
@@ -48,11 +74,46 @@ p {
    right: 0px;
 }
 
-#gui-exit-button {
-    width: 10%;
-    height: 10%;
-    background-color: red;
+#right-list-section {
+    background-color: rgb(44, 44, 44);
+    color: aliceblue;
+    margin: 10%;
+    width: 70%;
+    top: 0%;
+}
+
+#list-text {
+    padding: 10px;
+}
+
+.close {
+    background-color: white;
     position: absolute;
-    top: 0px;
-    right: 0px;
+    right: 32px;
+    top: 32px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+}
+
+.close:hover {
+    opacity: 1;
+}
+
+.close:before, .close:after {
+    position: absolute;
+    left: 15px;
+    top: 0%;
+    content: ' ';
+    height: 32px;
+    width: 2px;
+    background-color: white;
+}
+
+.close:before {
+  transform: rotate(45deg);
+}
+
+.close:after {
+  transform: rotate(-45deg);
 }
