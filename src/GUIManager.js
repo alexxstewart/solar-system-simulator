@@ -49,74 +49,44 @@ export const changeVolumeSlider = (baseContainer, music) => {
   ===============================================================*/
 export const showPlanetInfo = (planetId, planetDataArray, revertCamera) => {
 
-    const titleStyle = _baseContainer.createStyle();
-    titleStyle.fontSize = 40;
-    titleStyle.fontFamily = "Verdana";
+    const planet = planetDataArray[planetId];
 
-    const textStyle = _baseContainer.createStyle();
-    textStyle.fontSize = 20;
-    textStyle.fontFamily = "Verdana"
+    // get the parent div
+    const parentDiv = document.getElementById('body');
 
-    console.log(planetDataArray);
-    const planetData = planetDataArray[planetId];
+    // create the parent divs
+    const leftParentDiv = document.createElement('div');
+    const rightParentDiv = document.createElement('div');
 
-    const leftContainer = new BABYLON.GUI.Rectangle('leftPlanetInfoContainer');
-    leftContainer.width = INFO_CONTAINER_WIDTH;
-    leftContainer.heigth = "110%";
-    leftContainer.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-    leftContainer.background = INFO_SECTION_BACKGROUND_COLOR;
-    leftContainer.alpha = 0.5;
-    _baseContainer.addControl(leftContainer);
-
-    const rightContainer = new BABYLON.GUI.Rectangle('rightPlanetInfoContainer');
-    rightContainer.width = INFO_CONTAINER_WIDTH;
-    rightContainer.heigth = "100%";
-    rightContainer.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
-    rightContainer.background = INFO_SECTION_BACKGROUND_COLOR;
-    rightContainer.border = null;
-    _baseContainer.addControl(rightContainer);
-
-    // create stack panel to store text elements
-    const stackPanel = new BABYLON.GUI.StackPanel('stackPanel');  
-    leftContainer.addControl(stackPanel);
-
-    // add the title element
-    const titleText = new BABYLON.GUI.TextBlock('titletext');
-    titleText.text = planetData.title;
-    titleText.color = "white";
-    titleText.size = "100%";
-    titleText.style = titleStyle;
-    titleText.background = "white";
-    titleText.width = "100%";
-    titleText.height = "200px";
-    titleText.alpha = 1.0;
-    titleText.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
-    stackPanel.addControl(titleText);
-
-    // create the exit button
-    const exitButton = new BABYLON.GUI.Button.CreateImageOnlyButton('exitbutton', 'style/textures/exit.png');
-    exitButton.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
-    exitButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
-    exitButton.height = "30px";
-    exitButton.width = "30px";
-    exitButton.background = "orangered";
+    // set the ids of the parent elements
+    leftParentDiv.setAttribute('id', 'left-canvas-ui');
+    rightParentDiv.setAttribute('id', 'right-canvas-ui');
     
-    // on exit button click remove planetInfoContainer from base container
-    exitButton.onPointerDownObservable.add(() => {
-        _baseContainer.removeControl(leftContainer);
-        _baseContainer.removeControl(rightContainer);
+    // create the content for the left div
+    const leftTitle = document.createElement('h2');
+    leftTitle.innerHTML = `${planet.title}`;
+
+    const leftText = document.createElement('p');
+    leftText.innerHTML = `${planet.info}`
+
+    // append content to leftDiv
+    leftParentDiv.appendChild(leftTitle);
+    leftParentDiv.appendChild(leftText);
+
+    // create the exit button for the right container
+    const exitButton = document.createElement('button');
+    exitButton.setAttribute('id', 'gui-exit-button');
+    exitButton.addEventListener('click', () => {
+        // remove the content inside of the containers
+        leftParentDiv.parentNode.removeChild(leftParentDiv);
+        rightParentDiv.parentNode.removeChild(rightParentDiv);
+
         revertCamera();
     });
-    rightContainer.addControl(exitButton);
 
-    // add the planet info section
-    const text = new BABYLON.GUI.TextBlock();
-    text.text = planetData.info;
-    text.color = "white";
-    //text.size = "100%";
-    text.style = textStyle;
-    text.width = "100%";
-    text.height = "600px";
-    text.background = "blue";
-    stackPanel.addControl(text);
+    rightParentDiv.appendChild(exitButton);
+    
+    // add the left and right containers to the parent div
+    parentDiv.appendChild(rightParentDiv);
+    parentDiv.appendChild(leftParentDiv);
 }
