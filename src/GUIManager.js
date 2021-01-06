@@ -99,11 +99,12 @@ export const showPlanetInfo = (planetId, planetDataArray, revertCamera) => {
 
     planetFactsArray.forEach((item, index) => {
         const listElement = document.createElement('li');
-        console.log(planetFactsArray[index]);
-        listElement.innerHTML = `<b>${item}</b>`;
+        listElement.innerHTML = `${item}`;
         listElement.setAttribute('id', 'list-text');
         list.appendChild(listElement);
     });
+
+    console.log(list);
 
     // add content to the right container
     rightParentDiv.appendChild(exitButton);

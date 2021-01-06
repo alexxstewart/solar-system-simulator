@@ -1,8 +1,6 @@
 * {
     background-color: black;
     overflow: hidden;
-    margin: 0;
-    padding: 0;
 }
 
 canvas {
@@ -46,15 +44,20 @@ p {
 }
 
 ul {
-    color: aliceblue;
     background-color: rgb(44, 44, 44);
+    color: aliceblue;
+    position: relative;
+    width: 80%;
+    left: 14%;
 }
 
 li {
+    background-color: rgb(44, 44, 44);
     color: aliceblue;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 1.5rem;
-    background-color: rgb(44, 44, 44);
+    overflow: visible;
+    padding: 10px;
+    margin-left: 10px;
 }
 
 #left-canvas-ui {
@@ -62,7 +65,7 @@ li {
    height: 100%;
    position: absolute;
    background-image : linear-gradient(to left, rgba(0,0,0, 1), rgb(44, 44, 44) 15%);
-   top: 0px; 
+   top: 0px;
 }
 
 #right-canvas-ui {
@@ -72,18 +75,6 @@ li {
    background-image : linear-gradient(to right, rgba(0,0,0, 1), rgb(44, 44, 44) 15%);
    top: 0px;
    right: 0px;
-}
-
-#right-list-section {
-    background-color: rgb(44, 44, 44);
-    color: aliceblue;
-    margin: 10%;
-    width: 70%;
-    top: 0%;
-}
-
-#list-text {
-    padding: 10px;
 }
 
 .close {
