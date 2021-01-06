@@ -49,7 +49,12 @@ export const changeVolumeSlider = (baseContainer, music) => {
   ===============================================================*/
 export const showPlanetInfo = (planetId, planetDataArray, revertCamera) => {
 
+    // get the planet from the array
     const planet = planetDataArray[planetId];
+
+    // parse the facts and info into an array
+    const planetFactsArray = planet.facts.split('|');
+    const planetInfoArray = planet.info.split('|');
 
     // get the parent div
     const parentDiv = document.getElementById('body');
@@ -65,13 +70,14 @@ export const showPlanetInfo = (planetId, planetDataArray, revertCamera) => {
     // create the content for the left div
     const leftTitle = document.createElement('h2');
     leftTitle.innerHTML = `${planet.title}`;
-
-    const leftText = document.createElement('p');
-    leftText.innerHTML = `${planet.info}`
-
-    // append content to leftDiv
     leftParentDiv.appendChild(leftTitle);
-    leftParentDiv.appendChild(leftText);
+
+    // iterate through all the items in the info array and place them into separate p elements
+    planetInfoArray.forEach((item) => {
+        const leftText = document.createElement('p');
+        leftText.innerHTML = item;
+        leftParentDiv.appendChild(leftText);
+    });
 
     // create the exit button for the right container
     const exitButton = document.createElement('button');
@@ -86,9 +92,6 @@ export const showPlanetInfo = (planetId, planetDataArray, revertCamera) => {
     });
 
     // create the content for the right content div
-
-    // parse the facts into an array
-    const planetFactsArray = planet.facts.split('|');
     
     // create a title
     const rightTitle = document.createElement('h3');
@@ -97,7 +100,7 @@ export const showPlanetInfo = (planetId, planetDataArray, revertCamera) => {
     const list = document.createElement('ul');
     list.setAttribute('id', 'right-list-section');
 
-    planetFactsArray.forEach((item, index) => {
+    planetFactsArray.forEach((item) => {
         const listElement = document.createElement('li');
         listElement.innerHTML = `${item}`;
         listElement.setAttribute('id', 'list-text');

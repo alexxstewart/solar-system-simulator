@@ -1,12 +1,12 @@
 {
     "0": {
         "title": "The Sun",
-        "info": "The Sun is the star at the center of \nour Solar System. It is a nearly perfect \nsphere of hot plasma heated to \nincandescence by nuclear fusion \nreactions in its core, radiating the energy \nmainly as visible light and infrared \nradiation",
+        "info": "The Sun is the star at the center of our Solar System. It is a nearly perfect sphere of hot plasma heated to incandescence by nuclear fusion reactions in its core, radiating the energy mainly as visible light and infrared radiation",
         "facts": "Distance from sun: 0.4 AU or 59,840,000 km"
     },
     "1": {
         "title": "Mercury",
-        "info": "1st planet from the sun",
+        "info": "Mercury is the smallest and closests planet to the sun. Its orbit is the shortest of all the planets in the Solar System. It is named after the Greek god Hermes, translated into latin as Mercurius, god of commerce, messenger of the gods, mediator between gods and mortals. | Mercury's surface is imilar in apperance to that of the Moon, showing extensive mare-like plains and heavy-cratering, indicating that it has been geologically inactive for billions of years.| Mercury has the most eccentric orbit of all the planets; its eccentricity is 0.21 with its distance from the Sun ranging from 46,000,000 to 70,000,00 km.",
         "facts": "Distance from sun: 0.4 AU or 59,840,000 km | Orbital Period: 87.9691 days | Average Orbital Speed: 47.362 km/s | Average Diameter: 4880 km | Volume: 6.083 x 10 <sup>10</sup> km (0.056 Earths) | Mass: 3.3011 x 10<sup>23</sup> kg (0.055 Earths) | Average Density: 5.427 g/cm<sup>3</sup> | Surface Gravity: 3.7 m/s<sup>2</sup> | Escape Velocity: 4.25 km/s | Temperature Range (At Equator): 100 - 700 K (-173 - 426 <sup>o</sup>C)"
     },
     "2": {
