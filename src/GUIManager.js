@@ -107,8 +107,6 @@ export const showPlanetInfo = (planetId, planetDataArray, revertCamera) => {
         list.appendChild(listElement);
     });
 
-    console.log(list);
-
     // add content to the right container
     rightParentDiv.appendChild(exitButton);
     rightParentDiv.appendChild(rightTitle);
