@@ -48,7 +48,7 @@ export const changeVolumeSlider = (baseContainer, music) => {
     GUI planet information tab
   ===============================================================*/
 export const showPlanetInfo = (planetId, planetDataArray, revertCamera) => {
-
+    
     // get the planet from the array
     const planet = planetDataArray[planetId];
 

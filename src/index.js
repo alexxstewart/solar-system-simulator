@@ -9,6 +9,7 @@ const STARS_IMAGE_DIAMETER = 300;
 let focusCameraOnPlanet = false;
 let focusCameraOnPlanetId = -1;
 let blockPlanetClick = false;
+let zoomingIn = false;
 
 let planetData = null;
 let planetInfoData = null;
@@ -16,11 +17,18 @@ let planets = [];
 
 let camera = null;
 
+BABYLON.ArcRotateCamera.prototype.spinTo = function (whichprop, targetval, speed) {
+    var ease = new BABYLON.CubicEase();
+    ease.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
+	BABYLON.Animation.CreateAndStartAnimation('at4', this, whichprop, speed, 120, this[whichprop], targetval, 0, ease);
+}
+
 function init() {
     loadJSON(function(response) {
         let {planets, planetsInfo} = response;
         planetData = planets;
         planetInfoData = planetsInfo;
+        planetInfoData;
 
         // after loading the data we start the app
         startApp();
@@ -70,7 +78,7 @@ const startApp = () => {
         createGroundMesh();
 
         planets = createPlanets(scene, planetData);
-
+        let count = 0;
         scene.beforeRender = () => {
 
             renderPlanets(planets);
@@ -81,9 +89,27 @@ const startApp = () => {
                 // remove the highlight
                 hightlightLayer.removeAllMeshes();
 
-                renderCamera(planets, focusCameraOnPlanetId, camera);
                 // block the user from clicking on any other planets while in focused mode
                 blockPlanetClick = true;
+
+                if(zoomingIn){
+
+                    const p = planets[focusCameraOnPlanetId];
+                    const planetToPos = new BABYLON.Vector3((p.position.x), 0, (p.position.z));
+                    camera.position = BABYLON.Vector3.Lerp(camera.position, planetToPos,0.02);
+                    console.log(count);
+                    if(count == 100){
+                        zoomingIn = false;
+                        console.log('movement done');
+                        console.log(p.position);
+                        console.log(camera.position);
+                        count = 0;
+                    }
+                    count++;
+                }else{
+                    //console.log(camera.position);
+                    renderCamera(planets, focusCameraOnPlanetId, camera);
+                }
             }else{
                 // allow for highlighting of planets
                 highlightLayerLogic(scene, hightlightLayer, planets);
@@ -107,6 +133,7 @@ const startApp = () => {
                 // we want to focus the camera on the planet and not allow the user to move the camera
                 focusCameraOnPlanet = true;
                 focusCameraOnPlanetId = pick.pickedMesh.idNumber;
+                zoomingIn = true;
                 camera.detachControl(canvas);
             }
         }
