@@ -34,8 +34,9 @@ export const renderCamera = (planets, id, camera) => {
     const p = planets[id];
     let alphaChange = 0;
     let distanceChange = 0;
-
-    if(id == 0 || id == 5){    
+    if(id == 0){
+        distanceChange = 3;
+    }else if(id == 5){    
         distanceChange = 3;
     }else if( id == 1 || id == 2 || id == 3 || id == 4 ){
         distanceChange = 1;

@@ -5,7 +5,7 @@ import loadJSON from './readData.js';
 
 // constants
 const STARS_IMAGE_DIAMETER = 300;
-const ALPHA_DIFFERENCE = 1.58;
+const ALPHA_DIFFERENCE = 1.5708365686;
 
 let focusCameraOnPlanet = false;
 let focusCameraOnPlanetId = -1;
@@ -18,10 +18,10 @@ let planets = [];
 
 let camera = null;
 
-BABYLON.ArcRotateCamera.prototype.spinTo = function (whichprop, targetval, speed) {
+BABYLON.ArcRotateCamera.prototype.spinTo = function (whichprop, targetval, speed, fps) {
     var ease = new BABYLON.CubicEase();
     ease.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
-	BABYLON.Animation.CreateAndStartAnimation('at4', this, whichprop, speed, 120, this[whichprop], targetval, 0, ease);
+	BABYLON.Animation.CreateAndStartAnimation('at4', this, whichprop, speed, fps, this[whichprop], targetval, 0, ease);
 }
 
 function init() {
@@ -53,9 +53,10 @@ const startApp = () => {
         scene.clearColor = new BABYLON.Color3.Black();
 
         // create the camera
-        camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 10, BABYLON.Vector3(0,0,0), scene);
+        camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI / 2 - 0.5, 20, BABYLON.Vector3(0,0,0), scene);
         camera.attachControl(canvas, true);
         //camera.position = new BABYLON.Vector3( 5, 8, -30);
+        camera.alpha = 1.58;
         let lastCameraLocation = null;
 
         // create the highlighting layer
@@ -106,12 +107,12 @@ const startApp = () => {
             }
         }
 
-        scene.beforeRender = () => {
+        let fps = 120;
 
+        scene.beforeRender = () => {
+            //console.log(camera.position.x, camera.position.y, camera.position.z);
             renderPlanets(planets);
             fixCameraAlpha(camera);
-            //console.log('alpha of camera',camera.alpha);
-            ////console.log('alpha of saturn',planets[6].alpha + ALPHA_DIFFERENCE);
             checkCameraPosition(camera, lastCameraLocation, STARS_IMAGE_DIAMETER);
 
             if(focusCameraOnPlanet){
@@ -138,76 +139,33 @@ const startApp = () => {
                             distanceChange = 2;       
                         }
 
-                        console.log(p.alpha);
-                        console.log('spinning');
                         if(p.alpha > Math.PI * 2){
-                            console.log(p.alpha);
-                            console.log('alpha bigger than one circle');
                             reduceAlpha(p);
-                            console.log(p.alpha);
                         }
 
-                        let planetAlphaInCameraAlpha = Math.PI * 2 - (p.alpha + (p.alphaIncrement * 100) - ALPHA_DIFFERENCE);
+                        let planetAlphaInCameraAlpha = Math.PI * 2 - (p.alpha + (p.alphaIncrement * fps) - ALPHA_DIFFERENCE);
+
                         if(planetAlphaInCameraAlpha > 2 * Math.PI){
                             planetAlphaInCameraAlpha -= 2 * Math.PI;
                         }
-                        console.log('matched alpha', planetAlphaInCameraAlpha);
+
+                        if(id == 0){
+                            fps = 50;
+                            planetAlphaInCameraAlpha = p.alpha;
+                        }
+
+                        const speed = fps;
                         
-                        setTimeout(()=>camera.spinTo("beta", Math.PI / 2, 100), 0);
-                        setTimeout(()=>camera.spinTo("radius", p.orbit + p.radius + distanceChange, 100), 0);
-                        setTimeout(()=>camera.spinTo("alpha", planetAlphaInCameraAlpha, 100), 0);
-                        console.log(p.alpha + (p.alphaIncrement * 100));
-                        console.log('camera alpha', camera.alpha);
-                        console.log('spun');
-                    }else if(count == 100){
+                        setTimeout(()=>camera.spinTo("beta", Math.PI / 2, speed, fps), 0);
+                        setTimeout(()=>camera.spinTo("radius", p.orbit + p.radius + distanceChange, speed, fps), 0);
+                        setTimeout(()=>camera.spinTo("alpha", planetAlphaInCameraAlpha, speed, fps), 0);
+                        
+                    }else if(count == fps){
                         zoomingIn = false;
                         count = -1;
-                        //console.log(planets[focusCameraOnPlanetId].alpha);
-                    }
-                    //console.log(planets[focusCameraOnPlanetId].alpha);
-                    count++;
-                    
-                    /*
-                    const id = focusCameraOnPlanetId;
-                    const p = planets[focusCameraOnPlanetId];
-
-                    let alphaChange = 0.1;
-                    let distanceChange = 0;
-
-                    if(id == 0 || id == 5){    
-                        distanceChange = 3;
-                    }else if( id == 1 || id == 2 || id == 3 || id == 4 ){
-                        distanceChange = 1;
-                    }else if(id == 6){
-                        distanceChange = 4;       
-                    }else if(id == 7 || id == 8){
-                        distanceChange = 2;       
-                    }
-
-                    const planetToPos = new BABYLON.Vector3((p.orbit + p.radius + distanceChange) * Math.sin(p.alpha + alphaChange), 0, (p.orbit + p.radius +distanceChange) * Math.cos(p.alpha + alphaChange));
-
-                    //const planetToPos = new BABYLON.Vector3((p.position.x) * 1.2, 0, (p.position.z) * 1.2);
-                    camera.position = BABYLON.Vector3.Lerp(camera.position, planetToPos, 0.02);
-                    if(camera.position == planetData.position){
-                        console.log('camera at planet location');
-                    }
-
-
-
-
-                    console.log(camera.position, planetToPos);
-                    console.log(count);
-                    if(count == 200){
-                        zoomingIn = false;
-                        console.log('movement done');
-                        console.log(p.position);
-                        console.log(camera.position);
-                        count = 0;
                     }
                     count++;
-                    */
                 }else{
-                    //console.log(camera.position);
                     renderCamera(planets, focusCameraOnPlanetId, camera);
                 }
             }else{
