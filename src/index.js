@@ -5,6 +5,7 @@ import loadJSON from './readData.js';
 
 // constants
 const STARS_IMAGE_DIAMETER = 300;
+const ALPHA_DIFFERENCE = 1.58;
 
 let focusCameraOnPlanet = false;
 let focusCameraOnPlanetId = -1;
@@ -52,9 +53,9 @@ const startApp = () => {
         scene.clearColor = new BABYLON.Color3.Black();
 
         // create the camera
-        camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI / 2, 12, BABYLON.Vector3(100,100,100), scene);
+        camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 10, BABYLON.Vector3(0,0,0), scene);
         camera.attachControl(canvas, true);
-        camera.position = new BABYLON.Vector3( 5, 8, -30);
+        //camera.position = new BABYLON.Vector3( 5, 8, -30);
         let lastCameraLocation = null;
 
         // create the highlighting layer
@@ -89,10 +90,28 @@ const startApp = () => {
             }
         }
 
+        const fixCameraAlpha = (camera) => {
+            // if the camera alpha is less than 0 than we need to convert it to a number between 0 and 2PI
+            if(camera.alpha < 0){
+                // increase the alpha by 2PI and recursively call the function till alpha is between 0 and 2 PI
+                camera.alpha += Math.PI * 2;
+                fixCameraAlpha(camera);
+            }
+            // if the camera alpha is greater than 2PI than we need to convert it to a number between 0 and 2PI
+            else if(camera.alpha > Math.PI * 2){
+                camera.alpha -= Math.PI * 2;
+                fixCameraAlpha(camera);
+            }else{
+                return;
+            }
+        }
+
         scene.beforeRender = () => {
 
             renderPlanets(planets);
-
+            fixCameraAlpha(camera);
+            //console.log('alpha of camera',camera.alpha);
+            ////console.log('alpha of saturn',planets[6].alpha + ALPHA_DIFFERENCE);
             checkCameraPosition(camera, lastCameraLocation, STARS_IMAGE_DIAMETER);
 
             if(focusCameraOnPlanet){
@@ -105,8 +124,20 @@ const startApp = () => {
                 if(zoomingIn){
                     // get the alpha, radius and beta positions of the planet
                     if(count == 0){
-                        
+
                         const p = planets[focusCameraOnPlanetId];
+                        const id = focusCameraOnPlanetId;
+                        let distanceChange = 0;
+                        if(id == 0 || id == 5){    
+                            distanceChange = 3;
+                        }else if( id == 1 || id == 2 || id == 3 || id == 4 ){
+                            distanceChange = 1;
+                        }else if(id == 6){
+                            distanceChange = 4;       
+                        }else if(id == 7 || id == 8){
+                            distanceChange = 2;       
+                        }
+
                         console.log(p.alpha);
                         console.log('spinning');
                         if(p.alpha > Math.PI * 2){
@@ -115,17 +146,25 @@ const startApp = () => {
                             reduceAlpha(p);
                             console.log(p.alpha);
                         }
+
+                        let planetAlphaInCameraAlpha = Math.PI * 2 - (p.alpha + (p.alphaIncrement * 100) - ALPHA_DIFFERENCE);
+                        if(planetAlphaInCameraAlpha > 2 * Math.PI){
+                            planetAlphaInCameraAlpha -= 2 * Math.PI;
+                        }
+                        console.log('matched alpha', planetAlphaInCameraAlpha);
                         
-                        setTimeout(()=>camera.spinTo("beta", Math.PI / 2, 100), 10);
-                        setTimeout(()=>camera.spinTo("radius", p.orbit + p.radius + 5, 100), 20);
-                        setTimeout(()=>camera.spinTo("alpha", p.alpha, 100), 30);
+                        setTimeout(()=>camera.spinTo("beta", Math.PI / 2, 100), 0);
+                        setTimeout(()=>camera.spinTo("radius", p.orbit + p.radius + distanceChange, 100), 0);
+                        setTimeout(()=>camera.spinTo("alpha", planetAlphaInCameraAlpha, 100), 0);
+                        console.log(p.alpha + (p.alphaIncrement * 100));
+                        console.log('camera alpha', camera.alpha);
                         console.log('spun');
                     }else if(count == 100){
                         zoomingIn = false;
                         count = -1;
-                        console.log(planets[focusCameraOnPlanetId].alpha);
+                        //console.log(planets[focusCameraOnPlanetId].alpha);
                     }
-                    console.log(planets[focusCameraOnPlanetId].alpha);
+                    //console.log(planets[focusCameraOnPlanetId].alpha);
                     count++;
                     
                     /*

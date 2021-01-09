@@ -1,7 +1,17 @@
+const reduceAlpha = (planet) => {
+    if(planet.alpha > Math.PI * 2){
+        planet.alpha -= Math.PI * 2;
+        reduceAlpha(planet);
+    }else{
+        return;
+    }
+}
+
 export const renderPlanets = (planets) => {
     // loop over the planets in the array
     for(let i in planets){
         const p = planets[i];
+        reduceAlpha(p);
         p.position = new BABYLON.Vector3(p.orbit * Math.sin(p.alpha), 0, p.orbit * Math.cos(p.alpha));
         p.alpha += p.alphaIncrement;
         p.rotation.y += p.rotationIncrement;
@@ -30,7 +40,8 @@ export const renderCamera = (planets, id, camera) => {
     }else if( id == 1 || id == 2 || id == 3 || id == 4 ){
         distanceChange = 1;
     }else if(id == 6){
-        distanceChange = 4;       
+        distanceChange = 4;
+        console.log('alpha for planet 6', p.alpha); 
     }else if(id == 7 || id == 8){
         distanceChange = 2;       
     }
