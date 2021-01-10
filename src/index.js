@@ -55,8 +55,7 @@ const startApp = () => {
         // create the camera
         camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI / 2 - 0.5, 20, BABYLON.Vector3(0,0,0), scene);
         camera.attachControl(canvas, true);
-        //camera.position = new BABYLON.Vector3( 5, 8, -30);
-        camera.alpha = 1.58;
+        camera.position = new BABYLON.Vector3( 5, 8, -30);
         let lastCameraLocation = null;
 
         // create the highlighting layer
@@ -197,6 +196,8 @@ const startApp = () => {
         }
     })
 
+    // on window resize, resize the engine
+    window.addEventListener('resize', () => engine.resize());
 
     engine.runRenderLoop(() => {
         scene.render();
