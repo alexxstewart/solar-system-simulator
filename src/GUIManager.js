@@ -165,7 +165,4 @@ export const createWelcomeSection = () => {
     // add the content div to the parent div
     parentDiv.appendChild(contentDiv);
     parentDiv.appendChild(backgroundDiv);
-
-    console.log(infoDiv.offsetHeight);
-    console.log(parentDiv.offsetHeight);
 }

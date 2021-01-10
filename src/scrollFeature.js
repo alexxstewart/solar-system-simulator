@@ -7,17 +7,18 @@ const STARS_IMAGE_DIAMETER = 300;
 let camera = null;
 
 const zoomControl = (event) => {
-    
     const cp = camera.position;
     const cameraDistance = Math.sqrt( (cp.x ** 2) + (cp.y ** 2) + (cp.z ** 2) );
     if(cameraDistance > (STARS_IMAGE_DIAMETER / 2 - 75)){
         camera.inputs.remove(camera.inputs.attached.mousewheel);
+        console.log('greater than 150')
         if(event.deltaY < 0){
             camera.inputs.addMouseWheel();
             camera.wheelPrecision = 10;
         }
     }else if(cameraDistance < 20){
         camera.inputs.remove(camera.inputs.attached.mousewheel);
+        console.log('less than 20');
         if(event.deltaY > 0){
             camera.inputs.addMouseWheel();
             camera.wheelPrecision = 5;
@@ -25,13 +26,7 @@ const zoomControl = (event) => {
     }
 }
 
-// modern Chrome requires { passive: false } when adding event
 var supportsPassive = false;
-try {
-    window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
-        get: function () { supportsPassive = true; } 
-    }));
-}catch(e) {}
 
 var wheelOpt = supportsPassive ? { passive: false } : false;
 var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';

@@ -8,6 +8,7 @@ import { disableScroll } from './scrollFeature.js';
 const STARS_IMAGE_DIAMETER = 300;
 const ALPHA_DIFFERENCE = 1.5708365686;
 
+// global variables
 let focusCameraOnPlanet = false;
 let focusCameraOnPlanetId = -1;
 let blockPlanetClick = false;
@@ -127,21 +128,23 @@ const startApp = () => {
 
                 // block the user from clicking on any other planets while in focused mode
                 blockPlanetClick = true;
-
                 if(zoomingIn){
                     // get the alpha, radius and beta positions of the planet
                     if(count == 0){
 
+                        // set the default fps back to 120
+                        fps = 120;
+
                         const p = planets[focusCameraOnPlanetId];
                         const id = focusCameraOnPlanetId;
-
                         let distanceChange = 0;
+
                         if(id == 0 || id == 5){    
                             distanceChange = 3;
                         }else if( id == 1 || id == 2 || id == 3 || id == 4 ){
                             distanceChange = 1;
                         }else if(id == 6){
-                            distanceChange = 4;       
+                            distanceChange = 5;       
                         }else if(id == 7 || id == 8){
                             distanceChange = 2;       
                         }
@@ -163,18 +166,15 @@ const startApp = () => {
 
                         const speed = fps;
                         let cameraOrbitDistance = p.orbit + p.radius + distanceChange;
+                        
                         if(id == 9){
                             cameraOrbitDistance = 2.7;
+                            camera.setTarget(p);
                         }
                         
                         setTimeout(()=>camera.spinTo("beta", Math.PI / 2, speed, fps), 0);
                         setTimeout(()=>camera.spinTo("radius", cameraOrbitDistance, speed, fps), 0);
-                        setTimeout(()=>camera.spinTo("alpha", planetAlphaInCameraAlpha, speed, fps), 0);
-
-                        if(id == 9){
-                            camera.setTarget(p);
-                        }
-                        
+                        setTimeout(()=>camera.spinTo("alpha", planetAlphaInCameraAlpha, speed, fps), 0);        
                     }else if(count == fps){
                         zoomingIn = false;
                         count = -1;

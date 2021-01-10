@@ -44,7 +44,7 @@ export const renderCamera = (planets, id, camera) => {
     }else if( id == 1 || id == 2 || id == 3 || id == 4 ){
         distanceChange = 1;
     }else if(id == 6){
-        distanceChange = 4;
+        distanceChange = 5;
     }else if(id == 7 || id == 8){
         distanceChange = 2;       
     }
