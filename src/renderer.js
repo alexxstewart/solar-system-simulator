@@ -75,6 +75,7 @@ export const highlightLayerLogic = (scene, highlightLayer, planets, advancedText
     if(pick.pickedMesh != null) {
         if(pick.pickedMesh.name == 'sphere'){
             const currentMesh = planets[pick.pickedMesh.idNumber];
+            document.getElementById("canvas").style.cursor = "pointer";
             if(lastMeshHighlighted != currentMesh){
 
                 // remove previous highlights and labels
@@ -99,6 +100,7 @@ export const highlightLayerLogic = (scene, highlightLayer, planets, advancedText
             highlightLayer.removeAllMeshes();
             lastMeshHighlighted = null;
             removePlanetLabel(advancedTexture);
+            document.getElementById("canvas").style.cursor = "auto";
         }
     }
 }
