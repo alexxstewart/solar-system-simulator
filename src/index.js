@@ -75,7 +75,7 @@ const startApp = () => {
         changeVolumeSlider(advancedTexture, music);
 
         // populate the universe
-        createLighting();
+        createLighting(scene, camera);
         createSkyImage();
         createGroundMesh();
 

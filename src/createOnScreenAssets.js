@@ -1,12 +1,18 @@
 // constants
 const STARS_IMAGE_DIAMETER = 300;
 
-export const createLighting = (scene) => {
+export const createLighting = (scene, camera) => {
     // creat light coming out of the sun
-    const light0 = new BABYLON.PointLight("Omni0", new BABYLON.Vector3(0, 0, 0), scene);
-    light0.diffuse = new BABYLON.Color3(1, 1, 1);
+    const light = new BABYLON.PointLight("Omni0", new BABYLON.Vector3(0, 0, 0), scene);
+    light.diffuse = new BABYLON.Color3(1, 1, 1);
+    light.intensity = 3;
 
-    new BABYLON.HemisphericLight("HemiLight", new BABYLON.Vector3(0, 100, 100), scene);
+    // create the light attached to the camera
+    const cameraLight = new BABYLON.HemisphericLight("HemiLight", new BABYLON.Vector3(0, 0, 0), scene);
+    cameraLight.groundColor = new BABYLON.Color3.Black();
+    cameraLight.specular = BABYLON.Color3.Black();
+    cameraLight.intensity = 2;
+    cameraLight.parent = camera;
 }
 
 export const createGroundMesh = (scene) => {
@@ -36,6 +42,7 @@ export const createPlanets = (scene, planetData) => {
     for(let i in planetData){
         const p = planetData[i];
         const planet = BABYLON.Mesh.CreateSphere("sphere", p.planetSegments, p.radius, scene);
+
         planet.idNumber = i;
         planet.radius = parseInt(p.radius);
 
