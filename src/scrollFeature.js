@@ -7,18 +7,20 @@ const STARS_IMAGE_DIAMETER = 300;
 let camera = null;
 
 const zoomControl = (event) => {
-
+    
     const cp = camera.position;
     const cameraDistance = Math.sqrt( (cp.x ** 2) + (cp.y ** 2) + (cp.z ** 2) );
     if(cameraDistance > (STARS_IMAGE_DIAMETER / 2 - 75)){
         camera.inputs.remove(camera.inputs.attached.mousewheel);
         if(event.deltaY < 0){
             camera.inputs.addMouseWheel();
+            camera.wheelPrecision = 10;
         }
-    }else if(cameraDistance < 30){
+    }else if(cameraDistance < 20){
         camera.inputs.remove(camera.inputs.attached.mousewheel);
         if(event.deltaY > 0){
             camera.inputs.addMouseWheel();
+            camera.wheelPrecision = 5;
         }
     }
 }
