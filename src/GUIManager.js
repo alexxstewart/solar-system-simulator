@@ -160,6 +160,18 @@ export const createWelcomeSection = () => {
                         <img src="style/textures/introduction/infosection.png" class="intro-img">
                         <p class="info-p-text"></p>`
 
+    // create the start button
+    const startButton = document.createElement('button');
+    startButton.setAttribute('id', 'welcome-start-button');
+    startButton.textContent = 'Start';
+
+    startButton.addEventListener('click', () => {
+        parentDiv.removeChild(contentDiv);
+        parentDiv.removeChild(backgroundDiv);
+    });
+
+    infoDiv.appendChild(startButton);
+
     contentDiv.appendChild(infoDiv);
 
     // add the content div to the parent div
