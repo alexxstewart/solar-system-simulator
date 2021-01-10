@@ -1,6 +1,6 @@
 import { changeVolumeSlider, showPlanetInfo } from './GUIManager.js';
 import { createLighting, createGroundMesh, createSkyImage, createPlanets } from './createOnScreenAssets.js';
-import { renderPlanets, renderCamera, highlightLayerLogic, checkCameraPosition } from './renderer.js';
+import { renderPlanets, renderCamera, highlightLayerLogic, checkCameraPosition, removePlanetLabel } from './renderer.js';
 import loadJSON from './readData.js';
 
 // constants
@@ -12,6 +12,7 @@ let focusCameraOnPlanetId = -1;
 let blockPlanetClick = false;
 let zoomingIn = false;
 
+let advancedTexture = null;
 let planetData = null;
 let planetInfoData = null;
 let planets = [];
@@ -63,7 +64,7 @@ const startApp = () => {
         const hightlightLayer = new BABYLON.HighlightLayer("hl1", scene);
 
         // create the base for the gui to be printed on and then call the music GUI function
-        const advancedTexture = new BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+        advancedTexture = new BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
         
         // create the music to play and set the default volume to 0.5
         const music = new BABYLON.Sound("Music", "style/music/ME - Galaxy Map Theme.mp3", scene, () => music.play(), {
@@ -196,6 +197,7 @@ const startApp = () => {
         if(pick.pickedMesh != null) {
             if(pick.pickedMesh.name == 'sphere' && !blockPlanetClick){
                 showPlanetInfo(pick.pickedMesh.idNumber, planetInfoData, revertCamera);
+                removePlanetLabel(advancedTexture);
                 // we want to focus the camera on the planet and not allow the user to move the camera
                 focusCameraOnPlanet = true;
                 focusCameraOnPlanetId = pick.pickedMesh.idNumber;

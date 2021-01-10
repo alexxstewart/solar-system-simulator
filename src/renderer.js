@@ -98,15 +98,21 @@ export const highlightLayerLogic = (scene, highlightLayer, planets, advancedText
         if(lastMeshHighlighted != null){
             highlightLayer.removeAllMeshes();
             lastMeshHighlighted = null;
-            advancedTexture.removeControl(rect);
-            advancedTexture.removeControl(line);
-            advancedTexture.removeControl(target);
+            removePlanetLabel(advancedTexture);
         }
     }
 }
 
+export const removePlanetLabel = (advancedTexture) => {
+    if(rect != null){
+        advancedTexture.removeControl(rect);
+        advancedTexture.removeControl(line);
+        advancedTexture.removeControl(target);
+    }
+}
+
 const labelPlanet = (planetMesh, advancedTexture) => {
-    var rect1 = new BABYLON.GUI.Rectangle();
+    const rect1 = new BABYLON.GUI.Rectangle();
     rect1.width = 0.1;
     rect1.height = "40px";
     rect1.cornerRadius = 20;
@@ -117,11 +123,11 @@ const labelPlanet = (planetMesh, advancedTexture) => {
     rect1.linkWithMesh(planetMesh);   
     rect1.linkOffsetY = -150;
 
-    var label = new BABYLON.GUI.TextBlock();
+    const label = new BABYLON.GUI.TextBlock();
     label.text = planetMesh.planetName;
     rect1.addControl(label);
 
-    var target = new BABYLON.GUI.Ellipse();
+    const target = new BABYLON.GUI.Ellipse();
     target.width = "10px";
     target.height = "10px";
     target.color = "White";
@@ -130,7 +136,7 @@ const labelPlanet = (planetMesh, advancedTexture) => {
     advancedTexture.addControl(target);
     target.linkWithMesh(planetMesh);   
 
-    var line = new BABYLON.GUI.Line();
+    const line = new BABYLON.GUI.Line();
     line.lineWidth = 4;
     line.color = "White";
     line.y2 = 20;
