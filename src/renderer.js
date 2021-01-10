@@ -64,24 +64,83 @@ export const renderCamera = (planets, id, camera) => {
     }
 }
 
-export const highlightLayerLogic = (scene, highlightLayer, planets) => {
+let rect = null,
+    line = null,
+    target = null;
+
+export const highlightLayerLogic = (scene, highlightLayer, planets, advancedTexture) => {
     // this section here is determining whether a planet needs to be highlighted or not
     const pick = scene.pick(scene.pointerX, scene.pointerY);
+
     if(pick.pickedMesh != null) {
         if(pick.pickedMesh.name == 'sphere'){
             const currentMesh = planets[pick.pickedMesh.idNumber];
             if(lastMeshHighlighted != currentMesh){
+
+                // remove previous highlights and labels
+                highlightLayer.removeAllMeshes();
+                lastMeshHighlighted = null;
+                if(rect != null){
+                    advancedTexture.removeControl(rect);
+                    advancedTexture.removeControl(line);
+                    advancedTexture.removeControl(target);
+                }
+
+                // create new highlights and labels
                 highlightLayer.addMesh(currentMesh, BABYLON.Color3.White());
                 highlightLayer.innerGlow = false;
                 lastMeshHighlighted = currentMesh;
+                const obj = labelPlanet(currentMesh, advancedTexture);
+                rect = obj.rect1, line = obj.line, target = obj.target;
             }
         }
     }else{
         if(lastMeshHighlighted != null){
             highlightLayer.removeAllMeshes();
             lastMeshHighlighted = null;
+            advancedTexture.removeControl(rect);
+            advancedTexture.removeControl(line);
+            advancedTexture.removeControl(target);
         }
     }
+}
+
+const labelPlanet = (planetMesh, advancedTexture) => {
+
+    var rect1 = new BABYLON.GUI.Rectangle();
+    rect1.width = 0.2;
+    rect1.height = "40px";
+    rect1.cornerRadius = 20;
+    rect1.color = "Orange";
+    rect1.thickness = 4;
+    rect1.background = "green";
+    advancedTexture.addControl(rect1);
+    rect1.linkWithMesh(planetMesh);   
+    rect1.linkOffsetY = -150;
+
+    var label = new BABYLON.GUI.TextBlock();
+    label.text = "Sphere";
+    rect1.addControl(label);
+
+    var target = new BABYLON.GUI.Ellipse();
+    target.width = "40px";
+    target.height = "40px";
+    target.color = "Orange";
+    target.thickness = 4;
+    target.background = "green";
+    advancedTexture.addControl(target);
+    target.linkWithMesh(planetMesh);   
+
+    var line = new BABYLON.GUI.Line();
+    line.lineWidth = 4;
+    line.color = "Orange";
+    line.y2 = 20;
+    line.linkOffsetY = -20;
+    advancedTexture.addControl(line);
+    line.linkWithMesh(planetMesh); 
+    line.connectedControl = rect1;  
+
+    return {rect1, target, line};
 }
 
 export const checkCameraPosition = (camera, lastCameraLocation, STARS_IMAGE_DIAMETER) => {

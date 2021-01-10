@@ -179,7 +179,7 @@ const startApp = () => {
                 }
             }else{
                 // allow for highlighting of planets
-                highlightLayerLogic(scene, hightlightLayer, planets);
+                highlightLayerLogic(scene, hightlightLayer, planets, advancedTexture);
                 blockPlanetClick = false;
             }
 
