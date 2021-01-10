@@ -18,6 +18,7 @@ export const renderPlanets = (planets) => {
         if(i == 9){
             // print earth moon
             p.position = planets[3].position;
+            //p.alpha += p.alphaIncrement;
         }else if(i == 6){ 
             // print saturn
             p.rotation.y = 0;
@@ -29,6 +30,8 @@ export const renderPlanets = (planets) => {
 } 
 
 let lastMeshHighlighted = null;
+
+let earthAlpha = Math.PI;
 
 export const renderCamera = (planets, id, camera) => {
     const p = planets[id];
@@ -47,7 +50,19 @@ export const renderCamera = (planets, id, camera) => {
         distanceChange = 2;       
     }
 
-    camera.position = new BABYLON.Vector3((p.orbit + p.radius + distanceChange) * Math.sin(p.alpha + alphaChange), 0, (p.orbit + p.radius +distanceChange) * Math.cos(p.alpha + alphaChange))
+    if(id == 9){
+        // get the earths position
+        const earthPos = planets[3].position;
+        p.cameraDistance = parseInt(p.cameraDistance);
+        //console.log(p.cameraDistance);
+        const cameraDistance = 2.7;
+        camera.position = new BABYLON.Vector3(earthPos.x + cameraDistance * Math.sin(p.alpha), 0, earthPos.z + cameraDistance * Math.cos(p.alpha));
+        camera.setTarget(planets[3]);
+        //console.log(p.alpha);
+    }else{
+        camera.setTarget(planets[0]);
+        camera.position = new BABYLON.Vector3((p.orbit + p.radius + distanceChange) * Math.sin(p.alpha + alphaChange), 0, (p.orbit + p.radius +distanceChange) * Math.cos(p.alpha + alphaChange))
+    }
 }
 
 export const highlightLayerLogic = (scene, highlightLayer, planets) => {

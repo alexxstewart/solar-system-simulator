@@ -60,6 +60,7 @@ export const createPlanets = (scene, planetData) => {
             // creating the moon
             planet.position.x = planet.orbit;
             planet.bakeCurrentTransformIntoVertices();
+            planet.alpha = Math.PI / 2;
         }else if(i == 10){
             break;
         }
