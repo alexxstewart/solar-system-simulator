@@ -11,14 +11,12 @@ const zoomControl = (event) => {
     const cameraDistance = Math.sqrt( (cp.x ** 2) + (cp.y ** 2) + (cp.z ** 2) );
     if(cameraDistance > (STARS_IMAGE_DIAMETER / 2 - 75)){
         camera.inputs.remove(camera.inputs.attached.mousewheel);
-        console.log('greater than 150')
         if(event.deltaY < 0){
             camera.inputs.addMouseWheel();
             camera.wheelPrecision = 10;
         }
     }else if(cameraDistance < 20){
         camera.inputs.remove(camera.inputs.attached.mousewheel);
-        console.log('less than 20');
         if(event.deltaY > 0){
             camera.inputs.addMouseWheel();
             camera.wheelPrecision = 5;
@@ -32,7 +30,7 @@ var wheelOpt = supportsPassive ? { passive: false } : false;
 var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
 
 // call this to Disable
-export const disableScroll = (c) => {
+export const scrollLockChecker = (c) => {
     camera = c;
     window.addEventListener('DOMMouseScroll', zoomControl, false); // older FF
     window.addEventListener(wheelEvent, zoomControl, wheelOpt); // modern desktop

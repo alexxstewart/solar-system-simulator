@@ -2,7 +2,7 @@ import { changeVolumeSlider, showPlanetInfo, createWelcomeSection } from './GUIM
 import { createLighting, createGroundMesh, createSkyImage, createPlanets } from './createOnScreenAssets.js';
 import { renderPlanets, renderCamera, highlightLayerLogic, checkCameraPosition, removePlanetLabel } from './renderer.js';
 import loadJSON from './readData.js';
-import { disableScroll } from './scrollFeature.js';
+import { scrollLockChecker } from './scrollFeature.js';
 
 // constants
 const STARS_IMAGE_DIAMETER = 300;
@@ -64,7 +64,7 @@ const startApp = () => {
         let lastCameraLocation = null;
 
         // disable the normal scrolling events
-        disableScroll(camera);
+        scrollLockChecker(camera);
 
         // create the highlighting layer
         const hightlightLayer = new BABYLON.HighlightLayer("hl1", scene);
