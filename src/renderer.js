@@ -106,12 +106,11 @@ export const highlightLayerLogic = (scene, highlightLayer, planets, advancedText
 }
 
 const labelPlanet = (planetMesh, advancedTexture) => {
-
     var rect1 = new BABYLON.GUI.Rectangle();
-    rect1.width = 0.2;
+    rect1.width = 0.1;
     rect1.height = "40px";
     rect1.cornerRadius = 20;
-    rect1.color = "Orange";
+    rect1.color = "White";
     rect1.thickness = 4;
     rect1.background = "green";
     advancedTexture.addControl(rect1);
@@ -119,13 +118,13 @@ const labelPlanet = (planetMesh, advancedTexture) => {
     rect1.linkOffsetY = -150;
 
     var label = new BABYLON.GUI.TextBlock();
-    label.text = "Sphere";
+    label.text = planetMesh.planetName;
     rect1.addControl(label);
 
     var target = new BABYLON.GUI.Ellipse();
-    target.width = "40px";
-    target.height = "40px";
-    target.color = "Orange";
+    target.width = "10px";
+    target.height = "10px";
+    target.color = "White";
     target.thickness = 4;
     target.background = "green";
     advancedTexture.addControl(target);
@@ -133,9 +132,8 @@ const labelPlanet = (planetMesh, advancedTexture) => {
 
     var line = new BABYLON.GUI.Line();
     line.lineWidth = 4;
-    line.color = "Orange";
+    line.color = "White";
     line.y2 = 20;
-    line.linkOffsetY = -20;
     advancedTexture.addControl(line);
     line.linkWithMesh(planetMesh); 
     line.connectedControl = rect1;  

@@ -42,7 +42,8 @@ export const createPlanets = (scene, planetData) => {
     for(let i in planetData){
         const p = planetData[i];
         const planet = BABYLON.Mesh.CreateSphere("sphere", p.planetSegments, p.radius, scene);
-
+        planet.planetName = p.planetName;
+        
         planet.idNumber = i;
         planet.radius = parseInt(p.radius);
 
