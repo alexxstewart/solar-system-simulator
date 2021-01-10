@@ -147,8 +147,25 @@ export const createWelcomeSection = () => {
     });
 
     contentDiv.appendChild(exitButton);
+
+    // create the info section
+    const infoDiv = document.createElement('div');
+    infoDiv.setAttribute('id', 'info-section-div');
     
+    infoDiv.innerHTML = `<p class="info-p-text">Navigate the System with your arrow keys and mouse!</p>
+                        <img src="style/textures/introduction/click&drag.png" class="intro-img">
+                        <p class="info-p-text">Hover Over a Planet to see its name!</p>
+                        <img src="style/textures/introduction/hover.png" class="intro-img">
+                        <p class="info-p-text">Click on a planet to get more information about it!</p>
+                        <img src="style/textures/introduction/infosection.png" class="intro-img">
+                        <p class="info-p-text"></p>`
+
+    contentDiv.appendChild(infoDiv);
+
     // add the content div to the parent div
     parentDiv.appendChild(contentDiv);
     parentDiv.appendChild(backgroundDiv);
+
+    console.log(infoDiv.offsetHeight);
+    console.log(parentDiv.offsetHeight);
 }

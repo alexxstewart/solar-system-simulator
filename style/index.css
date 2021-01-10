@@ -141,3 +141,25 @@ li {
     opacity: 1;
     z-index: 1;
 }
+
+#info-section-div {
+    padding: 5%;
+    width: 100%;
+    background-color: rgb(44, 44, 44);
+    text-align: center;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.intro-img {
+    width: 80%;
+    height: 50%;
+    border: 5px solid #555;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+.info-p-text {
+    padding-top: 20px;
+    font-size: 20px;
+}
