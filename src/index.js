@@ -1,4 +1,4 @@
-import { changeVolumeSlider, showPlanetInfo } from './GUIManager.js';
+import { changeVolumeSlider, showPlanetInfo, createWelcomeSection } from './GUIManager.js';
 import { createLighting, createGroundMesh, createSkyImage, createPlanets } from './createOnScreenAssets.js';
 import { renderPlanets, renderCamera, highlightLayerLogic, checkCameraPosition, removePlanetLabel } from './renderer.js';
 import loadJSON from './readData.js';
@@ -220,4 +220,5 @@ const startApp = () => {
     });
 }
 
+createWelcomeSection();
 window.addEventListener('DOMContentLoaded', init());

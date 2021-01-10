@@ -116,3 +116,39 @@ export const showPlanetInfo = (planetId, planetDataArray, revertCamera) => {
     parentDiv.appendChild(rightParentDiv);
     parentDiv.appendChild(leftParentDiv);
 }
+
+export const createWelcomeSection = () => {
+
+    // get the parent div 
+    const parentDiv = document.getElementById('body');
+
+    // create a background div to block out the solar system
+    const backgroundDiv = document.createElement('div');
+    backgroundDiv.setAttribute('id', 'background-div');
+
+    // create a div to store content
+    const contentDiv = document.createElement('div');
+    contentDiv.setAttribute('id', 'welcome-div');
+
+    // add a title to the contentDiv
+    const title = document.createElement('h1');
+    title.innerHTML = 'Tour Our Solar System';
+    contentDiv.appendChild(title);
+
+    // create an exit button
+    // create the exit button for the right container
+    const exitButton = document.createElement('button');
+    exitButton.setAttribute('class', 'close');
+    exitButton.setAttribute('id', 'welcome-exit-button');
+
+    exitButton.addEventListener('click', () => {
+        parentDiv.removeChild(contentDiv);
+        parentDiv.removeChild(backgroundDiv);
+    });
+
+    contentDiv.appendChild(exitButton);
+    
+    // add the content div to the parent div
+    parentDiv.appendChild(contentDiv);
+    parentDiv.appendChild(backgroundDiv);
+}
