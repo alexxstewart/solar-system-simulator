@@ -128,6 +128,7 @@ const startApp = () => {
 
                         const p = planets[focusCameraOnPlanetId];
                         const id = focusCameraOnPlanetId;
+
                         let distanceChange = 0;
                         if(id == 0 || id == 5){    
                             distanceChange = 3;
@@ -155,10 +156,18 @@ const startApp = () => {
                         }
 
                         const speed = fps;
+                        let cameraOrbitDistance = p.orbit + p.radius + distanceChange;
+                        if(id == 9){
+                            cameraOrbitDistance = 2.7;
+                        }
                         
                         setTimeout(()=>camera.spinTo("beta", Math.PI / 2, speed, fps), 0);
-                        setTimeout(()=>camera.spinTo("radius", p.orbit + p.radius + distanceChange, speed, fps), 0);
+                        setTimeout(()=>camera.spinTo("radius", cameraOrbitDistance, speed, fps), 0);
                         setTimeout(()=>camera.spinTo("alpha", planetAlphaInCameraAlpha, speed, fps), 0);
+
+                        if(id == 9){
+                            camera.setTarget(p);
+                        }
                         
                     }else if(count == fps){
                         zoomingIn = false;
