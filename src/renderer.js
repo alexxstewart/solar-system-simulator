@@ -45,7 +45,6 @@ export const renderCamera = (planets, id, camera) => {
         distanceChange = 1;
     }else if(id == 6){
         distanceChange = 4;
-        console.log('alpha for planet 6', p.alpha); 
     }else if(id == 7 || id == 8){
         distanceChange = 2;       
     }

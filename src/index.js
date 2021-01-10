@@ -186,8 +186,6 @@ const startApp = () => {
         const pick = scene.pick(scene.pointerX, scene.pointerY);
         if(pick.pickedMesh != null) {
             if(pick.pickedMesh.name == 'sphere' && !blockPlanetClick){
-                console.log(pick.pickedMesh.idNumber);
-                console.log(planetInfoData);
                 showPlanetInfo(pick.pickedMesh.idNumber, planetInfoData, revertCamera);
                 // we want to focus the camera on the planet and not allow the user to move the camera
                 focusCameraOnPlanet = true;

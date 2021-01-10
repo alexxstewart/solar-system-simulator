@@ -41,7 +41,7 @@
         "alpha": "6.28",
         "alphaIncrement": "0.002",
         "rotation": "0.01",
-        "rotationIncrement": "0.01"
+        "rotationIncrement": "0.015"
     },
     "4": {
         "planetName": "mars",
