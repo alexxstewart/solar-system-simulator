@@ -17,7 +17,7 @@ export const createCamera = (scene, canvas, defaultPos) => {
 }
 
 // this function creates the lighting for the scene
-const createLighting = (scene, camera) => {
+export const createLighting = (scene, camera) => {
     // creat light coming out of the sun
     const light = new BABYLON.PointLight("Omni0", new BABYLON.Vector3(0, 0, 0), scene);
     light.diffuse = new BABYLON.Color3(1, 1, 1);
