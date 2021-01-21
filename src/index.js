@@ -4,6 +4,7 @@ import { renderPlanets, renderCamera, highlightLayerLogic, checkCameraPosition, 
 import loadJSON from './readData.js';
 import { scrollLockChecker } from './scrollFeature.js';
 import { reduceAlpha, fixCameraAlpha } from './alphaAlterer.js';
+import { moveCameraTo } from './moveCamera.js'; 
 
 // constants
 const STARS_IMAGE_DIAMETER = 300;
@@ -80,9 +81,7 @@ const startApp = () => {
         createGroundMesh();
 
         planets = createPlanets(scene, planetData);
-        let count = 0;
-
-        let fps = 120;
+        let iteration = 0;
 
         scene.beforeRender = () => {
             renderPlanets(planets);
@@ -96,57 +95,9 @@ const startApp = () => {
                 // block the user from clicking on any other planets while in focused mode
                 blockPlanetClick = true;
                 if(zoomingIn){
-                    // get the alpha, radius and beta positions of the planet
-                    if(count == 0){
-
-                        // set the default fps back to 120
-                        fps = 120;
-
-                        const p = planets[focusCameraOnPlanetId];
-                        const id = focusCameraOnPlanetId;
-                        let distanceChange = 0;
-
-                        if(id == 0 || id == 5){    
-                            distanceChange = 3;
-                        }else if( id == 1 || id == 2 || id == 3 || id == 4 ){
-                            distanceChange = 1;
-                        }else if(id == 6){
-                            distanceChange = 5;       
-                        }else if(id == 7 || id == 8){
-                            distanceChange = 2;       
-                        }
-
-                        if(p.alpha > Math.PI * 2){
-                            reduceAlpha(p);
-                        }
-
-                        let planetAlphaInCameraAlpha = Math.PI * 2 - (p.alpha + (p.alphaIncrement * fps) - ALPHA_DIFFERENCE);
-
-                        if(planetAlphaInCameraAlpha > 2 * Math.PI){
-                            planetAlphaInCameraAlpha -= 2 * Math.PI;
-                        }
-
-                        if(id == 0){
-                            fps = 50;
-                            planetAlphaInCameraAlpha = p.alpha;
-                        }
-
-                        const speed = fps;
-                        let cameraOrbitDistance = p.orbit + p.radius + distanceChange;
-                        
-                        if(id == 9){
-                            cameraOrbitDistance = 2.7;
-                            camera.setTarget(p);
-                        }
-                        
-                        setTimeout(()=>camera.spinTo("beta", Math.PI / 2, speed, fps), 0);
-                        setTimeout(()=>camera.spinTo("radius", cameraOrbitDistance, speed, fps), 0);
-                        setTimeout(()=>camera.spinTo("alpha", planetAlphaInCameraAlpha, speed, fps), 0);        
-                    }else if(count == fps){
-                        zoomingIn = false;
-                        count = -1;
-                    }
-                    count++;
+                    const returnObj = moveCameraTo(iteration, planets, focusCameraOnPlanetId, reduceAlpha, camera, ALPHA_DIFFERENCE);
+                    iteration = returnObj.iteration, zoomingIn = returnObj.zoomingIn;
+                    iteration++;
                 }else{
                     renderCamera(planets, focusCameraOnPlanetId, camera);
                 }
@@ -187,5 +138,7 @@ const startApp = () => {
     });
 }
 
+// call the function to create the UI to introduce the user to the simulation
 createWelcomeSection();
+
 window.addEventListener('DOMContentLoaded', init());
