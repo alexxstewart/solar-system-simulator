@@ -113,6 +113,14 @@ const startApp = (infoData, data) => {
             // check the planet alpha only sits between 0 and 2PI
             fixCameraAlpha(camera);
 
+            /*
+            If the user has clicked on a planet the boolean focusCamerOnPlanet will be true. If this is true then we remove all
+            the highlights and we set the blockPlanetClick boolean to true to block the user from clicking on other planets. If 
+            the boolean zoomingIn, which is the state between when the user has clicked on a planet and the planet is not in full 
+            view yet. If this is true then we call the move cameraTo function to handle the movement, and we keep track of the
+            number of iterations the loop has done. If the zoomingIn boolean is false then we just track the planet with the renderCamera
+            function. If none of these are true then the normal case is we just allow the planets to be highlighted.
+            */
             if(focusCameraOnPlanet){
                 // remove the highlight
                 hightlightLayer.removeAllMeshes();
@@ -132,6 +140,7 @@ const startApp = (infoData, data) => {
                 blockPlanetClick = false;
             }
 
+            // set the last cameraLocation to the current position
             lastCameraLocation = camera.position;
         }
 
@@ -140,6 +149,11 @@ const startApp = (infoData, data) => {
 
     const scene = createScene();
 
+    /*
+    This event listener handles the ability for the user to click on planets. 
+    It determines whether the mesh that the user has clicked on is a planet and if so it
+    shows the information about the planet and indirectly activates the camera move in to planet ability.
+    */
     window.addEventListener('click', () => {
         const pick = scene.pick(scene.pointerX, scene.pointerY);
         if(pick.pickedMesh != null) {
