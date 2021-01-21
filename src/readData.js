@@ -2,23 +2,26 @@ function loadJSON(callback) {
     let planetsInfo = null;
     let planets = null;
     // read planet info data
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", "./data/planetInfo.json");
-    xhr.addEventListener('load', (event) => {
+    const req1 = new XMLHttpRequest();
+    req1.open("GET", "./data/planetInfo.json");
+    console.log(req1)
+    req1.addEventListener('load', (event) => {
+        console.log('data loaded');
+        console.log(event.currentTarget);
         planetsInfo = JSON.parse(event.currentTarget.responseText);
     });
-    xhr.send();
+    req1.send();
 
     // read planet data
-    xhr = new XMLHttpRequest();
-    xhr.open("GET", "./data/planetData.json");
-    xhr.addEventListener('load', (event) => {
+    const req2 = new XMLHttpRequest();
+    req2.open("GET", "./data/planetData.json");
+    req2.addEventListener('load', (event) => {
         planets = JSON.parse(event.currentTarget.responseText);
 
         // after the content has loaded start the application
         callback({planets, planetsInfo});
     });
-    xhr.send();
+    req2.send();
 }
 
 export default loadJSON;
