@@ -1,4 +1,4 @@
-import { changeVolumeSlider, showPlanetInfo, createWelcomeSection } from './GUIManager.js';
+import { changeVolumeSlider, showPlanetInfo, createWelcomeSection, deleteLoadingScreen} from './GUIManager.js';
 import { createLighting, createGroundMesh, createSkyImage, createPlanets, createCamera, createMusic } from './createOnScreenAssets.js';
 import { renderPlanets, renderCamera, highlightLayerLogic, removePlanetLabel } from './renderer.js';
 import { readDataClass} from './readData.js';
@@ -90,7 +90,7 @@ const startApp = (infoData, data) => {
         scene.clearColor = new BABYLON.Color3.Black();
 
         // load the assets for the scene
-        loadTextures(scene)
+        loadTextures(scene, deleteLoadingScreen)
 
         // create the camera
         camera = createCamera(scene, canvas, defaultCamPos);

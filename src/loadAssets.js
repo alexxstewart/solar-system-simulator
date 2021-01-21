@@ -1,7 +1,8 @@
-export const loadTextures = (scene, callbackfunction) => {
+export const loadTextures = (scene, deleteLoadingScreen) => {
 
     const textures = []
     var assetsManager = new BABYLON.AssetsManager(scene);
+    assetsManager.useDefaultLoadingScreen = false;
 
     assetsManager.addTextureTask("image task", "/style/textures/sun.jpg");
     assetsManager.addTextureTask("image task", "/style/textures/mercury.jpg");
@@ -16,7 +17,7 @@ export const loadTextures = (scene, callbackfunction) => {
     assetsManager.addTextureTask("image task", "/style/textures/starpic4/star.jpg");
 
     assetsManager.load();
-    assetsManager.onFinish = function(tasks) {
-        callbackfunction();
+    assetsManager.onFinish = function() {
+        deleteLoadingScreen();
     };
 }

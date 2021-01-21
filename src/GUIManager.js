@@ -186,3 +186,10 @@ export const createWelcomeSection = () => {
     parentDiv.appendChild(contentDiv);
     parentDiv.appendChild(backgroundDiv);
 }
+
+export const deleteLoadingScreen = () => {
+    console.log('removing loading screen');
+    // get the element
+    const element = document.getElementById('loading-screen');
+    element.parentElement.removeChild(element)
+}
