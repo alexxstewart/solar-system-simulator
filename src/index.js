@@ -43,7 +43,7 @@ This function reverts the camera back to the origin position after the user has 
 information section.
 */
 const revertCamera = () => {
-
+    console.log('reverting camera')
     // set the camera position to the default position
     camera.position = defaultCamPos;
 
