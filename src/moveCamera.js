@@ -33,15 +33,13 @@ export const moveCameraTo = (iteration, planets, id, reduceAlpha, camera, ALPHA_
         if(id == 0){
             planetAlphaInCameraAlpha = p.alpha;
         }
-
-        let cameraOrbitDistance = p.cameraDistance;
         
         if(id == 9){
             camera.setTarget(p);
         }
         
         setTimeout(()=>camera.spinTo("beta", Math.PI / 2, speed, fps), 0);
-        setTimeout(()=>camera.spinTo("radius", cameraOrbitDistance, speed, fps), 0);
+        setTimeout(()=>camera.spinTo("radius", p.cameraDistance, speed, fps), 0);
         setTimeout(()=>camera.spinTo("alpha", planetAlphaInCameraAlpha, speed, fps), 0);
     }else if(iteration == fps){
         zoomingIn = false;

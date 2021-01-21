@@ -30,7 +30,7 @@ var wheelOpt = supportsPassive ? { passive: false } : false;
 var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
 
 // call this to Disable
-export const scrollLockChecker = (c) => {
+export const scrollHandleInitiator= (c) => {
     camera = c;
     window.addEventListener('DOMMouseScroll', zoomControl, false); // older FF
     window.addEventListener(wheelEvent, zoomControl, wheelOpt); // modern desktop

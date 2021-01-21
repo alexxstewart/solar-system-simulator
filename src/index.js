@@ -2,9 +2,10 @@ import { changeVolumeSlider, showPlanetInfo, createWelcomeSection } from './GUIM
 import { createLighting, createGroundMesh, createSkyImage, createPlanets, createCamera, createMusic } from './createOnScreenAssets.js';
 import { renderPlanets, renderCamera, highlightLayerLogic, checkCameraPosition, removePlanetLabel } from './renderer.js';
 import loadJSON from './readData.js';
-import { scrollLockChecker } from './scrollFeature.js';
+import { scrollHandleInitiator } from './scrollFeature.js';
 import { reduceAlpha, fixCameraAlpha } from './alphaAlterer.js';
 import { moveCameraTo } from './moveCamera.js'; 
+import { initiateSpinToFunction } from './spinTo.js';
 
 // constants
 const STARS_IMAGE_DIAMETER = 300;
@@ -24,11 +25,8 @@ let planets = [];
 let camera = null;
 let lastCameraLocation = null;
 
-BABYLON.ArcRotateCamera.prototype.spinTo = function (whichprop, targetval, speed, fps) {
-    var ease = new BABYLON.CubicEase();
-    ease.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
-	BABYLON.Animation.CreateAndStartAnimation('at4', this, whichprop, speed, fps, this[whichprop], targetval, 0, ease);
-}
+// create the spinTo function used for the camera
+initiateSpinToFunction()
 
 const init = () => {
     loadJSON(function(response) {
@@ -62,8 +60,8 @@ const startApp = () => {
         const cameraAndPositionObject = createCamera(scene, canvas);
         camera = cameraAndPositionObject.camera, lastCameraLocation = cameraAndPositionObject.lastCameraLocation;
 
-        // disable the normal scrolling events
-        scrollLockChecker(camera);
+        // initiate the scroll handlers
+        scrollHandleInitiator(camera);
 
         // create the highlighting layer
         const hightlightLayer = new BABYLON.HighlightLayer("hl1", scene);
@@ -119,12 +117,12 @@ const startApp = () => {
         const pick = scene.pick(scene.pointerX, scene.pointerY);
         if(pick.pickedMesh != null) {
             if(pick.pickedMesh.name == 'sphere' && !blockPlanetClick){
+                //show the info about the planet and remove the label above the planet
                 showPlanetInfo(pick.pickedMesh.idNumber, planetInfoData, revertCamera);
                 removePlanetLabel(advancedTexture);
+
                 // we want to focus the camera on the planet and not allow the user to move the camera
-                focusCameraOnPlanet = true;
-                focusCameraOnPlanetId = pick.pickedMesh.idNumber;
-                zoomingIn = true;
+                focusCameraOnPlanet = true, focusCameraOnPlanetId = pick.pickedMesh.idNumber, zoomingIn = true;
                 camera.detachControl(canvas);
             }
         }
@@ -133,6 +131,7 @@ const startApp = () => {
     // on window resize, resize the engine
     window.addEventListener('resize', () => engine.resize());
 
+    // render the scene
     engine.runRenderLoop(() => {
         scene.render();
     });
@@ -141,4 +140,5 @@ const startApp = () => {
 // call the function to create the UI to introduce the user to the simulation
 createWelcomeSection();
 
+// when the DOM content has been loaded initiate the application
 window.addEventListener('DOMContentLoaded', init());
