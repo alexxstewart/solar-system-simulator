@@ -1,7 +1,7 @@
 import { changeVolumeSlider, showPlanetInfo, createWelcomeSection } from './GUIManager.js';
 import { createLighting, createGroundMesh, createSkyImage, createPlanets, createCamera, createMusic } from './createOnScreenAssets.js';
 import { renderPlanets, renderCamera, highlightLayerLogic, checkCameraPosition, removePlanetLabel } from './renderer.js';
-import { loadJSON } from './readData.js';
+import { loadJSON, readDataClass} from './readData.js';
 import { scrollHandleInitiator } from './scrollFeature.js';
 import { reduceAlpha, fixCameraAlpha } from './alphaAlterer.js';
 import { moveCameraTo } from './moveCamera.js'; 
@@ -29,14 +29,9 @@ let lastCameraLocation = null;
 initiateSpinToFunction()
 
 const init = () => {
-    loadJSON(function(response) {
-        const {planets, planetsInfo} = response;
-        planetData = planets;
-        planetInfoData = planetsInfo;
-
-        // after loading the data we start the app
-        startApp();
-    });
+    // read the data through the object and when the data is loaded it will call the startApp function
+    const readData = new readDataClass(startApp, '/data/planetInfo.json', '/data/planetData.json');
+    readData.readPlanetInfo();
 }
 
 const revertCamera = () => {
@@ -47,7 +42,10 @@ const revertCamera = () => {
     camera.setTarget(planets[0]);
 }
 
-const startApp = () => {
+const startApp = (infoData, data) => {
+    planetInfoData = infoData;
+    planetData = data;
+    console.log(planetInfoData, planetData);
 
     const canvas = document.getElementById('canvas');
     const engine = new BABYLON.Engine(canvas, true, {stencil: true});

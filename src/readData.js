@@ -1,22 +1,33 @@
-export const loadJSON = (callback) => {
-    let planetsInfo = null;
-    let planets = null;
-    // read planet info data
-    const req1 = new XMLHttpRequest();
-    req1.open("GET", "/data/planetInfo.json");
-    req1.addEventListener('load', (event) => {
-        planetsInfo = JSON.parse(event.currentTarget.responseText);
-    });
-    req1.send();
+export class readDataClass {
+    
+    constructor(callbackFunction, path1, path2){
+        this.callbackFunction = callbackFunction;
+        this.path1 = path1;
+        this.path2 = path2;
+        this.planetInfo = null;
+        this.planetData = null;
+    }
 
-    // read planet data
-    const req2 = new XMLHttpRequest();
-    req2.open("GET", "/data/planetData.json");
-    req2.addEventListener('load', (event) => {
-        planets = JSON.parse(event.currentTarget.responseText);
+    readPlanetInfo(){
+        this.readData(this.path1, this.readPlanetData.bind(this));
+    }
 
-        // after the content has loaded start the application
-        callback({planets, planetsInfo});
-    });
-    req2.send();
+    readPlanetData(data) {
+        this.planetInfo = data;
+        this.readData(this.path2, this.lastCallBackFunction.bind(this));
+    }
+
+    lastCallBackFunction(data) {
+        this.planetData = data;
+        this.callbackFunction(this.planetInfo, this.planetData);
+    }
+
+    readData = (path, callback) => {
+        const req = new XMLHttpRequest();
+        req.open("GET", path);
+        req.addEventListener('load', (event) => {
+            callback(JSON.parse(event.currentTarget.responseText));
+        });
+        req.send();
+    }
 }
