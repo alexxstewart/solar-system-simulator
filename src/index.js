@@ -5,6 +5,7 @@ import { readDataClass} from './readData.js';
 import { reduceAlpha, fixCameraAlpha } from './alphaAlterer.js';
 import { moveCameraTo } from './moveCamera.js'; 
 import { initiateSpinToFunction } from './spinTo.js';
+import { loadTextures } from './loadAssets.js';
 
 // constants
 const ALPHA_DIFFERENCE = 1.5708365686;
@@ -86,6 +87,9 @@ const startApp = (infoData, data) => {
         const scene = new BABYLON.Scene(engine);
         scene.clearColor = new BABYLON.Color3.Black();
 
+        // load the assets for the scene
+        loadTextures(scene)
+        
         // create the camera
         camera = createCamera(scene, canvas, defaultCamPos);
 
@@ -154,18 +158,6 @@ const startApp = (infoData, data) => {
     }
 
     const scene = createScene();
-    console.log('Hello there');
-    var assetsManager = new BABYLON.AssetsManager(scene);
-    console.log(assetsManager);
-    var meshTask = assetsManager.addMeshTask("earth task", "", "/style/textures/", "earth.jpg");
-    console.log(meshTask);
-    meshTask.onSuccess = function (task) {
-        console.log('Task Done');
-        console.log(task);
-    }
-    meshTask.onError = function (task, message, exception) {
-        console.log(message, exception);
-    }
 
     /*
     This event listener handles the ability for the user to click on planets. 
