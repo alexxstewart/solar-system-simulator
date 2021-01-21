@@ -2,7 +2,6 @@ import { changeVolumeSlider, showPlanetInfo, createWelcomeSection } from './GUIM
 import { createLighting, createGroundMesh, createSkyImage, createPlanets, createCamera, createMusic } from './createOnScreenAssets.js';
 import { renderPlanets, renderCamera, highlightLayerLogic, removePlanetLabel } from './renderer.js';
 import { readDataClass} from './readData.js';
-import { scrollHandleInitiator } from './scrollFeature.js';
 import { reduceAlpha, fixCameraAlpha } from './alphaAlterer.js';
 import { moveCameraTo } from './moveCamera.js'; 
 import { initiateSpinToFunction } from './spinTo.js';
@@ -10,6 +9,8 @@ import { initiateSpinToFunction } from './spinTo.js';
 // constants
 const ALPHA_DIFFERENCE = 1.5708365686;
 const defaultCamPos = new BABYLON.Vector3( 5, 8, -30);
+const CAMERA_LOWER_RADIUS_LIMIT = 4;
+const CAMERA_UPPER_RADIUS_LIMIT = 150;
 
 // global variables
 let focusCameraOnPlanet = false;
@@ -24,7 +25,7 @@ let planets = [];
 
 let camera = null;
 
-let lastCameraLocation = null;
+let blockCamPos = null;
 
 // create the spinTo function used for the camera
 initiateSpinToFunction()
@@ -43,7 +44,7 @@ This function reverts the camera back to the origin position after the user has 
 information section.
 */
 const revertCamera = () => {
-    console.log('reverting camera')
+    console.log('reverting camera');
     // set the camera position to the default position
     camera.position = defaultCamPos;
 
@@ -53,6 +54,13 @@ const revertCamera = () => {
 
     // allow the camera to pan again
     camera.attachControl(canvas, true);
+
+    console.log(camera.inputs.attached.mousewheel)
+    // add the mouse wheel if it has been taken away
+    if(!(camera.inputs.attached.mousewheel)){
+        console.log(camera.inputs.attached.mousewheel)
+        camera.inputs.addMouseWheel();
+    }
 
     // set the target to the sun
     camera.setTarget(planets[0]);
@@ -81,8 +89,9 @@ const startApp = (infoData, data) => {
         // create the camera
         camera = createCamera(scene, canvas, defaultCamPos);
 
-        // initiate the scroll handlers
-        scrollHandleInitiator(camera);
+        // set the limits on the camera
+        camera.lowerRadiusLimit = CAMERA_LOWER_RADIUS_LIMIT;
+        camera.upperRadiusLimit = CAMERA_UPPER_RADIUS_LIMIT;
 
         // create the highlighting layer
         const hightlightLayer = new BABYLON.HighlightLayer("hl1", scene);
@@ -139,9 +148,6 @@ const startApp = (infoData, data) => {
                 highlightLayerLogic(scene, hightlightLayer, planets, advancedTexture);
                 blockPlanetClick = false;
             }
-
-            // set the last cameraLocation to the current position
-            lastCameraLocation = camera.position;
         }
 
         return scene;

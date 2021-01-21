@@ -117,7 +117,7 @@
         "alphaIncrement": "0.01",
         "rotation": "0.01",
         "rotationIncrement": "0.01",
-        "cameraDistance": "2.7"
+        "cameraDistance": "0.5"
     },
     "10": {
         "planetName": "saturnRings",

@@ -42,11 +42,10 @@ export const renderCamera = (planets, id, camera) => {
     let distanceChange = p.cameraDistance;
 
     if(id == 9){
+        console.log(distanceChange);
         // if the moon is the current planet then you can set the target 
         const earthPos = planets[3].position;
-        p.cameraDistance = parseInt(p.cameraDistance);
-        const cameraDistance = 2.7;
-        camera.position = new BABYLON.Vector3(earthPos.x + cameraDistance * Math.sin(p.alpha), 0, earthPos.z + cameraDistance * Math.cos(p.alpha));
+        camera.position = new BABYLON.Vector3(earthPos.x + distanceChange * Math.sin(p.alpha), 0, earthPos.z + distanceChange * Math.cos(p.alpha));
         camera.setTarget(planets[3]);
     }else{
         camera.setTarget(planets[0]);
