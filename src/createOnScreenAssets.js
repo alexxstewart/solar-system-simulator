@@ -67,6 +67,7 @@ export const createPlanets = (scene, planetData) => {
 
         // set the rotation and the rotation increment of the planet
         planet.rotationIncrement = parseFloat(p.rotationIncrement);
+        planet.cameraDistance = parseFloat(p.cameraDistance);
 
         if(i == 0){
             // the sun has a light source so

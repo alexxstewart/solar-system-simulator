@@ -36,31 +36,18 @@ let earthAlpha = Math.PI;
 export const renderCamera = (planets, id, camera) => {
     const p = planets[id];
     let alphaChange = 0;
-    let distanceChange = 0;
-    if(id == 0){
-        distanceChange = 3;
-    }else if(id == 5){    
-        distanceChange = 3;
-    }else if( id == 1 || id == 2 || id == 3 || id == 4 ){
-        distanceChange = 1;
-    }else if(id == 6){
-        distanceChange = 5;
-    }else if(id == 7 || id == 8){
-        distanceChange = 2;       
-    }
+    let distanceChange = p.cameraDistance;
 
     if(id == 9){
         // get the earths position
         const earthPos = planets[3].position;
         p.cameraDistance = parseInt(p.cameraDistance);
-        //console.log(p.cameraDistance);
         const cameraDistance = 2.7;
         camera.position = new BABYLON.Vector3(earthPos.x + cameraDistance * Math.sin(p.alpha), 0, earthPos.z + cameraDistance * Math.cos(p.alpha));
         camera.setTarget(planets[3]);
-        //console.log(p.alpha);
     }else{
         camera.setTarget(planets[0]);
-        camera.position = new BABYLON.Vector3((p.orbit + p.radius + distanceChange) * Math.sin(p.alpha + alphaChange), 0, (p.orbit + p.radius +distanceChange) * Math.cos(p.alpha + alphaChange))
+        camera.position = new BABYLON.Vector3(distanceChange * Math.sin(p.alpha + alphaChange), 0, distanceChange * Math.cos(p.alpha + alphaChange))
     }
 }
 

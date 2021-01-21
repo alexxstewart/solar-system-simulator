@@ -8,7 +8,8 @@
         "alpha": "0",
         "alphaIncrement": "0",
         "rotation": "0.001",
-        "rotationIncrement": "0.001"
+        "rotationIncrement": "0.001",
+        "cameraDistance": "6"
     },
     "1": {
         "planetName": "Mercury",
@@ -19,7 +20,8 @@
         "alpha": "6.28",
         "alphaIncrement": "0.003",
         "rotation": "0.001",
-        "rotationIncrement": "0.001"
+        "rotationIncrement": "0.001",
+        "cameraDistance": "8"
     },
     "2": {
         "planetName": "Venus",
@@ -30,7 +32,8 @@
         "alpha": "6.28",
         "alphaIncrement": "0.002",
         "rotation": "0.001",
-        "rotationIncrement": "0.001"
+        "rotationIncrement": "0.001",
+        "cameraDistance": "12"
     },
     "3": {
         "planetName": "Earth",
@@ -41,7 +44,8 @@
         "alpha": "6.28",
         "alphaIncrement": "0.002",
         "rotation": "0.01",
-        "rotationIncrement": "0.015"
+        "rotationIncrement": "0.015",
+        "cameraDistance": "17"
     },
     "4": {
         "planetName": "Mars",
@@ -52,7 +56,8 @@
         "alpha": "6.28",
         "alphaIncrement": "0.0015",
         "rotation": "0.01",
-        "rotationIncrement": "0.01"
+        "rotationIncrement": "0.01",
+        "cameraDistance": "22"
     },
     "5": {
         "planetName": "Jupiter",
@@ -63,7 +68,8 @@
         "alpha": "6.28",
         "alphaIncrement": "0.0009",
         "rotation": "0.01",
-        "rotationIncrement": "0.01"
+        "rotationIncrement": "0.01",
+        "cameraDistance": "35.5"
     },
     "6": {
         "planetName": "Saturn",
@@ -74,7 +80,8 @@
         "alpha": "6.28",
         "alphaIncrement": "0.0007",
         "rotation": "0.01",
-        "rotationIncrement": "0.01"
+        "rotationIncrement": "0.01",
+        "cameraDistance": "47"
     },
     "7": {
         "planetName": "Uranus",
@@ -85,7 +92,8 @@
         "alpha": "6.28",
         "alphaIncrement": "0.0006",
         "rotation": "0.01",
-        "rotationIncrement": "0.01"
+        "rotationIncrement": "0.01",
+        "cameraDistance": "53.8"
     },
     "8": {
         "planetName": "Neptune",
@@ -96,7 +104,8 @@
         "alpha": "6.28",
         "alphaIncrement": "0.0005",
         "rotation": "0.01",
-        "rotationIncrement": "0.01"
+        "rotationIncrement": "0.01",
+        "cameraDistance": "63.6"
     },
     "9": {
         "planetName": "The Moon",
@@ -107,7 +116,8 @@
         "alpha": "0",
         "alphaIncrement": "0.01",
         "rotation": "0.01",
-        "rotationIncrement": "0.01"
+        "rotationIncrement": "0.01",
+        "cameraDistance": "2.7"
     },
     "10": {
         "planetName": "saturnRings",
@@ -121,6 +131,7 @@
         "diameter": "3.5",
         "thickness": "0.8",
         "tessellation": "40",
-        "rotationZ": "10"
+        "rotationZ": "10",
+        "cameraDistance": "1"
     }
 }

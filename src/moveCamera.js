@@ -10,40 +10,33 @@ export const moveCameraTo = (iteration, planets, id, reduceAlpha, camera, ALPHA_
         fps = 50;
     }
 
+    // set the speed for the camera
+    const speed = fps;
+
     if(iteration == 0){
         const p = planets[id];
-        let distanceChange = 0;
 
-        if(id == 0 || id == 5){    
-            distanceChange = 3;
-        }else if( id == 1 || id == 2 || id == 3 || id == 4 ){
-            distanceChange = 1;
-        }else if(id == 6){
-            distanceChange = 5;       
-        }else if(id == 7 || id == 8){
-            distanceChange = 2;       
-        }
-
+        console.log(p);
+        // check if the alpha is bigger than 2PI that means the camera will spin more than a full rotation to get to the planet
         if(p.alpha > Math.PI * 2){
             reduceAlpha(p);
         }
 
+        // determine the alpha for the camera to match the rotation of the planets
         let planetAlphaInCameraAlpha = Math.PI * 2 - (p.alpha + (p.alphaIncrement * fps) - ALPHA_DIFFERENCE);
-
+        
+        // the alpha calculation can be ober 2PI so we reduce it
         if(planetAlphaInCameraAlpha > 2 * Math.PI){
             planetAlphaInCameraAlpha -= 2 * Math.PI;
         }
-
+        // the camera alpha when focusing on the sun just needs to be the suns alpha
         if(id == 0){
-            fps = 50;
             planetAlphaInCameraAlpha = p.alpha;
         }
 
-        const speed = fps;
-        let cameraOrbitDistance = p.orbit + p.radius + distanceChange;
+        let cameraOrbitDistance = p.cameraDistance;
         
         if(id == 9){
-            cameraOrbitDistance = 2.7;
             camera.setTarget(p);
         }
         
