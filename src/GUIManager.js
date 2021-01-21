@@ -1,3 +1,7 @@
+/*===============================================================
+    This file handles all the GUI parts of the application. 
+===============================================================*/
+
 let _baseContainer = null;
 
 // constants
@@ -117,6 +121,9 @@ export const showPlanetInfo = (planetId, planetDataArray, revertCamera) => {
     parentDiv.appendChild(leftParentDiv);
 }
 
+/*===============================================================
+    GUI Welcome Information section
+  ===============================================================*/
 export const createWelcomeSection = () => {
 
     // get the parent div 
@@ -165,13 +172,14 @@ export const createWelcomeSection = () => {
     startButton.setAttribute('id', 'welcome-start-button');
     startButton.textContent = 'Start';
 
+    // add a click handler to remove the divs from the screen on click
     startButton.addEventListener('click', () => {
         parentDiv.removeChild(contentDiv);
         parentDiv.removeChild(backgroundDiv);
     });
 
+    // add the button and divs to the content div
     infoDiv.appendChild(startButton);
-
     contentDiv.appendChild(infoDiv);
 
     // add the content div to the parent div

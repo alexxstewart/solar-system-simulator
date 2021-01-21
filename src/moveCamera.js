@@ -1,4 +1,9 @@
 
+/*
+This function moves the camera to a planet when the user clicks on it.
+It calculates the alpha the camera must travel to since the camera and planet alpha values increase in
+opposite directions.
+*/
 export const moveCameraTo = (iteration, planets, id, reduceAlpha, camera, ALPHA_DIFFERENCE) => {
     
     // set the value for zooming in
@@ -34,16 +39,20 @@ export const moveCameraTo = (iteration, planets, id, reduceAlpha, camera, ALPHA_
             planetAlphaInCameraAlpha = p.alpha;
         }
         
+        // if the planet is the moon then we set the target of the camera to the moon mesh
         if(id == 9){
             camera.setTarget(p);
         }
         
+        // spin the camera in the 3 dimensions to the specified location.
         setTimeout(()=>camera.spinTo("beta", Math.PI / 2, speed, fps), 0);
         setTimeout(()=>camera.spinTo("radius", p.cameraDistance, speed, fps), 0);
         setTimeout(()=>camera.spinTo("alpha", planetAlphaInCameraAlpha, speed, fps), 0);
     }else if(iteration == fps){
+        // if the interation and fps number is the same then we have ended the animationa and we track the planet with the camera
         zoomingIn = false;
         iteration = -1;
     }
+    
     return {iteration, zoomingIn};
 }

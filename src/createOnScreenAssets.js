@@ -1,16 +1,23 @@
 // constants
 const STARS_IMAGE_DIAMETER = 300;
 
-export const createCamera = (scene, canvas) => {
+// this function creates the camera element to be attached to the canvas
+export const createCamera = (scene, canvas, defaultPos) => {
+
+    // create the camera and attach the control to the canvas
     let camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI / 2 - 0.5, 20, BABYLON.Vector3(0,0,0), scene);
     camera.attachControl(canvas, true);
-    camera.position = new BABYLON.Vector3( 5, 8, -30);
+
+    // set the position to the default position
+    camera.position = defaultPos;
+
+    // set the wheel precision (how large are the increments that the wheel scrolls at)
     camera.wheelPrecision = 10;
-    let lastCameraLocation = null;
-    return {camera, lastCameraLocation};
+    return camera;
 }
 
-export const createLighting = (scene, camera) => {
+// this function creates the lighting for the scene
+const createLighting = (scene, camera) => {
     // creat light coming out of the sun
     const light = new BABYLON.PointLight("Omni0", new BABYLON.Vector3(0, 0, 0), scene);
     light.diffuse = new BABYLON.Color3(1, 1, 1);
@@ -21,10 +28,14 @@ export const createLighting = (scene, camera) => {
     cameraLight.groundColor = new BABYLON.Color3.Black();
     cameraLight.specular = BABYLON.Color3.Black();
     cameraLight.intensity = 2;
+
+    // attach this light to the camera
     cameraLight.parent = camera;
 }
 
+// this function creates the grid mesh plane which all the planets sit on
 export const createGroundMesh = (scene) => {
+
     // create a mesh ground
     const ref = BABYLON.Mesh.CreateGround("gnd", 200, 200, 200, scene);
 	ref.material = new BABYLON.StandardMaterial("gmat", scene);
@@ -33,6 +44,7 @@ export const createGroundMesh = (scene) => {
     ref.isPickable = false;
 }
 
+// this function creates the image background to be displayed as a sphere
 export const createSkyImage = (scene) => {
     // create the stars background
     const skySphere = BABYLON.MeshBuilder.CreateSphere("Sphere", {diameter: STARS_IMAGE_DIAMETER}, scene);
@@ -43,36 +55,44 @@ export const createSkyImage = (scene) => {
     skySphere.isPickable = false;
 }
 
+
+/* 
+This function creates the planet meshes and adds then to an array to be returned.
+it translates the planetData into objects to be shown on screen.
+*/
 export const createPlanets = (scene, planetData) => {
 
     const planets = [];
 
     // loop over the planet data stored in planetData
     for(let i in planetData){
+
+        // get the planetdata from the array
         const p = planetData[i];
+
+        // create the planet mesh
         const planet = BABYLON.Mesh.CreateSphere("sphere", p.planetSegments, p.radius, scene);
-        planet.planetName = p.planetName;
         
+        // translate all the properties to the planet mesh object
+        planet.planetName = p.planetName;
         planet.idNumber = i;
         planet.radius = parseInt(p.radius);
+        planet.alpha = parseFloat(p.alpha);
+        planet.alphaIncrement = parseFloat(p.alphaIncrement);
+        planet.orbit = parseFloat(p.orbit);
+        planet.rotationIncrement = parseFloat(p.rotationIncrement);
+        planet.cameraDistance = parseFloat(p.cameraDistance);
 
         // assign a material to the planets
         planet.material = new BABYLON.StandardMaterial(`${p.planetName}material`, scene);
         planet.material.diffuseTexture = new BABYLON.Texture(p.urlPath, scene);
 
-        // set the alpha and alpha increment of the planet
-        planet.alpha = parseFloat(p.alpha);
-        planet.alphaIncrement = parseFloat(p.alphaIncrement);
-        planet.orbit = parseFloat(p.orbit);
-
-        // set the rotation and the rotation increment of the planet
-        planet.rotationIncrement = parseFloat(p.rotationIncrement);
-        planet.cameraDistance = parseFloat(p.cameraDistance);
-
+        // add planet specfic values
         if(i == 0){
-            // the sun has a light source so
+            // add a light to the sun
             planet.material.emissiveColor = new BABYLON.Color3(1, 1, 0);
         }else if(i == 6){
+            // add a rotation to the saturn 
             planet.addRotation(0,0,10);
         }else if(i == 9){
             // creating the moon
@@ -107,6 +127,7 @@ export const createPlanets = (scene, planetData) => {
     return planets;
 }
 
+// this function creates the music asset for the application
 export const createMusic = (scene) => {
     // create the music to play and set the default volume to 0.5
     const music = new BABYLON.Sound("Music", "style/music/ME - Galaxy Map Theme.mp3", scene, () => music.play(), {

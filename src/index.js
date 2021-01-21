@@ -9,6 +9,7 @@ import { initiateSpinToFunction } from './spinTo.js';
 
 // constants
 const ALPHA_DIFFERENCE = 1.5708365686;
+const defaultCamPos = new BABYLON.Vector3( 5, 8, -30);
 
 // global variables
 let focusCameraOnPlanet = false;
@@ -44,7 +45,7 @@ information section.
 const revertCamera = () => {
 
     // set the camera position to the default position
-    camera.position = new BABYLON.Vector3( 5, 8, -30);
+    camera.position = defaultCamPos;
 
     // set the focus values off
     focusCameraOnPlanet = false;
@@ -78,8 +79,7 @@ const startApp = (infoData, data) => {
         scene.clearColor = new BABYLON.Color3.Black();
 
         // create the camera
-        const cameraAndPositionObject = createCamera(scene, canvas);
-        camera = cameraAndPositionObject.camera, lastCameraLocation = cameraAndPositionObject.lastCameraLocation;
+        camera = createCamera(scene, canvas, defaultCamPos);
 
         // initiate the scroll handlers
         scrollHandleInitiator(camera);
