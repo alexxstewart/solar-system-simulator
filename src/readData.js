@@ -4,10 +4,7 @@ function loadJSON(callback) {
     // read planet info data
     const req1 = new XMLHttpRequest();
     req1.open("GET", "/data/planetInfo.json");
-    console.log(req1)
     req1.addEventListener('load', (event) => {
-        console.log('data loaded');
-        console.log(event.currentTarget);
         planetsInfo = JSON.parse(event.currentTarget.responseText);
     });
     req1.send();

@@ -1,5 +1,5 @@
 import { changeVolumeSlider, showPlanetInfo, createWelcomeSection } from './GUIManager.js';
-import { createLighting, createGroundMesh, createSkyImage, createPlanets } from './createOnScreenAssets.js';
+import { createLighting, createGroundMesh, createSkyImage, createPlanets, createCamera } from './createOnScreenAssets.js';
 import { renderPlanets, renderCamera, highlightLayerLogic, checkCameraPosition, removePlanetLabel } from './renderer.js';
 import loadJSON from './readData.js';
 import { scrollLockChecker } from './scrollFeature.js';
@@ -56,10 +56,11 @@ const startApp = () => {
         scene.clearColor = new BABYLON.Color3.Black();
 
         // create the camera
-        camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI / 2 - 0.5, 20, BABYLON.Vector3(0,0,0), scene);
-        camera.attachControl(canvas, true);
-        camera.position = new BABYLON.Vector3( 5, 8, -30);
-        camera.wheelPrecision = 10;
+        camera = createCamera(scene, canvas);
+        // camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI / 2 - 0.5, 20, BABYLON.Vector3(0,0,0), scene);
+        // camera.attachControl(canvas, true);
+        // camera.position = new BABYLON.Vector3( 5, 8, -30);
+        // camera.wheelPrecision = 10;
         let lastCameraLocation = null;
 
         // disable the normal scrolling events

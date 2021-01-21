@@ -1,6 +1,14 @@
 // constants
 const STARS_IMAGE_DIAMETER = 300;
 
+export const createCamera = (scene, canvas) => {
+    let camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI / 2 - 0.5, 20, BABYLON.Vector3(0,0,0), scene);
+    camera.attachControl(canvas, true);
+    camera.position = new BABYLON.Vector3( 5, 8, -30);
+    camera.wheelPrecision = 10;
+    return camera;
+}
+
 export const createLighting = (scene, camera) => {
     // creat light coming out of the sun
     const light = new BABYLON.PointLight("Omni0", new BABYLON.Vector3(0, 0, 0), scene);
