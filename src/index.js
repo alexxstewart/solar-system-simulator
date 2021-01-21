@@ -1,5 +1,5 @@
 import { changeVolumeSlider, showPlanetInfo, createWelcomeSection } from './GUIManager.js';
-import { createLighting, createGroundMesh, createSkyImage, createPlanets, createCamera } from './createOnScreenAssets.js';
+import { createLighting, createGroundMesh, createSkyImage, createPlanets, createCamera, createMusic } from './createOnScreenAssets.js';
 import { renderPlanets, renderCamera, highlightLayerLogic, checkCameraPosition, removePlanetLabel } from './renderer.js';
 import loadJSON from './readData.js';
 import { scrollLockChecker } from './scrollFeature.js';
@@ -20,6 +20,7 @@ let planetInfoData = null;
 let planets = [];
 
 let camera = null;
+let lastCameraLocation = null;
 
 BABYLON.ArcRotateCamera.prototype.spinTo = function (whichprop, targetval, speed, fps) {
     var ease = new BABYLON.CubicEase();
@@ -56,12 +57,8 @@ const startApp = () => {
         scene.clearColor = new BABYLON.Color3.Black();
 
         // create the camera
-        camera = createCamera(scene, canvas);
-        // camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI / 2 - 0.5, 20, BABYLON.Vector3(0,0,0), scene);
-        // camera.attachControl(canvas, true);
-        // camera.position = new BABYLON.Vector3( 5, 8, -30);
-        // camera.wheelPrecision = 10;
-        let lastCameraLocation = null;
+        const cameraAndPositionObject = createCamera(scene, canvas);
+        camera = cameraAndPositionObject.camera, lastCameraLocation = cameraAndPositionObject.lastCameraLocation;
 
         // disable the normal scrolling events
         scrollLockChecker(camera);
@@ -72,13 +69,8 @@ const startApp = () => {
         // create the base for the gui to be printed on and then call the music GUI function
         advancedTexture = new BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
         
-        // create the music to play and set the default volume to 0.5
-        const music = new BABYLON.Sound("Music", "style/music/ME - Galaxy Map Theme.mp3", scene, () => music.play(), {
-            loop: true,
-            autoplay: true
-        });
-        music.setVolume(0.5);
-
+        // create the music and create the slider element to change the music volume
+        const music = createMusic(scene);
         changeVolumeSlider(advancedTexture, music);
 
         // populate the universe

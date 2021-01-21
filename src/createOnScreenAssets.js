@@ -6,7 +6,8 @@ export const createCamera = (scene, canvas) => {
     camera.attachControl(canvas, true);
     camera.position = new BABYLON.Vector3( 5, 8, -30);
     camera.wheelPrecision = 10;
-    return camera;
+    let lastCameraLocation = null;
+    return {camera, lastCameraLocation};
 }
 
 export const createLighting = (scene, camera) => {
@@ -103,4 +104,14 @@ export const createPlanets = (scene, planetData) => {
     planets.push(saturnRings);
 
     return planets;
+}
+
+export const createMusic = (scene) => {
+    // create the music to play and set the default volume to 0.5
+    const music = new BABYLON.Sound("Music", "style/music/ME - Galaxy Map Theme.mp3", scene, () => music.play(), {
+        loop: true,
+        autoplay: true
+    });
+    music.setVolume(0.5);
+    return music;
 }
