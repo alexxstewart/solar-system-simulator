@@ -9,9 +9,12 @@
     </head>
     <body id="body">
         <div id="loading-screen">
-            <h1>Solar System Simulation</h1>
-            <div></div>
-            <p>loading...</p>
+            <div id="loading-content-section">
+                <h1 id="loading-screen-title">Solar System Simulation</h1>
+                <div class="loader"></div>
+                <p id="loading-screen-text">Loading ... </p>
+            </div>
+            <img id="loading-screen-image" src="/style/textures/introduction/stars1.jpg">
         </div>
         <canvas id="canvas"></canvas>
         <script type="module" src="./src/index.js"></script>
