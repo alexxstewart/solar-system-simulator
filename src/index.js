@@ -1,6 +1,6 @@
 import { changeVolumeSlider, showPlanetInfo, createWelcomeSection } from './GUIManager.js';
 import { createLighting, createGroundMesh, createSkyImage, createPlanets, createCamera, createMusic } from './createOnScreenAssets.js';
-import { renderPlanets, renderCamera, highlightLayerLogic, checkCameraPosition, removePlanetLabel } from './renderer.js';
+import { renderPlanets, renderCamera, highlightLayerLogic, removePlanetLabel } from './renderer.js';
 import { readDataClass} from './readData.js';
 import { scrollHandleInitiator } from './scrollFeature.js';
 import { reduceAlpha, fixCameraAlpha } from './alphaAlterer.js';
@@ -8,7 +8,6 @@ import { moveCameraTo } from './moveCamera.js';
 import { initiateSpinToFunction } from './spinTo.js';
 
 // constants
-const STARS_IMAGE_DIAMETER = 300;
 const ALPHA_DIFFERENCE = 1.5708365686;
 
 // global variables
@@ -23,6 +22,7 @@ let planetInfoData = null;
 let planets = [];
 
 let camera = null;
+
 let lastCameraLocation = null;
 
 // create the spinTo function used for the camera
@@ -112,9 +112,6 @@ const startApp = (infoData, data) => {
 
             // check the planet alpha only sits between 0 and 2PI
             fixCameraAlpha(camera);
-
-            // make sure the
-            //checkCameraPosition(camera, lastCameraLocation, STARS_IMAGE_DIAMETER);
 
             if(focusCameraOnPlanet){
                 // remove the highlight
