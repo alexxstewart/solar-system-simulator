@@ -26,7 +26,7 @@ let planets = [];
 
 let camera = null;
 
-let blockCamPos = null;
+let iteration = 0;
 
 // create the spinTo function used for the camera
 initiateSpinToFunction()
@@ -52,6 +52,8 @@ const revertCamera = () => {
     // set the focus values off
     focusCameraOnPlanet = false;
     focusCameraOnPlanetId = -1;
+    zoomingIn = false;
+    iteration = 0;
 
     // allow the camera to pan again
     camera.attachControl(canvas, true);
@@ -89,7 +91,7 @@ const startApp = (infoData, data) => {
 
         // load the assets for the scene
         loadTextures(scene)
-        
+
         // create the camera
         camera = createCamera(scene, canvas, defaultCamPos);
 
@@ -114,9 +116,6 @@ const startApp = (infoData, data) => {
 
         // create the planet meshes and store them into an array
         planets = createPlanets(scene, planetData);
-
-        // set the iteration count to 0
-        let iteration = 0;
 
         scene.beforeRender = () => {
 
