@@ -1,7 +1,7 @@
 import { changeVolumeSlider, showPlanetInfo, createWelcomeSection } from './GUIManager.js';
 import { createLighting, createGroundMesh, createSkyImage, createPlanets, createCamera, createMusic } from './createOnScreenAssets.js';
 import { renderPlanets, renderCamera, highlightLayerLogic, checkCameraPosition, removePlanetLabel } from './renderer.js';
-import { loadJSON, readDataClass} from './readData.js';
+import { readDataClass} from './readData.js';
 import { scrollHandleInitiator } from './scrollFeature.js';
 import { reduceAlpha, fixCameraAlpha } from './alphaAlterer.js';
 import { moveCameraTo } from './moveCamera.js'; 
@@ -28,29 +28,52 @@ let lastCameraLocation = null;
 // create the spinTo function used for the camera
 initiateSpinToFunction()
 
+/*
+This Function reads the data for the planets and then once it has loaded it starts the application.
+*/
 const init = () => {
     // read the data through the object and when the data is loaded it will call the startApp function
     const readData = new readDataClass(startApp, '/data/planetInfo.json', '/data/planetData.json');
     readData.readPlanetInfo();
 }
 
+/*
+This function reverts the camera back to the origin position after the user has exited out of a planet
+information section.
+*/
 const revertCamera = () => {
+
+    // set the camera position to the default position
     camera.position = new BABYLON.Vector3( 5, 8, -30);
+
+    // set the focus values off
     focusCameraOnPlanet = false;
     focusCameraOnPlanetId = -1;
+
+    // allow the camera to pan again
     camera.attachControl(canvas, true);
+
+    // set the target to the sun
     camera.setTarget(planets[0]);
 }
 
+/*
+This function starts the application. It is called when the json data has been read into the application. There is
+also a before render function which handles the highlighting logic and the logic for focusing on planets
+*/
 const startApp = (infoData, data) => {
+
+    // set the data
     planetInfoData = infoData;
     planetData = data;
-    console.log(planetInfoData, planetData);
 
+    // create the canvas and engine
     const canvas = document.getElementById('canvas');
     const engine = new BABYLON.Engine(canvas, true, {stencil: true});
 
     const createScene = () => {
+
+        // create the scene and set the background color to black
         const scene = new BABYLON.Scene(engine);
         scene.clearColor = new BABYLON.Color3.Black();
 
@@ -76,13 +99,22 @@ const startApp = (infoData, data) => {
         createSkyImage();
         createGroundMesh();
 
+        // create the planet meshes and store them into an array
         planets = createPlanets(scene, planetData);
+
+        // set the iteration count to 0
         let iteration = 0;
 
         scene.beforeRender = () => {
+
+            // render the planets
             renderPlanets(planets);
+
+            // check the planet alpha only sits between 0 and 2PI
             fixCameraAlpha(camera);
-            checkCameraPosition(camera, lastCameraLocation, STARS_IMAGE_DIAMETER);
+
+            // make sure the
+            //checkCameraPosition(camera, lastCameraLocation, STARS_IMAGE_DIAMETER);
 
             if(focusCameraOnPlanet){
                 // remove the highlight
