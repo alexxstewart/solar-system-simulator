@@ -1,4 +1,4 @@
-function loadJSON(callback) {
+export const loadJSON = (callback) => {
     let planetsInfo = null;
     let planets = null;
     // read planet info data
@@ -20,5 +20,3 @@ function loadJSON(callback) {
     });
     req2.send();
 }
-
-export default loadJSON;

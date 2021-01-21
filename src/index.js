@@ -1,7 +1,7 @@
 import { changeVolumeSlider, showPlanetInfo, createWelcomeSection } from './GUIManager.js';
 import { createLighting, createGroundMesh, createSkyImage, createPlanets, createCamera, createMusic } from './createOnScreenAssets.js';
 import { renderPlanets, renderCamera, highlightLayerLogic, checkCameraPosition, removePlanetLabel } from './renderer.js';
-import loadJSON from './readData.js';
+import { loadJSON } from './readData.js';
 import { scrollHandleInitiator } from './scrollFeature.js';
 import { reduceAlpha, fixCameraAlpha } from './alphaAlterer.js';
 import { moveCameraTo } from './moveCamera.js'; 
@@ -30,7 +30,7 @@ initiateSpinToFunction()
 
 const init = () => {
     loadJSON(function(response) {
-        let {planets, planetsInfo} = response;
+        const {planets, planetsInfo} = response;
         planetData = planets;
         planetInfoData = planetsInfo;
 
