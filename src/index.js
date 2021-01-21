@@ -27,21 +27,11 @@ BABYLON.ArcRotateCamera.prototype.spinTo = function (whichprop, targetval, speed
 	BABYLON.Animation.CreateAndStartAnimation('at4', this, whichprop, speed, fps, this[whichprop], targetval, 0, ease);
 }
 
-const setPlanetData = (data) => {
-    planetData = data
-}
-
-const setPlanetinfoData = (data) => {
-    planetInfoData = data
-}
-
 const init = () => {
     loadJSON(function(response) {
         let {planets, planetsInfo} = response;
-        setPlanetData(planets);
-        setPlanetinfoData(planetsInfo)
-
-        console.log(planets, planetsInfo);
+        planetData = planets;
+        planetInfoData = planetsInfo;
 
         // after loading the data we start the app
         startApp();
