@@ -7,24 +7,28 @@ const reduceAlpha = (planet) => {
     }
 }
 
-export const renderPlanets = (planets) => {
-    // loop over the planets in the array
+export const renderPlanets = (planets, paused) => {
     for(let i in planets){
         const p = planets[i];
-        reduceAlpha(p);
-        p.position = new BABYLON.Vector3(p.orbit * Math.sin(p.alpha), 0, p.orbit * Math.cos(p.alpha));
-        p.alpha += p.alphaIncrement;
-        p.rotation.y += p.rotationIncrement;
-        if(i == 9){
-            // print earth moon
-            p.position = planets[3].position;
-            //p.alpha += p.alphaIncrement;
-        }else if(i == 6){ 
-            // print saturn
-            p.rotation.y = 0;
-        }else if(i == 10){
-            // print saturn rings
+        if(i == 10){
             p.position = planets[6].position;
+            continue;
+        }
+        if (p.orbit == null || p.alpha == null) {
+            continue;
+        }
+        reduceAlpha(p);
+        if (!paused) {
+            p.alpha += p.alphaIncrement || 0;
+            if (p.rotationIncrement) {
+                p.rotation.y += p.rotationIncrement;
+            }
+        }
+        p.position = new BABYLON.Vector3(p.orbit * Math.sin(p.alpha), 0, p.orbit * Math.cos(p.alpha));
+        if(i == 9){
+            p.position = planets[3].position;
+        }else if(i == 6){ 
+            p.rotation.y = 0;
         }
     }
 } 
@@ -61,39 +65,28 @@ let rect = null,
 This function handles the highlight layer logic for the application. It checks if the mesh that the user is currently
 mousing over is a planet and if so it adds a mesh layer to the planet. Otherwise it removes the mesh.
 */
-export const highlightLayerLogic = (scene, highlightLayer, planets, advancedTexture) => {
-    // this section here is determining whether a planet needs to be highlighted or not
+export const highlightLayerLogic = (scene, highlightLayer, pickables, setHover) => {
     const pick = scene.pick(scene.pointerX, scene.pointerY);
 
-    if(pick.pickedMesh != null) {
-        if(pick.pickedMesh.name == 'sphere'){
-            const currentMesh = planets[pick.pickedMesh.idNumber];
-            document.getElementById("canvas").style.cursor = "pointer";
-            if(lastMeshHighlighted != currentMesh){
-
-                // remove previous highlights and labels
-                highlightLayer.removeAllMeshes();
-                lastMeshHighlighted = null;
-                if(rect != null){
-                    advancedTexture.removeControl(rect);
-                    advancedTexture.removeControl(line);
-                    advancedTexture.removeControl(target);
-                }
-
-                // create new highlights and labels
-                highlightLayer.addMesh(currentMesh, BABYLON.Color3.White());
-                highlightLayer.innerGlow = false;
-                lastMeshHighlighted = currentMesh;
-                const obj = labelPlanet(currentMesh, advancedTexture);
-                rect = obj.rect1, line = obj.line, target = obj.target;
-            }
+    if(pick.pickedMesh != null && pick.pickedMesh.isCelestial){
+        const currentMesh = pick.pickedMesh;
+        document.getElementById("canvas").style.cursor = "pointer";
+        if (setHover) {
+            setHover(currentMesh.planetName || currentMesh.objectName, scene.pointerX, scene.pointerY);
+        }
+        if(lastMeshHighlighted != currentMesh){
+            highlightLayer.removeAllMeshes();
+            highlightLayer.addMesh(currentMesh, new BABYLON.Color3(1, 1, 1));
+            highlightLayer.innerGlow = false;
+            lastMeshHighlighted = currentMesh;
         }
     }else{
+        if (setHover) {
+            setHover(null);
+        }
         if(lastMeshHighlighted != null){
-            // remove the meshes and set the cursor style to normal
             highlightLayer.removeAllMeshes();
             lastMeshHighlighted = null;
-            removePlanetLabel(advancedTexture);
             document.getElementById("canvas").style.cursor = "auto";
         }
     }
@@ -122,7 +115,7 @@ const labelPlanet = (planetMesh, advancedTexture) => {
     rect1.linkOffsetY = -150;
 
     const label = new BABYLON.GUI.TextBlock();
-    label.text = planetMesh.planetName;
+    label.text = planetMesh.planetName || planetMesh.objectName || 'Object';
     rect1.addControl(label);
 
     const target = new BABYLON.GUI.Ellipse();

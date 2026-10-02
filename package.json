@@ -1,0 +1,12 @@
+{
+  "name": "solar-system-simulator",
+  "private": true,
+  "description": "A web browser-based simulation and guide of our solar system.",
+  "scripts": {
+    "start": "npx --yes serve -l 5173 ."
+  },
+  "dependencies": {
+    "babylonjs": "9.22.2",
+    "babylonjs-gui": "9.22.2"
+  }
+}

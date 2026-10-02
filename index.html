@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Universe Simulator</title>
-        <script src="https://cdn.babylonjs.com/babylon.max.js"></script>
-        <script src="https://cdn.babylonjs.com/gui/babylon.gui.js"></script>
+        <title>Milky Way Explorer</title>
+        <script src="https://cdn.jsdelivr.net/npm/babylonjs@9.22.2/babylon.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/babylonjs-gui@9.22.2/babylon.gui.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="./style/index.css">
     </head>
     <body id="body">
         <div id="loading-screen">
             <div id="loading-content-section">
-                <h1 id="loading-screen-title">Solar System Simulation</h1>
+                <h1 id="loading-screen-title">Milky Way Explorer</h1>
                 <div class="loader"></div>
-                <p id="loading-screen-text">Loading ... </p>
+                <p id="loading-screen-text">Charting nearby stars and nebulae ... </p>
             </div>
-            <img id="loading-screen-image" src="/style/textures/introduction/stars.jpg">
+            <img id="loading-screen-image" src="style/textures/introduction/stars.jpg">
         </div>
         <canvas id="canvas"></canvas>
         <script type="module" src="./src/index.js"></script>

@@ -1,0 +1,147 @@
+{
+  "pluto": {
+    "title": "Pluto",
+    "info": "Pluto is a dwarf planet in the Kuiper Belt, a ring of icy bodies beyond Neptune. Discovered in 1930 by Clyde Tombaugh, it was classed as the ninth planet until 2006. NASA's New Horizons flew past it in 2015 and returned the first close-up images of its nitrogen glaciers and the bright heart-shaped region Sputnik Planitia. | Pluto and its largest moon Charon are tidally locked, always showing the same faces to each other as they orbit a barycenter above Pluto's surface. The encounter showed mountains of water ice, hazy blue layers in a thin atmosphere, and a geologically young surface. | <a href=\"https://en.wikipedia.org/wiki/Pluto\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance from Sun: 39.5 AU (average) | Orbital Period: 248 years | Diameter: 2,377 km | Mass: 0.00218 Earths | Surface gravity: 0.62 m/s² | Known moons: 5 | Classification: Dwarf planet (Kuiper Belt object)"
+  },
+  "asteroid-belt": {
+    "title": "Asteroid Belt",
+    "info": "The asteroid belt is a torus of leftover planetesimals between Mars and Jupiter. Jupiter's gravity prevented these rocks from forming a full planet. Most of the belt's mass is in the four largest objects: Ceres, Vesta, Pallas and Hygiea. Ceres is large enough to be a dwarf planet. | Spacecraft including Dawn, Galileo, Cassini and New Horizons have flown through the belt; the dust is sparse enough that crossings are safe. These bodies are time capsules from the solar system's first few million years. | <a href=\"https://en.wikipedia.org/wiki/Asteroid_belt\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance from Sun: ~2.2 to 3.2 AU | Largest object: Ceres (940 km) | Estimated bodies > 1 km: over 1 million | Total mass: ~4% of the Moon | Origin: leftover planetesimals"
+  },
+  "kuiper-belt": {
+    "title": "Kuiper Belt",
+    "info": "The Kuiper Belt is a vast doughnut of icy worlds beyond Neptune, home to Pluto, Haumea, Makemake and Arrokoth. It is the solar system's outer construction yard — leftover material from the disk that built the planets. | New Horizons visited Arrokoth (2014 MU69) in 2019, finding two lobes gently merged, evidence that planets grew from pebble clouds rather than violent smash-ups alone. | <a href=\"https://en.wikipedia.org/wiki/Kuiper_belt\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance from Sun: ~30 to 55 AU | Known objects: thousands catalogued | Famous residents: Pluto, Arrokoth, Haumea, Makemake | Source of many short-period comets"
+  },
+  "voyager1": {
+    "title": "Voyager 1",
+    "info": "Voyager 1 is humanity's most distant spacecraft. Launched in 1977, it flew past Jupiter and Saturn, then climbed out of the solar system. In 2012 it crossed the heliopause and entered interstellar space — the first human-made object to do so. | It carries the Golden Record, a phonograph of Earth sounds, music and images, should anyone find it. Its radio signals still reach Earth after more than 22 hours of light-travel time. | <a href=\"https://en.wikipedia.org/wiki/Voyager_1\" target=\"_blank\">More Info Here</a>",
+    "facts": "Launch: 5 September 1977 | Interstellar space: 25 August 2012 | Distance (2026): > 166 AU | Speed: ~17 km/s relative to the Sun | Instruments still reporting plasma and cosmic rays"
+  },
+  "oort-cloud": {
+    "title": "Oort Cloud",
+    "info": "The Oort Cloud is a predicted spherical reservoir of icy bodies wrapping the solar system at thousands to hundreds of thousands of AU. We have not imaged it directly, but long-period comets arriving from random directions are strong evidence it exists. | It marks the gravitational edge of the Sun's domain, where passing stars and the Milky Way's tide can nudge comets inward toward the planets. | <a href=\"https://en.wikipedia.org/wiki/Oort_cloud\" target=\"_blank\">More Info Here</a>",
+    "facts": "Estimated distance: 2,000 to 100,000 AU | Shape: roughly spherical | Source of long-period comets | Still bound, just, to the Sun"
+  },
+  "proxima": {
+    "title": "Proxima Centauri",
+    "info": "Proxima Centauri is a red dwarf and the nearest star to the Sun, 4.24 light-years away in the constellation Centaurus. It is a flare star: magnetic storms can blast its planets with X-rays. It is gravitationally bound to Alpha Centauri A and B as a distant third member. | In 2016 astronomers confirmed Proxima b, an Earth-size planet in the habitable zone. Whether it holds an atmosphere after billions of years of flares is an open question. | <a href=\"https://en.wikipedia.org/wiki/Proxima_Centauri\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: 4.246 light-years | Spectral type: M5.5V red dwarf | Mass: 0.12 Solar masses | Radius: 0.15 Solar radii | Confirmed planets: Proxima b, Proxima d, candidate c"
+  },
+  "proxima-b": {
+    "title": "Proxima Centauri b",
+    "info": "Proxima b is a rocky world at least 1.07 Earth masses, orbiting in the liquid-water zone of Proxima Centauri. A year there lasts only 11.2 Earth days. Because the star is so dim, that tight orbit can still be temperate — if the planet kept its air. | Tidal locking is likely: one hemisphere would face the star forever. Climate models range from a dayside ocean to a barren, flare-scoured rock. | <a href=\"https://en.wikipedia.org/wiki/Proxima_Centauri_b\" target=\"_blank\">More Info Here</a>",
+    "facts": "Host: Proxima Centauri | Orbital period: 11.2 days | Minimum mass: 1.07 Earths | Insolation: ~65% of Earth's | Discovery: 2016, radial velocity"
+  },
+  "alpha-cen-a": {
+    "title": "Alpha Centauri A",
+    "info": "Alpha Centauri A (Rigil Kentaurus) is a G2 yellow dwarf almost a twin of the Sun, and the brightest member of the nearest star system. Together with orange dwarf Alpha Centauri B it forms a close binary; Proxima orbits the pair at a much greater distance. | From a planet around A, B would shine as a brilliant second sun. Searches for Earth-size planets in the system are among the highest priorities in nearby-star astronomy. | <a href=\"https://en.wikipedia.org/wiki/Alpha_Centauri\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: 4.37 light-years | Spectral type: G2V | Mass: 1.08 Solar masses | Binary period with B: ~80 years | Apparent magnitude: −0.01"
+  },
+  "alpha-cen-b": {
+    "title": "Alpha Centauri B",
+    "info": "Alpha Centauri B is a K1 orange dwarf orbiting Alpha Centauri A. It is a little smaller and cooler than the Sun, and slightly more active magnetically. The two stars approach as close as Saturn's orbit and recede to about the orbit of Pluto. | A claimed planet around B was later withdrawn; the system remains a prime target for the next generation of direct-imaging telescopes. | <a href=\"https://en.wikipedia.org/wiki/Alpha_Centauri\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: 4.37 light-years | Spectral type: K1V | Mass: 0.91 Solar masses | Separation from A: 11 to 36 AU"
+  },
+  "barnard": {
+    "title": "Barnard's Star",
+    "info": "Barnard's Star is a red dwarf 6 light-years away with the largest proper motion of any star in our sky — it crawls across the heavens as seen from Earth. It is among the oldest stars in the solar neighbourhood, perhaps 10 billion years old, and very flare-quiet for an M dwarf. | A planet, Barnard's Star b, was confirmed in 2024: a rocky world in a 3.15-day orbit. | <a href=\"https://en.wikipedia.org/wiki/Barnard's_Star\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: 5.96 light-years | Spectral type: M4V | Radial velocity: −110 km/s (approaching) | Age: ~10 billion years"
+  },
+  "sirius": {
+    "title": "Sirius A",
+    "info": "Sirius is the brightest star in Earth's night sky, a white A-type main-sequence star in Canis Major. It is a binary: the companion Sirius B is a white dwarf, the first one discovered, found by Alvan Graham Clark in 1862. | The name comes from Greek seirios, 'glowing'. Many cultures used Sirius as a seasonal marker; in ancient Egypt its heliacal rising heralded the Nile flood. | <a href=\"https://en.wikipedia.org/wiki/Sirius\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: 8.60 light-years | Spectral type: A1V | Luminosity: 25 Solar | Apparent magnitude: −1.46 | Binary period: 50 years"
+  },
+  "sirius-b": {
+    "title": "Sirius B",
+    "info": "Sirius B is a white dwarf — the Earth-sized remnant core of a star that once outshone Sirius A. A teaspoon of its material would weigh tonnes. Its surface is around 25,000 K, yet it is faint because it is only about the size of Earth. | White dwarfs like this are the future of the Sun, several billion years from now. | <a href=\"https://en.wikipedia.org/wiki/Sirius#Sirius_B\" target=\"_blank\">More Info Here</a>",
+    "facts": "Type: DA white dwarf | Mass: 1.02 Solar masses | Radius: ~0.008 Solar (Earth-sized) | Temperature: ~25,000 K"
+  },
+  "eps-eri": {
+    "title": "Epsilon Eridani",
+    "info": "Epsilon Eridani is a young K2 orange dwarf only 10.5 light-years away, with a dusty debris disk and at least one confirmed giant planet, AEgir (Epsilon Eridani b). It is a favourite of SETI and science fiction because it is nearby, Sun-like enough, and still assembling its planetary system. | Hubble and infrared observatories have imaged two dusty belts, analogues of our asteroid and Kuiper belts. | <a href=\"https://en.wikipedia.org/wiki/Epsilon_Eridani\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: 10.49 light-years | Spectral type: K2V | Age: 200–800 million years | Confirmed planet: Epsilon Eridani b (gas giant)"
+  },
+  "tau-ceti": {
+    "title": "Tau Ceti",
+    "info": "Tau Ceti is a G8.5 yellow dwarf, one of the closest solitary Sun-like stars. It hosts a massive debris disk and a compact system of candidate planets, including worlds in or near the habitable zone. The dust implies a heavy bombardment environment. | It has long been a first-stop in searches for life because it is stable, nearby, and visible to the unaided eye. | <a href=\"https://en.wikipedia.org/wiki/Tau_Ceti\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: 11.91 light-years | Spectral type: G8.5V | Mass: 0.78 Solar masses | Planet candidates: 4+"
+  },
+  "altair": {
+    "title": "Altair",
+    "info": "Altair is a rapidly spinning A-type star in Aquila and one vertex of the Summer Triangle. It rotates in under 9 hours, so it is flattened into an oblate spheroid — interferometers have imaged the equator bulging and the poles running hotter. | At 16.7 light-years it is among the nearest stars visible to the naked eye. | <a href=\"https://en.wikipedia.org/wiki/Altair\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: 16.73 light-years | Spectral type: A7V | Rotation period: ~9 hours | Flattening: clearly oblate"
+  },
+  "vega": {
+    "title": "Vega",
+    "info": "Vega, in Lyra, was the northern pole star around 12,000 BCE and will be again around 14,000 CE. It is an A0 white star with a debris disk, one of the first discovered, and a photometric standard that defined magnitude zero. | Vega is also flattened by fast rotation and was the first star besides the Sun to be photographed and to have its spectrum recorded. | <a href=\"https://en.wikipedia.org/wiki/Vega\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: 25.04 light-years | Spectral type: A0V | Luminosity: ~40 Solar | Debris disk: yes | Pole star in ~13,000 years"
+  },
+  "polaris": {
+    "title": "Polaris",
+    "info": "Polaris is the current North Star, a yellow supergiant and classical Cepheid variable sitting almost on Earth's rotation axis. It is a triple star: a close F-type companion and a more distant one visible in small telescopes. | As a Cepheid it pulses, and those pulses helped calibrate cosmic distances. It is slowly brightening as it evolves. | <a href=\"https://en.wikipedia.org/wiki/Polaris\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~323 light-years | Spectral type: F7Ib (supergiant) | Variable: Cepheid | System: triple star"
+  },
+  "betelgeuse": {
+    "title": "Betelgeuse",
+    "info": "Betelgeuse is a red supergiant in Orion's shoulder and one of the largest stars you can see with the naked eye. If it replaced the Sun it would swallow Mercury, Venus, Earth and Mars. It is nearing the end of its life and will explode as a Type II supernova, possibly within the next 100,000 years. | In 2019–2020 it famously dimmed as a dust cloud and a cool patch on its surface combined — not the explosion, not yet. | <a href=\"https://en.wikipedia.org/wiki/Betelgeuse\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~548 light-years | Spectral type: M1–M2 Ia–ab | Radius: ~640–900 Solar radii | Fate: core-collapse supernova"
+  },
+  "antares": {
+    "title": "Antares",
+    "info": "Antares is the red-supergiant heart of Scorpius. Its name means 'rival of Mars' for its similar colour. A hotter blue companion orbits it, often lost in the glare. Like Betelgeuse it will end as a supernova, leaving a neutron star or black hole. | The Antares system sits in front of the rich Milky Way star clouds toward the galactic centre. | <a href=\"https://en.wikipedia.org/wiki/Antares\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~550 light-years | Spectral type: M1.5Iab | Companion: B-type star | Radius: several hundred Solar radii"
+  },
+  "rigel": {
+    "title": "Rigel",
+    "info": "Rigel is Orion's blue-white foot, a luminous B-type supergiant tens of thousands of times brighter than the Sun. It is a multiple-star system and a benchmark for massive-star physics. Despite looking fainter than Betelgeuse in the sky, it is intrinsically far more luminous and more distant. | Rigel lights the surrounding dust, including parts of the Orion molecular clouds. | <a href=\"https://en.wikipedia.org/wiki/Rigel\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~860 light-years | Spectral type: B8 Ia | Luminosity: ~1.2×10⁵ Solar | System: at least 4 stars"
+  },
+  "orion": {
+    "title": "Orion Nebula",
+    "info": "The Orion Nebula (M42) is the nearest massive star-forming region, a cavern of gas 1,300 light-years away that you can see with the unaided eye as the middle 'star' in Orion's sword. Hubble, Spitzer, Herschel and JWST have shown thousands of newborn stars, proplyds (planet-forming disks) and brown dwarfs inside. | At its core, the Trapezium — four hot O and B stars — carves the nebula with ultraviolet light. This is what the Sun's birthplace may have looked like. | <a href=\"https://en.wikipedia.org/wiki/Orion_Nebula\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~1,344 light-years | Catalogue: M42 / NGC 1976 | Type: emission nebula | Age of young stars: ~1–3 million years | Image: NASA/ESA Hubble"
+  },
+  "horsehead": {
+    "title": "Horsehead Nebula",
+    "info": "The Horsehead Nebula (Barnard 33) is a dark cloud of dust silhouetted against the glowing hydrogen of IC 434, just south of Alnitak in Orion. The 'horse head' is a familiar silhouette in amateur and Hubble images. Behind the dust, stars are still forming. | Infrared telescopes pierce the darkness and reveal the newborn stars hidden in the mane. | <a href=\"https://en.wikipedia.org/wiki/Horsehead_Nebula\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~1,375 light-years | Catalogue: Barnard 33 | Type: dark nebula | Nearby: Flame Nebula, Alnitak | Image: NASA"
+  },
+  "pleiades": {
+    "title": "Pleiades",
+    "info": "The Pleiades (M45), or Seven Sisters, are a nearby open cluster of hot B-type stars in Taurus. The blue haze is starlight scattered by passing interstellar dust — not leftover birth-cloud, which has already dispersed. Cultures worldwide named this cluster; it is one of the most photographed objects in the sky. | Several hundred stars belong to the cluster, dominated by the bright sisters visible to the naked eye. | <a href=\"https://en.wikipedia.org/wiki/Pleiades\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~444 light-years | Catalogue: M45 | Age: ~100 million years | Bright members: 7–14 to the naked eye | Image: NASA/ESA/AURA"
+  },
+  "helix": {
+    "title": "Helix Nebula",
+    "info": "The Helix Nebula (NGC 7293) is a nearby planetary nebula — the shed outer layers of a dying Sun-like star. From Earth it looks like an eye, which earned it the nickname Eye of God. At its centre sits a hot white dwarf that will slowly cool for billions of years. | Cometary knots in the Helix are dense fingers of leftover gas pointing away from the central star. | <a href=\"https://en.wikipedia.org/wiki/Helix_Nebula\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~655 light-years | Catalogue: NGC 7293 | Type: planetary nebula | Central star: white dwarf | Image: NASA/ESA Hubble"
+  },
+  "crab": {
+    "title": "Crab Nebula",
+    "info": "The Crab Nebula (M1) is the remnant of a supernova seen on Earth in 1054 CE by Chinese and other astronomers. At its centre a pulsar spins 30 times a second, a city-sized neutron star beaming radio, X-ray and gamma radiation. The nebula expands at about 1,500 km/s. | Hubble's mosaic of tangled filaments is one of the iconic images of high-energy astrophysics. | <a href=\"https://en.wikipedia.org/wiki/Crab_Nebula\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~6,500 light-years | Catalogue: M1 / NGC 1952 | Origin: SN 1054 | Pulsar period: 33 ms | Image: NASA/ESA Hubble"
+  },
+  "eagle": {
+    "title": "Pillars of Creation",
+    "info": "The Pillars of Creation are columns of cold hydrogen and dust in the Eagle Nebula (M16), made famous by Hubble in 1995 and re-imaged in 2014. New stars form in the evaporating tips while ultraviolet light from nearby massive stars slowly boils the towers away. | Spitzer later showed the original pillars have already been hit by a supernova shock; because of light-travel time we still see them intact. | <a href=\"https://en.wikipedia.org/wiki/Pillars_of_Creation\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~7,000 light-years | Nebula: Eagle / M16 | Height of pillars: several light-years | Image: NASA/ESA Hubble (2014)"
+  },
+  "carina": {
+    "title": "Carina Nebula",
+    "info": "The Carina Nebula (NGC 3372) is one of the Milky Way's largest star-forming complexes, home to Eta Carinae — a volatile luminous blue variable that survived a giant eruption in the 1840s. The nebula spans more than 300 light-years of sculpted dust, pillars and clusters. | Hubble and JWST images of Carina are among the most detailed views we have of massive-star nurseries. | <a href=\"https://en.wikipedia.org/wiki/Carina_Nebula\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~7,500 light-years | Catalogue: NGC 3372 | Notable star: Eta Carinae | Type: emission nebula | Image: NASA"
+  },
+  "sgr-a": {
+    "title": "Sagittarius A*",
+    "info": "Sagittarius A* is the supermassive black hole at the centre of the Milky Way, about 4.3 million solar masses packed into a region smaller than Mercury's orbit. The Event Horizon Telescope imaged its ring of glowing plasma in 2022. Stars such as S2 whip around it at several percent of light speed, confirming the mass. | You cannot see it in visible light from Earth — the galactic plane's dust blocks the view — but infrared and radio telescopes watch it flare as it snacks on gas. | <a href=\"https://en.wikipedia.org/wiki/Sagittarius_A*\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~26,600 light-years | Mass: 4.3 million Solar masses | Type: supermassive black hole | First EHT image: 2022 | Galactic longitude: near 0°"
+  },
+  "andromeda": {
+    "title": "Andromeda Galaxy",
+    "info": "Andromeda (M31) is the nearest large spiral galaxy and the most distant object most people can see with the naked eye. It holds around a trillion stars and is on a collision course with the Milky Way: in about 4.5 billion years the two will merge into a giant elliptical. | Hubble's Panchromatic Hubble Andromeda Treasury resolved individual stars across the disk. Its two bright companions, M32 and M110, ride along with it. | <a href=\"https://en.wikipedia.org/wiki/Andromeda_Galaxy\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: 2.54 million light-years | Catalogue: M31 / NGC 224 | Diameter: ~220,000 light-years | Mass: ~1.5×10¹² Solar | Fate: merge with the Milky Way"
+  }
+}

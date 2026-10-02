@@ -1,194 +1,275 @@
-import { changeVolumeSlider, showPlanetInfo, createWelcomeSection, deleteLoadingScreen} from './GUIManager.js';
-import { createLighting, createGroundMesh, createSkyImage, createPlanets, createCamera, createMusic } from './createOnScreenAssets.js';
-import { renderPlanets, renderCamera, highlightLayerLogic, removePlanetLabel } from './renderer.js';
-import { readDataClass} from './readData.js';
-import { reduceAlpha, fixCameraAlpha } from './alphaAlterer.js';
-import { moveCameraTo } from './moveCamera.js'; 
-import { initiateSpinToFunction } from './spinTo.js';
+import { createWelcomeSection, deleteLoadingScreen, showObjectCard, closeObjectCard } from './GUIManager.js';
+import { createLighting, createGroundMesh, createSkyImage, createPlanets, createMusic } from './createOnScreenAssets.js';
+import { renderPlanets, highlightLayerLogic } from './renderer.js';
 import { loadTextures } from './loadAssets.js';
+import { createExplorationCamera, warpToMesh, goHome, turnToward, findNearestCelestial } from './explorationCamera.js';
+import { createGalaxyContent } from './galaxyBuilder.js';
+import { createSpaceHud } from './navigationUI.js';
+import { attachPlanetDistances } from './distance.js';
+import { playWarpSound, playArrivalChime } from './warpArrival.js';
 
-// constants
-const ALPHA_DIFFERENCE = 1.5708365686;
-const defaultCamPos = new BABYLON.Vector3( 5, 8, -30);
-const CAMERA_LOWER_RADIUS_LIMIT = 4;
-const CAMERA_UPPER_RADIUS_LIMIT = 150;
+const defaultCamPos = new BABYLON.Vector3(5, 8, -30);
+const UI_SELECTOR = '#nav-panel, #space-hud, #minimap-wrap, #object-card, #welcome-div, #background-div, #loading-screen, #hover-label, #warp-caption, #arrival-toast, #target-arrow';
 
-// global variables
-let focusCameraOnPlanet = false;
-let focusCameraOnPlanetId = -1;
-let blockPlanetClick = false;
-let zoomingIn = false;
-
-let advancedTexture = null;
-let planetData = null;
-let planetInfoData = null;
-let planets = [];
-
-let camera = null;
-
-let iteration = 0;
-
-// create the spinTo function used for the camera
-initiateSpinToFunction()
-
-/*
-This Function reads the data for the planets and then once it has loaded it starts the application.
-*/
 const init = () => {
-    // read the data through the object and when the data is loaded it will call the startApp function
-    const readData = new readDataClass(startApp, '/data/planetInfo.json', '/data/planetData.json');
-    readData.readPlanetInfo();
-}
+    Promise.all([
+        fetch('data/planetInfo.json').then((response) => response.json()),
+        fetch('data/planetData.json').then((response) => response.json()),
+        fetch('data/galaxyObjects.json').then((response) => response.json()),
+        fetch('data/galaxyInfo.json').then((response) => response.json())
+    ]).then(([planetInfo, planetData, galaxyCatalog, galaxyInfo]) => {
+        return startApp(planetInfo, planetData, galaxyCatalog, galaxyInfo);
+    }).catch((error) => {
+        console.error('Failed to load simulation data', error);
+    });
+};
 
-/*
-This function reverts the camera back to the origin position after the user has exited out of a planet
-information section.
-*/
-const revertCamera = () => {
-    console.log('reverting camera');
-    // set the camera position to the default position
-    camera.position = defaultCamPos;
-
-    // set the focus values off
-    focusCameraOnPlanet = false;
-    focusCameraOnPlanetId = -1;
-    zoomingIn = false;
-    iteration = 0;
-
-    // allow the camera to pan again
-    camera.attachControl(canvas, true);
-
-    console.log(camera.inputs.attached.mousewheel)
-    // add the mouse wheel if it has been taken away
-    if(!(camera.inputs.attached.mousewheel)){
-        console.log(camera.inputs.attached.mousewheel)
-        camera.inputs.addMouseWheel();
-    }
-
-    // set the target to the sun
-    camera.setTarget(planets[0]);
-}
-
-/*
-This function starts the application. It is called when the json data has been read into the application. There is
-also a before render function which handles the highlighting logic and the logic for focusing on planets
-*/
-const startApp = (infoData, data) => {
-
-    // set the data
-    planetInfoData = infoData;
-    planetData = data;
-
-    // create the canvas and engine
+const startApp = async (planetInfo, planetData, galaxyCatalog, galaxyInfo) => {
+    const allInfo = Object.assign({}, planetInfo, galaxyInfo);
     const canvas = document.getElementById('canvas');
-    const engine = new BABYLON.Engine(canvas, true, {stencil: true});
+    const engineOptions = {
+        adaptToDeviceRatio: true,
+        antialias: true,
+        stencil: true,
+        powerPreference: 'high-performance'
+    };
+    let engine;
+    try {
+        engine = BABYLON.EngineFactory
+            ? await BABYLON.EngineFactory.CreateAsync(canvas, engineOptions)
+            : new BABYLON.Engine(canvas, true, engineOptions);
+    } catch (error) {
+        console.warn('Falling back to WebGL engine', error);
+        engine = new BABYLON.Engine(canvas, true, engineOptions);
+    }
 
     const createScene = () => {
-
-        // create the scene and set the background color to black
         const scene = new BABYLON.Scene(engine);
-        scene.clearColor = new BABYLON.Color3.Black();
+        scene.clearColor = new BABYLON.Color4(0, 0, 0, 1);
+        scene.collisionsEnabled = false;
+        if (BABYLON.ScenePerformancePriority) {
+            scene.performancePriority = BABYLON.ScenePerformancePriority.Intermediate;
+        }
 
-        // load the assets for the scene
-        loadTextures(scene, deleteLoadingScreen)
+        loadTextures(scene, deleteLoadingScreen);
 
-        // create the camera
-        camera = createCamera(scene, canvas, defaultCamPos);
+        const flight = createExplorationCamera(scene, canvas, defaultCamPos);
+        const camera = flight.camera;
 
-        // set the limits on the camera
-        camera.lowerRadiusLimit = CAMERA_LOWER_RADIUS_LIMIT;
-        camera.upperRadiusLimit = CAMERA_UPPER_RADIUS_LIMIT;
+        const highlightLayer = new BABYLON.HighlightLayer('hl1', scene);
+        const glowLayer = new BABYLON.GlowLayer('starGlow', scene);
+        glowLayer.intensity = 0.55;
 
-        // create the highlighting layer
-        const hightlightLayer = new BABYLON.HighlightLayer("hl1", scene);
-
-        // create the base for the gui to be printed on and then call the music GUI function
-        advancedTexture = new BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
-        
-        // create the music and create the slider element to change the music volume
         const music = createMusic(scene);
-        changeVolumeSlider(advancedTexture, music);
-
-        // populate the universe
         createLighting(scene, camera);
-        createSkyImage();
-        createGroundMesh();
+        const sky = createSkyImage(scene);
+        const ground = createGroundMesh(scene);
 
-        // create the planet meshes and store them into an array
-        planets = createPlanets(scene, planetData);
+        const planets = createPlanets(scene, planetData);
+        if (planets[0]) {
+            glowLayer.addIncludedOnlyMesh(planets[0]);
+        }
+
+        const solarDestinations = planets.filter((mesh) => mesh.isCelestial).map((mesh) => ({
+            id: String(mesh.infoId),
+            name: mesh.planetName,
+            group: 'Solar System',
+            mesh
+        })).filter((destination, index, list) => (
+            destination.name && list.findIndex((item) => item.name === destination.name) === index
+        ));
+
+        const galaxy = createGalaxyContent(scene, galaxyCatalog, glowLayer);
+        planets.push(...galaxy.orbiters);
+        attachPlanetDistances(planets);
+        attachPlanetDistances(galaxy.pickables);
+
+        const pickables = planets.filter((mesh) => mesh.isCelestial).concat(galaxy.pickables);
+        const uniquePickables = [];
+        const seen = new Set();
+        pickables.forEach((mesh) => {
+            if (!seen.has(mesh.infoId)) {
+                seen.add(mesh.infoId);
+                uniquePickables.push(mesh);
+            }
+        });
+
+        const sunMesh = planets[0];
+        const appState = {
+            selected: null,
+            visited: new Set(),
+            tourIndex: -1,
+            pauseOrbits: false,
+            muted: false,
+            pointerLocked: false,
+            musicVolume: 0.5
+        };
+
+        const hud = createSpaceHud({
+            flight,
+            pickables: uniquePickables,
+            destinations: solarDestinations.concat(galaxy.destinations),
+            appState
+        });
+
+        const lookAt = (mesh) => {
+            if (!mesh) return;
+            appState.selected = mesh;
+            turnToward(scene, flight, mesh);
+        };
+
+        const warpTo = (mesh) => {
+            if (!mesh) return;
+            appState.selected = mesh;
+            playWarpSound(appState.muted);
+            hud.showWarpCaption(mesh.planetName || mesh.objectName);
+            warpToMesh(scene, flight, mesh, () => {
+                hud.showWarpCaption(null);
+                appState.visited.add(String(mesh.infoId));
+                playArrivalChime(appState.muted);
+                showObjectCard(mesh, allInfo, {
+                    arrived: true,
+                    lookAt,
+                    warpTo,
+                    onClose: () => { appState.pauseOrbits = false; }
+                });
+                appState.pauseOrbits = true;
+            });
+        };
+
+        appState.select = (mesh, options = {}) => {
+            appState.selected = mesh;
+            if (options.look !== false) {
+                lookAt(mesh);
+            }
+            if (options.openCard) {
+                appState.pauseOrbits = true;
+                showObjectCard(mesh, allInfo, { lookAt, warpTo, onClose: () => { appState.pauseOrbits = false; } });
+            }
+        };
+        appState.lookAt = lookAt;
+        appState.warpTo = warpTo;
+        appState.goHome = () => {
+            goHome(scene, flight, sunMesh);
+            appState.selected = sunMesh;
+        };
+        appState.toggleMute = () => {
+            appState.muted = !appState.muted;
+            music.setVolume(appState.muted ? 0 : appState.musicVolume);
+        };
+        appState.togglePointerLock = () => {
+            if (document.pointerLockElement === canvas) {
+                document.exitPointerLock();
+            } else {
+                canvas.requestPointerLock();
+            }
+        };
+        appState.toggleTour = () => {
+            if (appState.tourIndex < 0) {
+                appState.tourIndex = 0;
+            } else {
+                appState.tourIndex += 1;
+            }
+            if (appState.tourIndex >= hud.tourIds.length) {
+                appState.tourIndex = -1;
+                hud.showArrival('Tour complete. Pick anywhere in the navigator.');
+                return;
+            }
+            const id = hud.tourIds[appState.tourIndex];
+            const dest = hud.uniqueDestinations.find((item) => item.id === id);
+            if (dest) {
+                warpTo(dest.mesh);
+            }
+        };
+        appState.closeCard = () => {
+            closeObjectCard();
+            appState.pauseOrbits = false;
+        };
+
+        flight.getSlowdownDistance = () => findNearestCelestial(camera.position, uniquePickables).distance;
+
+        document.addEventListener('pointerlockchange', () => {
+            appState.pointerLocked = document.pointerLockElement === canvas;
+            const lookBtn = document.getElementById('look-lock-button');
+            if (lookBtn) {
+                lookBtn.textContent = appState.pointerLocked ? 'Looking' : 'Free look';
+                lookBtn.classList.toggle('active', appState.pointerLocked);
+            }
+        });
 
         scene.beforeRender = () => {
-
-            // render the planets
-            renderPlanets(planets);
-
-            // check the planet alpha only sits between 0 and 2PI
-            fixCameraAlpha(camera);
-
-            /*
-            If the user has clicked on a planet the boolean focusCamerOnPlanet will be true. If this is true then we remove all
-            the highlights and we set the blockPlanetClick boolean to true to block the user from clicking on other planets. If 
-            the boolean zoomingIn, which is the state between when the user has clicked on a planet and the planet is not in full 
-            view yet. If this is true then we call the move cameraTo function to handle the movement, and we keep track of the
-            number of iterations the loop has done. If the zoomingIn boolean is false then we just track the planet with the renderCamera
-            function. If none of these are true then the normal case is we just allow the planets to be highlighted.
-            */
-            if(focusCameraOnPlanet){
-                // remove the highlight
-                hightlightLayer.removeAllMeshes();
-
-                // block the user from clicking on any other planets while in focused mode
-                blockPlanetClick = true;
-                if(zoomingIn){
-                    const returnObj = moveCameraTo(iteration, planets, focusCameraOnPlanetId, reduceAlpha, camera, ALPHA_DIFFERENCE);
-                    iteration = returnObj.iteration, zoomingIn = returnObj.zoomingIn;
-                    iteration++;
-                }else{
-                    renderCamera(planets, focusCameraOnPlanetId, camera);
+            try {
+                renderPlanets(planets, appState.pauseOrbits);
+                galaxy.update(appState.pauseOrbits);
+                hud.update();
+                if (sky && !sky.infiniteDistance) {
+                    sky.position.copyFrom(camera.position);
                 }
-            }else{
-                // allow for highlighting of planets
-                highlightLayerLogic(scene, hightlightLayer, planets, advancedTexture);
-                blockPlanetClick = false;
+                if (ground) {
+                    ground.isVisible = camera.position.lengthSquared() < 500 * 500;
+                }
+                if (!flight.warping) {
+                    highlightLayerLogic(scene, highlightLayer, uniquePickables, hud.setHover);
+                }
+            } catch (error) {
+                console.error('frame update failed', error);
             }
-        }
+        };
 
+        window.addEventListener('click', (event) => {
+            if (event.target.closest(`${UI_SELECTOR}, button, a, input, select, label`)) {
+                return;
+            }
+            const pick = scene.pick(scene.pointerX, scene.pointerY);
+            if (pick.pickedMesh && pick.pickedMesh.isCelestial) {
+                appState.select(pick.pickedMesh, { look: true, openCard: true });
+            } else if (!appState.pointerLocked) {
+                canvas.requestPointerLock();
+            }
+        });
+
+        window.addEventListener('keydown', (event) => {
+            if (event.target && ['INPUT', 'TEXTAREA'].includes(event.target.tagName)) {
+                return;
+            }
+            const key = event.key.toLowerCase();
+            if (key === 'escape') {
+                if (document.pointerLockElement) {
+                    document.exitPointerLock();
+                }
+                appState.closeCard();
+            }
+            if (key === 'n') {
+                document.getElementById('nav-panel').classList.toggle('collapsed');
+            }
+            if (key === 'r') {
+                appState.goHome();
+            }
+            if (key === 'f') {
+                const nearest = findNearestCelestial(camera.position, uniquePickables);
+                if (nearest.mesh) {
+                    warpTo(nearest.mesh);
+                }
+            }
+            if (key === '[' || key === ']') {
+                const list = hud.uniqueDestinations;
+                const current = list.findIndex((item) => appState.selected && item.id === String(appState.selected.infoId));
+                const next = key === ']'
+                    ? (current + 1) % list.length
+                    : (current - 1 + list.length) % list.length;
+                if (list[next]) {
+                    appState.select(list[next].mesh, { look: true, openCard: true });
+                }
+            }
+        });
+
+        window.addEventListener('resize', () => engine.resize());
         return scene;
-    }
+    };
 
     const scene = createScene();
+    engine.runRenderLoop(() => scene.render());
+};
 
-    /*
-    This event listener handles the ability for the user to click on planets. 
-    It determines whether the mesh that the user has clicked on is a planet and if so it
-    shows the information about the planet and indirectly activates the camera move in to planet ability.
-    */
-    window.addEventListener('click', () => {
-        const pick = scene.pick(scene.pointerX, scene.pointerY);
-        if(pick.pickedMesh != null) {
-            if(pick.pickedMesh.name == 'sphere' && !blockPlanetClick){
-                //show the info about the planet and remove the label above the planet
-                showPlanetInfo(pick.pickedMesh.idNumber, planetInfoData, revertCamera);
-                removePlanetLabel(advancedTexture);
-
-                // we want to focus the camera on the planet and not allow the user to move the camera
-                focusCameraOnPlanet = true, focusCameraOnPlanetId = pick.pickedMesh.idNumber, zoomingIn = true;
-                camera.detachControl(canvas);
-            }
-        }
-    })
-
-    // on window resize, resize the engine
-    window.addEventListener('resize', () => engine.resize());
-
-    // render the scene
-    engine.runRenderLoop(() => {
-        scene.render();
-    });
-}
-
-// call the function to create the UI to introduce the user to the simulation
 createWelcomeSection();
-
-// when the DOM content has been loaded initiate the application
 window.addEventListener('DOMContentLoaded', init());

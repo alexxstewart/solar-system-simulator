@@ -1,11 +1,11 @@
 // constants
-const STARS_IMAGE_DIAMETER = 300;
+const STARS_IMAGE_DIAMETER = 18000;
 
 // this function creates the camera element to be attached to the canvas
 export const createCamera = (scene, canvas, defaultPos) => {
 
     // create the camera and attach the control to the canvas
-    let camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI / 2 - 0.5, 20, BABYLON.Vector3(0,0,0), scene);
+    let camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI / 2 - 0.5, 20, new BABYLON.Vector3(0, 0, 0), scene);
     camera.attachControl(canvas, true);
 
     // set the position to the default position
@@ -22,12 +22,13 @@ export const createLighting = (scene, camera) => {
     const light = new BABYLON.PointLight("Omni0", new BABYLON.Vector3(0, 0, 0), scene);
     light.diffuse = new BABYLON.Color3(1, 1, 1);
     light.intensity = 3;
+    light.range = 220;
 
     // create the light attached to the camera
     const cameraLight = new BABYLON.HemisphericLight("HemiLight", new BABYLON.Vector3(0, 0, 0), scene);
-    cameraLight.groundColor = new BABYLON.Color3.Black();
-    cameraLight.specular = BABYLON.Color3.Black();
-    cameraLight.intensity = 2;
+    cameraLight.groundColor = new BABYLON.Color3(0, 0, 0);
+    cameraLight.specular = new BABYLON.Color3(0, 0, 0);
+    cameraLight.intensity = 1.15;
 
     // attach this light to the camera
     cameraLight.parent = camera;
@@ -37,11 +38,13 @@ export const createLighting = (scene, camera) => {
 export const createGroundMesh = (scene) => {
 
     // create a mesh ground
-    const ref = BABYLON.Mesh.CreateGround("gnd", 200, 200, 200, scene);
+    const ref = BABYLON.MeshBuilder.CreateGround("gnd", { width: 420, height: 420, subdivisions: 80 }, scene);
 	ref.material = new BABYLON.StandardMaterial("gmat", scene);
     ref.material.wireframe = true;
     ref.material.alpha = 0.02;
     ref.isPickable = false;
+    ref.freezeWorldMatrix();
+    return ref;
 }
 
 // this function creates the image background to be displayed as a sphere
@@ -49,10 +52,15 @@ export const createSkyImage = (scene) => {
     // create the stars background
     const skySphere = BABYLON.MeshBuilder.CreateSphere("Sphere", {diameter: STARS_IMAGE_DIAMETER}, scene);
     const skySphereMaterial = new BABYLON.StandardMaterial("skySphereMaterial", scene);
-    skySphereMaterial.diffuseTexture = new BABYLON.Texture("style/textures/starpic4/star.jpg", scene);
+    skySphereMaterial.diffuseTexture = new BABYLON.Texture("style/textures/galaxy/milkyway.jpg", scene);
+    skySphereMaterial.emissiveTexture = skySphereMaterial.diffuseTexture;
+    skySphereMaterial.emissiveColor = new BABYLON.Color3(0.35, 0.35, 0.4);
     skySphereMaterial.backFaceCulling = false;
+    skySphereMaterial.disableLighting = true;
     skySphere.material = skySphereMaterial;
     skySphere.isPickable = false;
+    skySphere.infiniteDistance = true;
+    return skySphere;
 }
 
 
@@ -71,7 +79,10 @@ export const createPlanets = (scene, planetData) => {
         const p = planetData[i];
 
         // create the planet mesh
-        const planet = BABYLON.Mesh.CreateSphere("sphere", p.planetSegments, p.radius, scene);
+        const planet = BABYLON.MeshBuilder.CreateSphere("sphere", {
+            segments: parseInt(p.planetSegments, 10) || 32,
+            diameter: parseFloat(p.radius)
+        }, scene);
         
         // translate all the properties to the planet mesh object
         planet.planetName = p.planetName;
@@ -82,6 +93,8 @@ export const createPlanets = (scene, planetData) => {
         planet.orbit = parseFloat(p.orbit);
         planet.rotationIncrement = parseFloat(p.rotationIncrement);
         planet.cameraDistance = parseFloat(p.cameraDistance);
+        planet.isCelestial = true;
+        planet.infoId = String(i);
 
         // assign a material to the planets
         planet.material = new BABYLON.StandardMaterial(`${p.planetName}material`, scene);
@@ -100,6 +113,7 @@ export const createPlanets = (scene, planetData) => {
             planet.bakeCurrentTransformIntoVertices();
             planet.alpha = Math.PI / 2;
         }else if(i == 10){
+            planet.dispose();
             break;
         }
 
@@ -107,19 +121,34 @@ export const createPlanets = (scene, planetData) => {
         planets.push(planet);
 
         // create the torus for the orbit path visual
-        const orbitVisual = BABYLON.Mesh.CreateTorus("orbitCircle", planet.orbit * 2, 0.01, 80, scene);
+        const orbitVisual = BABYLON.MeshBuilder.CreateTorus("orbitCircle", {
+            diameter: planet.orbit * 2,
+            thickness: 0.01,
+            tessellation: 80
+        }, scene);
         orbitVisual.scaling.y = 0.01;
+        orbitVisual.isPickable = false;
+        orbitVisual.freezeWorldMatrix();
     }
 
     // create the saturn rings and append them onto the array
-    const saturnRings = BABYLON.Mesh.CreateTorus("torus", 3.5, 0.8, 40, scene);
+    const saturnRings = BABYLON.MeshBuilder.CreateTorus("torus", {
+        diameter: 3.5,
+        thickness: 0.8,
+        tessellation: 40
+    }, scene);
     saturnRings.addRotation(0,0,10);
     saturnRings.scaling.y = 0.01;
     saturnRings.material = new BABYLON.StandardMaterial("saturnMaterial", scene);
     saturnRings.material.diffuseTexture = new BABYLON.Texture("style/textures/saturn.jpg", scene);
     saturnRings.idNumber = 10;
-    saturnRings.alpha = 0;
-    saturnRings.alphaIncrement = 0;
+    saturnRings.infoId = '6';
+    saturnRings.planetName = 'Saturn';
+    saturnRings.isCelestial = true;
+    saturnRings.cameraDistance = 8;
+    saturnRings.orbit = planets[6] ? planets[6].orbit : 0;
+    saturnRings.alpha = planets[6] ? planets[6].alpha : 0;
+    saturnRings.alphaIncrement = planets[6] ? planets[6].alphaIncrement : 0;
     saturnRings.rotationIncrement = 0;
 
     planets.push(saturnRings);
