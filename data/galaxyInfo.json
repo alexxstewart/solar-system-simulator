@@ -2,7 +2,7 @@
   "pluto": {
     "title": "Pluto",
     "info": "Pluto is a dwarf planet in the Kuiper Belt, a ring of icy bodies beyond Neptune. Discovered in 1930 by Clyde Tombaugh, it was classed as the ninth planet until 2006. NASA's New Horizons flew past it in 2015 and returned the first close-up images of its nitrogen glaciers and the bright heart-shaped region Sputnik Planitia. | Pluto and its largest moon Charon are tidally locked, always showing the same faces to each other as they orbit a barycenter above Pluto's surface. The encounter showed mountains of water ice, hazy blue layers in a thin atmosphere, and a geologically young surface. | <a href=\"https://en.wikipedia.org/wiki/Pluto\" target=\"_blank\">More Info Here</a>",
-    "facts": "Distance from Sun: 39.5 AU (average) | Orbital Period: 248 years | Diameter: 2,377 km | Mass: 0.00218 Earths | Surface gravity: 0.62 m/s² | Known moons: 5 | Classification: Dwarf planet (Kuiper Belt object)"
+    "facts": "Distance from Sun: 39.5 AU (average) | Orbital Period: 248 years | Diameter: 2,377 km | Mass: 0.00218 Earths | Surface gravity: 0.62 m/s\u00b2 | Known moons: 5 | Classification: Dwarf planet (Kuiper Belt object)"
   },
   "asteroid-belt": {
     "title": "Asteroid Belt",
@@ -11,12 +11,12 @@
   },
   "kuiper-belt": {
     "title": "Kuiper Belt",
-    "info": "The Kuiper Belt is a vast doughnut of icy worlds beyond Neptune, home to Pluto, Haumea, Makemake and Arrokoth. It is the solar system's outer construction yard — leftover material from the disk that built the planets. | New Horizons visited Arrokoth (2014 MU69) in 2019, finding two lobes gently merged, evidence that planets grew from pebble clouds rather than violent smash-ups alone. | <a href=\"https://en.wikipedia.org/wiki/Kuiper_belt\" target=\"_blank\">More Info Here</a>",
+    "info": "The Kuiper Belt is a vast doughnut of icy worlds beyond Neptune, home to Pluto, Haumea, Makemake and Arrokoth. It is the solar system's outer construction yard \u2014 leftover material from the disk that built the planets. | New Horizons visited Arrokoth (2014 MU69) in 2019, finding two lobes gently merged, evidence that planets grew from pebble clouds rather than violent smash-ups alone. | <a href=\"https://en.wikipedia.org/wiki/Kuiper_belt\" target=\"_blank\">More Info Here</a>",
     "facts": "Distance from Sun: ~30 to 55 AU | Known objects: thousands catalogued | Famous residents: Pluto, Arrokoth, Haumea, Makemake | Source of many short-period comets"
   },
   "voyager1": {
     "title": "Voyager 1",
-    "info": "Voyager 1 is humanity's most distant spacecraft. Launched in 1977, it flew past Jupiter and Saturn, then climbed out of the solar system. In 2012 it crossed the heliopause and entered interstellar space — the first human-made object to do so. | It carries the Golden Record, a phonograph of Earth sounds, music and images, should anyone find it. Its radio signals still reach Earth after more than 22 hours of light-travel time. | <a href=\"https://en.wikipedia.org/wiki/Voyager_1\" target=\"_blank\">More Info Here</a>",
+    "info": "Voyager 1 is humanity's most distant spacecraft. Launched in 1977, it flew past Jupiter and Saturn, then climbed out of the solar system. In 2012 it crossed the heliopause and entered interstellar space \u2014 the first human-made object to do so. | It carries the Golden Record, a phonograph of Earth sounds, music and images, should anyone find it. Its radio signals still reach Earth after more than 22 hours of light-travel time. | <a href=\"https://en.wikipedia.org/wiki/Voyager_1\" target=\"_blank\">More Info Here</a>",
     "facts": "Launch: 5 September 1977 | Interstellar space: 25 August 2012 | Distance (2026): > 166 AU | Speed: ~17 km/s relative to the Sun | Instruments still reporting plasma and cosmic rays"
   },
   "oort-cloud": {
@@ -31,13 +31,13 @@
   },
   "proxima-b": {
     "title": "Proxima Centauri b",
-    "info": "Proxima b is a rocky world at least 1.07 Earth masses, orbiting in the liquid-water zone of Proxima Centauri. A year there lasts only 11.2 Earth days. Because the star is so dim, that tight orbit can still be temperate — if the planet kept its air. | Tidal locking is likely: one hemisphere would face the star forever. Climate models range from a dayside ocean to a barren, flare-scoured rock. | <a href=\"https://en.wikipedia.org/wiki/Proxima_Centauri_b\" target=\"_blank\">More Info Here</a>",
+    "info": "Proxima b is a rocky world at least 1.07 Earth masses, orbiting in the liquid-water zone of Proxima Centauri. A year there lasts only 11.2 Earth days. Because the star is so dim, that tight orbit can still be temperate \u2014 if the planet kept its air. | Tidal locking is likely: one hemisphere would face the star forever. Climate models range from a dayside ocean to a barren, flare-scoured rock. | <a href=\"https://en.wikipedia.org/wiki/Proxima_Centauri_b\" target=\"_blank\">More Info Here</a>",
     "facts": "Host: Proxima Centauri | Orbital period: 11.2 days | Minimum mass: 1.07 Earths | Insolation: ~65% of Earth's | Discovery: 2016, radial velocity"
   },
   "alpha-cen-a": {
     "title": "Alpha Centauri A",
     "info": "Alpha Centauri A (Rigil Kentaurus) is a G2 yellow dwarf almost a twin of the Sun, and the brightest member of the nearest star system. Together with orange dwarf Alpha Centauri B it forms a close binary; Proxima orbits the pair at a much greater distance. | From a planet around A, B would shine as a brilliant second sun. Searches for Earth-size planets in the system are among the highest priorities in nearby-star astronomy. | <a href=\"https://en.wikipedia.org/wiki/Alpha_Centauri\" target=\"_blank\">More Info Here</a>",
-    "facts": "Distance: 4.37 light-years | Spectral type: G2V | Mass: 1.08 Solar masses | Binary period with B: ~80 years | Apparent magnitude: −0.01"
+    "facts": "Distance: 4.37 light-years | Spectral type: G2V | Mass: 1.08 Solar masses | Binary period with B: ~80 years | Apparent magnitude: \u22120.01"
   },
   "alpha-cen-b": {
     "title": "Alpha Centauri B",
@@ -46,23 +46,23 @@
   },
   "barnard": {
     "title": "Barnard's Star",
-    "info": "Barnard's Star is a red dwarf 6 light-years away with the largest proper motion of any star in our sky — it crawls across the heavens as seen from Earth. It is among the oldest stars in the solar neighbourhood, perhaps 10 billion years old, and very flare-quiet for an M dwarf. | A planet, Barnard's Star b, was confirmed in 2024: a rocky world in a 3.15-day orbit. | <a href=\"https://en.wikipedia.org/wiki/Barnard's_Star\" target=\"_blank\">More Info Here</a>",
-    "facts": "Distance: 5.96 light-years | Spectral type: M4V | Radial velocity: −110 km/s (approaching) | Age: ~10 billion years"
+    "info": "Barnard's Star is a red dwarf 6 light-years away with the largest proper motion of any star in our sky \u2014 it crawls across the heavens as seen from Earth. It is among the oldest stars in the solar neighbourhood, perhaps 10 billion years old, and very flare-quiet for an M dwarf. | A planet, Barnard's Star b, was confirmed in 2024: a rocky world in a 3.15-day orbit. | <a href=\"https://en.wikipedia.org/wiki/Barnard's_Star\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: 5.96 light-years | Spectral type: M4V | Radial velocity: \u2212110 km/s (approaching) | Age: ~10 billion years"
   },
   "sirius": {
     "title": "Sirius A",
     "info": "Sirius is the brightest star in Earth's night sky, a white A-type main-sequence star in Canis Major. It is a binary: the companion Sirius B is a white dwarf, the first one discovered, found by Alvan Graham Clark in 1862. | The name comes from Greek seirios, 'glowing'. Many cultures used Sirius as a seasonal marker; in ancient Egypt its heliacal rising heralded the Nile flood. | <a href=\"https://en.wikipedia.org/wiki/Sirius\" target=\"_blank\">More Info Here</a>",
-    "facts": "Distance: 8.60 light-years | Spectral type: A1V | Luminosity: 25 Solar | Apparent magnitude: −1.46 | Binary period: 50 years"
+    "facts": "Distance: 8.60 light-years | Spectral type: A1V | Luminosity: 25 Solar | Apparent magnitude: \u22121.46 | Binary period: 50 years"
   },
   "sirius-b": {
     "title": "Sirius B",
-    "info": "Sirius B is a white dwarf — the Earth-sized remnant core of a star that once outshone Sirius A. A teaspoon of its material would weigh tonnes. Its surface is around 25,000 K, yet it is faint because it is only about the size of Earth. | White dwarfs like this are the future of the Sun, several billion years from now. | <a href=\"https://en.wikipedia.org/wiki/Sirius#Sirius_B\" target=\"_blank\">More Info Here</a>",
+    "info": "Sirius B is a white dwarf \u2014 the Earth-sized remnant core of a star that once outshone Sirius A. A teaspoon of its material would weigh tonnes. Its surface is around 25,000 K, yet it is faint because it is only about the size of Earth. | White dwarfs like this are the future of the Sun, several billion years from now. | <a href=\"https://en.wikipedia.org/wiki/Sirius#Sirius_B\" target=\"_blank\">More Info Here</a>",
     "facts": "Type: DA white dwarf | Mass: 1.02 Solar masses | Radius: ~0.008 Solar (Earth-sized) | Temperature: ~25,000 K"
   },
   "eps-eri": {
     "title": "Epsilon Eridani",
     "info": "Epsilon Eridani is a young K2 orange dwarf only 10.5 light-years away, with a dusty debris disk and at least one confirmed giant planet, AEgir (Epsilon Eridani b). It is a favourite of SETI and science fiction because it is nearby, Sun-like enough, and still assembling its planetary system. | Hubble and infrared observatories have imaged two dusty belts, analogues of our asteroid and Kuiper belts. | <a href=\"https://en.wikipedia.org/wiki/Epsilon_Eridani\" target=\"_blank\">More Info Here</a>",
-    "facts": "Distance: 10.49 light-years | Spectral type: K2V | Age: 200–800 million years | Confirmed planet: Epsilon Eridani b (gas giant)"
+    "facts": "Distance: 10.49 light-years | Spectral type: K2V | Age: 200\u2013800 million years | Confirmed planet: Epsilon Eridani b (gas giant)"
   },
   "tau-ceti": {
     "title": "Tau Ceti",
@@ -71,7 +71,7 @@
   },
   "altair": {
     "title": "Altair",
-    "info": "Altair is a rapidly spinning A-type star in Aquila and one vertex of the Summer Triangle. It rotates in under 9 hours, so it is flattened into an oblate spheroid — interferometers have imaged the equator bulging and the poles running hotter. | At 16.7 light-years it is among the nearest stars visible to the naked eye. | <a href=\"https://en.wikipedia.org/wiki/Altair\" target=\"_blank\">More Info Here</a>",
+    "info": "Altair is a rapidly spinning A-type star in Aquila and one vertex of the Summer Triangle. It rotates in under 9 hours, so it is flattened into an oblate spheroid \u2014 interferometers have imaged the equator bulging and the poles running hotter. | At 16.7 light-years it is among the nearest stars visible to the naked eye. | <a href=\"https://en.wikipedia.org/wiki/Altair\" target=\"_blank\">More Info Here</a>",
     "facts": "Distance: 16.73 light-years | Spectral type: A7V | Rotation period: ~9 hours | Flattening: clearly oblate"
   },
   "vega": {
@@ -86,8 +86,8 @@
   },
   "betelgeuse": {
     "title": "Betelgeuse",
-    "info": "Betelgeuse is a red supergiant in Orion's shoulder and one of the largest stars you can see with the naked eye. If it replaced the Sun it would swallow Mercury, Venus, Earth and Mars. It is nearing the end of its life and will explode as a Type II supernova, possibly within the next 100,000 years. | In 2019–2020 it famously dimmed as a dust cloud and a cool patch on its surface combined — not the explosion, not yet. | <a href=\"https://en.wikipedia.org/wiki/Betelgeuse\" target=\"_blank\">More Info Here</a>",
-    "facts": "Distance: ~548 light-years | Spectral type: M1–M2 Ia–ab | Radius: ~640–900 Solar radii | Fate: core-collapse supernova"
+    "info": "Betelgeuse is a red supergiant in Orion's shoulder and one of the largest stars you can see with the naked eye. If it replaced the Sun it would swallow Mercury, Venus, Earth and Mars. It is nearing the end of its life and will explode as a Type II supernova, possibly within the next 100,000 years. | In 2019\u20132020 it famously dimmed as a dust cloud and a cool patch on its surface combined \u2014 not the explosion, not yet. | <a href=\"https://en.wikipedia.org/wiki/Betelgeuse\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~548 light-years | Spectral type: M1\u2013M2 Ia\u2013ab | Radius: ~640\u2013900 Solar radii | Fate: core-collapse supernova"
   },
   "antares": {
     "title": "Antares",
@@ -97,12 +97,12 @@
   "rigel": {
     "title": "Rigel",
     "info": "Rigel is Orion's blue-white foot, a luminous B-type supergiant tens of thousands of times brighter than the Sun. It is a multiple-star system and a benchmark for massive-star physics. Despite looking fainter than Betelgeuse in the sky, it is intrinsically far more luminous and more distant. | Rigel lights the surrounding dust, including parts of the Orion molecular clouds. | <a href=\"https://en.wikipedia.org/wiki/Rigel\" target=\"_blank\">More Info Here</a>",
-    "facts": "Distance: ~860 light-years | Spectral type: B8 Ia | Luminosity: ~1.2×10⁵ Solar | System: at least 4 stars"
+    "facts": "Distance: ~860 light-years | Spectral type: B8 Ia | Luminosity: ~1.2\u00d710\u2075 Solar | System: at least 4 stars"
   },
   "orion": {
     "title": "Orion Nebula",
-    "info": "The Orion Nebula (M42) is the nearest massive star-forming region, a cavern of gas 1,300 light-years away that you can see with the unaided eye as the middle 'star' in Orion's sword. Hubble, Spitzer, Herschel and JWST have shown thousands of newborn stars, proplyds (planet-forming disks) and brown dwarfs inside. | At its core, the Trapezium — four hot O and B stars — carves the nebula with ultraviolet light. This is what the Sun's birthplace may have looked like. | <a href=\"https://en.wikipedia.org/wiki/Orion_Nebula\" target=\"_blank\">More Info Here</a>",
-    "facts": "Distance: ~1,344 light-years | Catalogue: M42 / NGC 1976 | Type: emission nebula | Age of young stars: ~1–3 million years | Image: NASA/ESA Hubble"
+    "info": "The Orion Nebula (M42) is the nearest massive star-forming region, a cavern of gas 1,300 light-years away that you can see with the unaided eye as the middle 'star' in Orion's sword. Hubble, Spitzer, Herschel and JWST have shown thousands of newborn stars, proplyds (planet-forming disks) and brown dwarfs inside. | At its core, the Trapezium \u2014 four hot O and B stars \u2014 carves the nebula with ultraviolet light. This is what the Sun's birthplace may have looked like. | <a href=\"https://en.wikipedia.org/wiki/Orion_Nebula\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~1,344 light-years | Catalogue: M42 / NGC 1976 | Type: emission nebula | Age of young stars: ~1\u20133 million years | Image: NASA/ESA Hubble"
   },
   "horsehead": {
     "title": "Horsehead Nebula",
@@ -111,12 +111,12 @@
   },
   "pleiades": {
     "title": "Pleiades",
-    "info": "The Pleiades (M45), or Seven Sisters, are a nearby open cluster of hot B-type stars in Taurus. The blue haze is starlight scattered by passing interstellar dust — not leftover birth-cloud, which has already dispersed. Cultures worldwide named this cluster; it is one of the most photographed objects in the sky. | Several hundred stars belong to the cluster, dominated by the bright sisters visible to the naked eye. | <a href=\"https://en.wikipedia.org/wiki/Pleiades\" target=\"_blank\">More Info Here</a>",
-    "facts": "Distance: ~444 light-years | Catalogue: M45 | Age: ~100 million years | Bright members: 7–14 to the naked eye | Image: NASA/ESA/AURA"
+    "info": "The Pleiades (M45), or Seven Sisters, are a nearby open cluster of hot B-type stars in Taurus. The blue haze is starlight scattered by passing interstellar dust \u2014 not leftover birth-cloud, which has already dispersed. Cultures worldwide named this cluster; it is one of the most photographed objects in the sky. | Several hundred stars belong to the cluster, dominated by the bright sisters visible to the naked eye. | <a href=\"https://en.wikipedia.org/wiki/Pleiades\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~444 light-years | Catalogue: M45 | Age: ~100 million years | Bright members: 7\u201314 to the naked eye | Image: NASA/ESA/AURA"
   },
   "helix": {
     "title": "Helix Nebula",
-    "info": "The Helix Nebula (NGC 7293) is a nearby planetary nebula — the shed outer layers of a dying Sun-like star. From Earth it looks like an eye, which earned it the nickname Eye of God. At its centre sits a hot white dwarf that will slowly cool for billions of years. | Cometary knots in the Helix are dense fingers of leftover gas pointing away from the central star. | <a href=\"https://en.wikipedia.org/wiki/Helix_Nebula\" target=\"_blank\">More Info Here</a>",
+    "info": "The Helix Nebula (NGC 7293) is a nearby planetary nebula \u2014 the shed outer layers of a dying Sun-like star. From Earth it looks like an eye, which earned it the nickname Eye of God. At its centre sits a hot white dwarf that will slowly cool for billions of years. | Cometary knots in the Helix are dense fingers of leftover gas pointing away from the central star. | <a href=\"https://en.wikipedia.org/wiki/Helix_Nebula\" target=\"_blank\">More Info Here</a>",
     "facts": "Distance: ~655 light-years | Catalogue: NGC 7293 | Type: planetary nebula | Central star: white dwarf | Image: NASA/ESA Hubble"
   },
   "crab": {
@@ -131,17 +131,132 @@
   },
   "carina": {
     "title": "Carina Nebula",
-    "info": "The Carina Nebula (NGC 3372) is one of the Milky Way's largest star-forming complexes, home to Eta Carinae — a volatile luminous blue variable that survived a giant eruption in the 1840s. The nebula spans more than 300 light-years of sculpted dust, pillars and clusters. | Hubble and JWST images of Carina are among the most detailed views we have of massive-star nurseries. | <a href=\"https://en.wikipedia.org/wiki/Carina_Nebula\" target=\"_blank\">More Info Here</a>",
+    "info": "The Carina Nebula (NGC 3372) is one of the Milky Way's largest star-forming complexes, home to Eta Carinae \u2014 a volatile luminous blue variable that survived a giant eruption in the 1840s. The nebula spans more than 300 light-years of sculpted dust, pillars and clusters. | Hubble and JWST images of Carina are among the most detailed views we have of massive-star nurseries. | <a href=\"https://en.wikipedia.org/wiki/Carina_Nebula\" target=\"_blank\">More Info Here</a>",
     "facts": "Distance: ~7,500 light-years | Catalogue: NGC 3372 | Notable star: Eta Carinae | Type: emission nebula | Image: NASA"
+  },
+  "rosette": {
+    "title": "Rosette Nebula",
+    "info": "The Rosette Nebula is a rose-shaped cloud in Monoceros, hollowed out by the young stars of cluster NGC 2244 burning at its centre. Their wind has cleared a cavity, and the rim is still collapsing into new stars. | The whole flower is wider than the distance from the Sun to its nearest stellar neighbour. | <a href=\"https://en.wikipedia.org/wiki/Rosette_Nebula\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~5,200 light-years | Catalogue: NGC 2237 | Cluster: NGC 2244 | Type: emission nebula | Image: ground-based colour"
+  },
+  "ring": {
+    "title": "Ring Nebula",
+    "info": "The Ring Nebula (M57) is the smoke ring of a dying star in Lyra. What looks like a flat doughnut is a barrel of gas aimed almost down its length, thrown off as the star became a white dwarf. | Hubble's view shows the orange rim of nitrogen and a blue interior of hot oxygen, with the faint central star still shining in the hole. | <a href=\"https://en.wikipedia.org/wiki/Ring_Nebula\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~2,570 light-years | Catalogue: M57 / NGC 6720 | Type: planetary nebula | Constellation: Lyra | Image: NASA/ESA Hubble"
+  },
+  "catseye": {
+    "title": "Cat's Eye Nebula",
+    "info": "The Cat's Eye (NGC 6543) is one of the most intricate planetary nebulae, a set of nested shells and jets around a dying star in Draco. The rings were puffed out in pulses, about a thousand years apart. | The bright pupil is the hot core. Concentric shells around it are a fossil of how the star shed its atmosphere. | <a href=\"https://en.wikipedia.org/wiki/Cat%27s_Eye_Nebula\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~3,300 light-years | Catalogue: NGC 6543 | Type: planetary nebula | Age: ~1,000 years | Image: NASA/ESA Hubble"
+  },
+  "lagoon": {
+    "title": "Lagoon Nebula",
+    "info": "The Lagoon Nebula (M8) is a vast star-forming cloud in Sagittarius, about 55 light-years across. A dark lane of dust cuts through the glow, which is what gave it the name. | Hubble's close view shows towers of gas being boiled away by newborn stars, the same kind of sculpture as the Pillars of Creation. | <a href=\"https://en.wikipedia.org/wiki/Lagoon_Nebula\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~4,100 light-years | Catalogue: M8 / NGC 6523 | Type: emission nebula | Width: ~55 light-years | Image: NASA/ESA Hubble"
+  },
+  "butterfly": {
+    "title": "Butterfly Nebula",
+    "info": "The Butterfly Nebula (NGC 6302) is a planetary nebula in Scorpius whose wings of gas stretch for light-years. The central star is one of the hottest known, hidden behind a dark dusty torus that pinched the outflow into two lobes. | Dust in the wings contains carbonates, a hint of the chemistry a Sun-like star leaves behind when it dies. | <a href=\"https://en.wikipedia.org/wiki/NGC_6302\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~3,800 light-years | Catalogue: NGC 6302 | Type: planetary nebula | Central star: among the hottest known | Image: NASA/ESA Hubble"
   },
   "sgr-a": {
     "title": "Sagittarius A*",
-    "info": "Sagittarius A* is the supermassive black hole at the centre of the Milky Way, about 4.3 million solar masses packed into a region smaller than Mercury's orbit. The Event Horizon Telescope imaged its ring of glowing plasma in 2022. Stars such as S2 whip around it at several percent of light speed, confirming the mass. | You cannot see it in visible light from Earth — the galactic plane's dust blocks the view — but infrared and radio telescopes watch it flare as it snacks on gas. | <a href=\"https://en.wikipedia.org/wiki/Sagittarius_A*\" target=\"_blank\">More Info Here</a>",
-    "facts": "Distance: ~26,600 light-years | Mass: 4.3 million Solar masses | Type: supermassive black hole | First EHT image: 2022 | Galactic longitude: near 0°"
+    "info": "Sagittarius A* is the supermassive black hole at the centre of the Milky Way, about 4.3 million solar masses packed into a region smaller than Mercury's orbit. The Event Horizon Telescope imaged its ring of glowing plasma in 2022. Stars such as S2 whip around it at several percent of light speed, confirming the mass. | You cannot see it in visible light from Earth \u2014 the galactic plane's dust blocks the view \u2014 but infrared and radio telescopes watch it flare as it snacks on gas. | <a href=\"https://en.wikipedia.org/wiki/Sagittarius_A*\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance: ~26,600 light-years | Mass: 4.3 million Solar masses | Type: supermassive black hole | First EHT image: 2022 | Galactic longitude: near 0\u00b0"
   },
   "andromeda": {
     "title": "Andromeda Galaxy",
     "info": "Andromeda (M31) is the nearest large spiral galaxy and the most distant object most people can see with the naked eye. It holds around a trillion stars and is on a collision course with the Milky Way: in about 4.5 billion years the two will merge into a giant elliptical. | Hubble's Panchromatic Hubble Andromeda Treasury resolved individual stars across the disk. Its two bright companions, M32 and M110, ride along with it. | <a href=\"https://en.wikipedia.org/wiki/Andromeda_Galaxy\" target=\"_blank\">More Info Here</a>",
-    "facts": "Distance: 2.54 million light-years | Catalogue: M31 / NGC 224 | Diameter: ~220,000 light-years | Mass: ~1.5×10¹² Solar | Fate: merge with the Milky Way"
+    "facts": "Distance: 2.54 million light-years | Catalogue: M31 / NGC 224 | Diameter: ~220,000 light-years | Mass: ~1.5\u00d710\u00b9\u00b2 Solar | Fate: merge with the Milky Way"
+  },
+  "io": {
+    "title": "Io",
+    "info": "Io is Jupiter's innermost large moon and the most volcanic body in the solar system. Tides from Jupiter and the other moons flex its interior until the crust melts. Sulfur and sulfur dioxide paint the ground yellow, orange, red, and black. | Voyager 1 saw an eruption in progress in 1979, the first active volcano discovered beyond Earth. The surface is so young that almost no impact craters remain. | <a href=\"https://en.wikipedia.org/wiki/Io\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance from Jupiter: 421,700 km | Orbital period: 1.77 days | Diameter: 3,643 km | Volcanoes: hundreds, many active | Atmosphere: a thin veil of sulfur dioxide"
+  },
+  "europa": {
+    "title": "Europa",
+    "info": "Europa is an ice moon with a global ocean underneath. The surface is a bright shell of water ice, crossed by reddish cracks where the ice has split and refrozen. Jupiter's gravity keeps the ocean liquid. | Plumes of water vapor have been spotted above the limb. It is one of the most promising places to look for life beyond Earth. | <a href=\"https://en.wikipedia.org/wiki/Europa\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance from Jupiter: 671,100 km | Orbital period: 3.55 days | Diameter: 3,122 km | Ice shell: a few to tens of km | Ocean: likely global, salty"
+  },
+  "ganymede": {
+    "title": "Ganymede",
+    "info": "Ganymede is the largest moon in the solar system, bigger than the planet Mercury. Dark ancient terrain sits beside bright grooved lanes of younger ice. It is the only moon known to generate its own magnetic field. | An ocean is thought to lie between layers of ice deep inside. | <a href=\"https://en.wikipedia.org/wiki/Ganymede\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance from Jupiter: 1,070,400 km | Orbital period: 7.15 days | Diameter: 5,268 km | Magnetic field: its own | Larger than Mercury"
+  },
+  "callisto": {
+    "title": "Callisto",
+    "info": "Callisto is the outermost of Jupiter's four great moons and the least changed. Its dark crust is saturated with craters, a record of the early solar system that the warmer moons have erased. | It may still hide a deep ocean, but the surface itself has been quiet for billions of years. | <a href=\"https://en.wikipedia.org/wiki/Callisto\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance from Jupiter: 1,882,700 km | Orbital period: 16.7 days | Diameter: 4,821 km | Surface: ancient, heavily cratered"
+  },
+  "mimas": {
+    "title": "Mimas",
+    "info": "Mimas is a small ice moon dominated by Herschel, a crater 139 km across with a central peak. The impact that made it nearly destroyed the moon. The rest of the surface is packed with smaller craters. | <a href=\"https://en.wikipedia.org/wiki/Mimas\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance from Saturn: 185,500 km | Orbital period: 0.94 days | Diameter: 396 km | Herschel crater: a third of the moon's diameter"
+  },
+  "enceladus": {
+    "title": "Enceladus",
+    "info": "Enceladus is a bright ice moon that vents geysers from cracks at its south pole, nicknamed tiger stripes. Cassini flew through the spray and found salt, silica, and organic molecules. | An ocean under the ice is in contact with a rocky core, the ingredients astrobiologists hope for. | <a href=\"https://en.wikipedia.org/wiki/Enceladus\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance from Saturn: 238,000 km | Orbital period: 1.37 days | Diameter: 504 km | Geysers: south polar, feeding Saturn's E ring"
+  },
+  "tethys": {
+    "title": "Tethys",
+    "info": "Tethys is an ice moon with two famous scars: Odysseus, a huge flattened crater, and Ithaca Chasma, a canyon that stretches most of the way around the globe. The canyon may have opened as the moon's interior froze and expanded. | <a href=\"https://en.wikipedia.org/wiki/Tethys\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance from Saturn: 294,700 km | Orbital period: 1.89 days | Diameter: 1,062 km | Ithaca Chasma: thousands of km long"
+  },
+  "dione": {
+    "title": "Dione",
+    "info": "Dione's trailing hemisphere is covered in bright ice cliffs, wispy fractures that stand above a darker, cratered leading side. The cliffs are canyon walls of clean ice. | A subsurface ocean is possible, though quieter than Enceladus. | <a href=\"https://en.wikipedia.org/wiki/Dione\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance from Saturn: 377,400 km | Orbital period: 2.74 days | Diameter: 1,123 km | Wispy terrain: ice cliffs on the trailing side"
+  },
+  "rhea": {
+    "title": "Rhea",
+    "info": "Rhea is Saturn's second-largest moon, a cold cratered ball of ice with a few bright fractures. It has no thick atmosphere. For a while astronomers suspected a ring of debris around it; later images did not confirm one. | <a href=\"https://en.wikipedia.org/wiki/Rhea\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance from Saturn: 527,100 km | Orbital period: 4.52 days | Diameter: 1,528 km | Surface: ancient water ice"
+  },
+  "titan": {
+    "title": "Titan",
+    "info": "Titan is the only moon with a thick atmosphere, an orange haze of nitrogen and methane that hides the ground from space. Under the haze are dunes, river channels, and lakes of liquid methane and ethane. The Huygens probe landed in 2005. | A water ocean is believed to lie beneath the icy crust. No spacecraft has photographed the surface as a complete globe in visible light; the globe here is the color of the haze. | <a href=\"https://en.wikipedia.org/wiki/Titan\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance from Saturn: 1,221,900 km | Orbital period: 16 days | Diameter: 5,150 km | Atmosphere: thicker than Earth's | Lakes: liquid methane and ethane"
+  },
+  "iapetus": {
+    "title": "Iapetus",
+    "info": "Iapetus is two colors at once. Its leading face is coated in dark reddish dust, and its trailing face is bright ice. A ridge of mountains runs along much of the equator, so high it is visible from a great distance. | The dark material may be dust swept up from Phoebe's ring. | <a href=\"https://en.wikipedia.org/wiki/Iapetus\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance from Saturn: 3,561,000 km | Orbital period: 79 days | Diameter: 1,469 km | Two-tone: dark leading face, bright trailing face"
+  },
+  "miranda": {
+    "title": "Miranda",
+    "info": "Miranda is a small moon that looks broken and reassembled. Cliffs, racetrack-shaped coronae, and jumbled blocks sit side by side. Verona Rupes may drop 20 km, among the tallest cliffs known. | Voyager 2 saw only the southern hemisphere up close. | <a href=\"https://en.wikipedia.org/wiki/Miranda\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance from Uranus: 129,400 km | Orbital period: 1.41 days | Diameter: 472 km | Verona Rupes: a cliff up to ~20 km"
+  },
+  "ariel": {
+    "title": "Ariel",
+    "info": "Ariel is the brightest of Uranus's large moons. Wide valleys and smooth plains cut through older craters, evidence that ice or slush once moved across the surface. | Voyager 2's 1986 flyby is still the only close look. | <a href=\"https://en.wikipedia.org/wiki/Ariel\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance from Uranus: 190,900 km | Orbital period: 2.52 days | Diameter: 1,158 km | Surface: valleys and younger plains"
+  },
+  "titania": {
+    "title": "Titania",
+    "info": "Titania is Uranus's largest moon. Craters are crossed by huge fault canyons, so the crust stretched after the bombardment. A subsurface ocean is possible but unproven. | Like the other Uranian moons, it has not been visited since Voyager 2. | <a href=\"https://en.wikipedia.org/wiki/Titania\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance from Uranus: 436,300 km | Orbital period: 8.7 days | Diameter: 1,578 km | Largest moon of Uranus"
+  },
+  "oberon": {
+    "title": "Oberon",
+    "info": "Oberon is the outermost large moon of Uranus, dark and heavily cratered. Some crater floors hold dark patches that may be dirty ice that erupted after the impacts. A peak near one crater may be several kilometers high. | <a href=\"https://en.wikipedia.org/wiki/Oberon\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance from Uranus: 583,500 km | Orbital period: 13.5 days | Diameter: 1,523 km | Surface: ancient and cratered"
+  },
+    "hubble": {
+    "title": "Hubble Space Telescope",
+    "info": "Hubble has orbited Earth since 1990, above the air that smears starlight. Its mirror is 2.4 metres across. Take a look through it for the landmark pictures: the deep fields, the pillars, colliding galaxies, and the planets it watched from orbit. | <a href=\"https://en.wikipedia.org/wiki/Hubble_Space_Telescope\" target=\"_blank\">More Info Here</a>",
+    "facts": "Launch: 24 April 1990 | Orbit: about 535 km above Earth | Primary mirror: 2.4 m | Servicing missions: 5 | Still observing"
+  },
+    "jwst": {
+    "title": "James Webb Space Telescope",
+    "info": "James Webb sits at a point of balance a million miles from Earth, with the Sun, Earth, and Moon always behind its sunshield. Eighteen gold mirrors work as one, 6.5 metres across, and they see in infrared, the light that gets through dust and the light stretched by the expansion of the universe. | Take a look for the pictures from its first years, and for the questions it was built to keep chasing. | <a href=\"https://en.wikipedia.org/wiki/James_Webb_Space_Telescope\" target=\"_blank\">More Info Here</a>",
+    "facts": "Launch: 25 December 2021 | Orbit: Sun–Earth L2, about 1.5 million km from Earth | Primary mirror: 6.5 m, 18 gold segments | First science images: 12 July 2022 | Still observing"
+  },
+    "triton": {
+    "title": "Triton",
+    "info": "Triton orbits Neptune backwards, a sign it was captured rather than formed in place. Voyager 2 found nitrogen geysers, a thin atmosphere, and a pinkish surface of nitrogen ice with a cantaloupe texture. | It is colder than Pluto's average surface and is slowly spiraling inward. | <a href=\"https://en.wikipedia.org/wiki/Triton\" target=\"_blank\">More Info Here</a>",
+    "facts": "Distance from Neptune: 354,800 km | Orbital period: 5.88 days, retrograde | Diameter: 2,707 km | Geysers: nitrogen | Only large moon with a backward orbit"
   }
 }

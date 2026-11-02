@@ -40,6 +40,9 @@ export const formatRealDistance = (mesh) => {
     if (!mesh) {
         return '—';
     }
+    if (mesh.distanceLabel) {
+        return mesh.distanceLabel;
+    }
     if (mesh.distanceLy != null && mesh.distanceLy >= 1) {
         if (mesh.distanceLy >= 1000000) {
             return `${(mesh.distanceLy / 1000000).toFixed(2)} million ly`;

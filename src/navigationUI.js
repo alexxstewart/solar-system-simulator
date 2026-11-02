@@ -1,7 +1,7 @@
 import { findNearestCelestial } from './explorationCamera.js';
 import { formatRealDistance, flyEta } from './distance.js';
 
-const TOUR_IDS = ['0', '3', '6', 'pluto', 'proxima', 'orion', 'sgr-a'];
+const TOUR_IDS = ['0', '1', '2', '3', 'hubble', 'jwst', '9', '4', '5', '6', '7', '8', 'pluto', 'voyager1', 'proxima', 'proxima-b', 'sirius', 'pleiades', 'andromeda', 'sgr-a'];
 
 const throttleLabel = (speed) => {
     if (speed < 0.8) return 'Slow';
@@ -10,7 +10,7 @@ const throttleLabel = (speed) => {
     return 'Warp-ready';
 };
 
-export const createSpaceHud = ({ flight, pickables, destinations, appState }) => {
+export const createSpaceHud = ({ flight, pickables, destinations, appState, moons = [] }) => {
     const body = document.getElementById('body');
     const uniqueDestinations = [];
     const usedIds = new Set();
@@ -47,24 +47,19 @@ export const createSpaceHud = ({ flight, pickables, destinations, appState }) =>
     hud.id = 'space-hud';
     hud.innerHTML = `
         <div id="hud-readout">
-            <div><span>You are here</span> <strong id="hud-here">Solar System</strong></div>
-            <div><span>Target</span> <strong id="hud-target">None selected</strong></div>
-            <div><span>Range</span> <strong id="hud-range">—</strong></div>
-            <div id="throttle-row">
-                <span>Throttle</span>
-                <div id="throttle-track"><div id="throttle-fill"></div></div>
-                <strong id="hud-speed">Cruise</strong>
-            </div>
-            <div id="hud-eta"></div>
-            <div id="hud-actions">
-                <button type="button" id="mute-button">Mute</button>
-                <button type="button" id="look-lock-button">Free look</button>
-                <button type="button" id="tour-button">Start tour</button>
-            </div>
+            <strong id="hud-here">Solar System</strong>
+            <em id="hud-range">—</em>
+            <div id="throttle-track" title="Throttle"><div id="throttle-fill"></div></div>
+            <strong id="hud-speed">Cruise</strong>
+            <span id="hud-target" hidden></span>
+            <span id="hud-eta" hidden></span>
         </div>
-        <div id="hud-help">
-            WASD fly · click empty sky for free look · Esc release · F fly nearest · [ ] cycle · R sun
+        <div id="hud-actions">
+            <button type="button" id="mute-button">Mute</button>
+            <button type="button" id="look-lock-button">Look</button>
+            <button type="button" id="tour-button">Tour</button>
         </div>
+        <p id="hud-help">Drag to look · scroll to zoom · WASD to fly</p>
     `;
     body.appendChild(hud);
 
@@ -80,7 +75,10 @@ export const createSpaceHud = ({ flight, pickables, destinations, appState }) =>
 
     nav.innerHTML = `
         <div id="nav-header">
-            <h2>Galaxy Navigator</h2>
+            <div id="nav-title-row">
+                <h2>Chart</h2>
+                <button id="nav-collapse" type="button">Hide</button>
+            </div>
             <input id="nav-search" type="search" placeholder="Search Vega, Orion…" autocomplete="off">
             <button id="nav-home" type="button">Return to Sun</button>
         </div>
@@ -94,15 +92,10 @@ export const createSpaceHud = ({ flight, pickables, destinations, appState }) =>
             row.className = 'nav-row';
             row.dataset.id = destination.id;
             row.innerHTML = `<button type="button" class="nav-jump">${destination.name}</button>
-                <button type="button" class="nav-look">Look</button>
                 <button type="button" class="nav-warp">Warp</button>`;
             row.querySelector('.nav-jump').addEventListener('click', (event) => {
                 event.stopPropagation();
                 appState.select(destination.mesh, { look: true, openCard: true });
-            });
-            row.querySelector('.nav-look').addEventListener('click', (event) => {
-                event.stopPropagation();
-                appState.select(destination.mesh, { look: true, openCard: false });
             });
             row.querySelector('.nav-warp').addEventListener('click', (event) => {
                 event.stopPropagation();
@@ -114,11 +107,125 @@ export const createSpaceHud = ({ flight, pickables, destinations, appState }) =>
     });
     body.appendChild(nav);
 
+    const tour = document.createElement('div');
+    tour.id = 'tour-panel';
+    const tourStops = TOUR_IDS.map((id, index) => {
+        const destination = uniqueDestinations.find((item) => item.id === id);
+        return {
+            id,
+            index,
+            name: destination ? destination.name : id
+        };
+    });
+    tour.innerHTML = `
+        <button type="button" id="tour-back">Back</button>
+        <p id="tour-progress">1 / ${tourStops.length}</p>
+        <ol id="tour-stops">
+            ${tourStops.map((stop) => `<li><button type="button" class="tour-stop" data-index="${stop.index}" data-id="${stop.id}"><span>${stop.index + 1}</span>${stop.name}</button></li>`).join('')}
+        </ol>
+        <button type="button" id="tour-next">Next</button>
+        <button type="button" id="tour-leave">Explore</button>
+    `;
+    body.appendChild(tour);
+    const dock = document.createElement('div');
+    dock.id = 'moon-dock';
+    dock.hidden = true;
+    dock.innerHTML = `
+        <p id="moon-quest-title">Moons</p>
+        <div id="moon-quest-list"></div>
+        <button type="button" id="moon-quest-return">Back</button>
+    `;
+    body.appendChild(dock);
+    const peek = document.createElement('button');
+    peek.id = 'nav-peek';
+    peek.type = 'button';
+    peek.textContent = 'Chart';
+    body.appendChild(peek);
+    tour.querySelectorAll('.tour-stop').forEach((button) => {
+        button.addEventListener('click', (event) => {
+            event.stopPropagation();
+            appState.goToTourStop(Number(button.dataset.index));
+        });
+    });
+    document.getElementById('tour-back').addEventListener('click', (event) => {
+        event.stopPropagation();
+        appState.tourBack();
+    });
+    document.getElementById('tour-next').addEventListener('click', (event) => {
+        event.stopPropagation();
+        appState.tourNext();
+    });
+    document.getElementById('tour-leave').addEventListener('click', (event) => {
+        event.stopPropagation();
+        appState.enterFreeMode();
+    });
+    const moonGroups = {};
+    moons.forEach((moon) => {
+        if (!moonGroups[moon.parentId]) {
+            moonGroups[moon.parentId] = [];
+        }
+        moonGroups[moon.parentId].push(moon);
+    });
+    const earthMoon = uniqueDestinations.find((item) => item.id === '9');
+    if (earthMoon && earthMoon.mesh) {
+        if (!earthMoon.mesh.parentId) {
+            earthMoon.mesh.parentId = '3';
+        }
+        if (!moonGroups['3']) {
+            moonGroups['3'] = [];
+        }
+        moonGroups['3'].push(earthMoon.mesh);
+    }
+    const nebulaOrder = ['horsehead', 'rosette', 'crab', 'helix', 'ring', 'catseye', 'eagle', 'lagoon', 'carina', 'butterfly'];
+    const nebulaMeshes = {};
+    uniqueDestinations.forEach((dest) => {
+        if (dest.mesh && dest.mesh.parentId === 'orion' && dest.mesh.celestialKind === 'nebula') {
+            nebulaMeshes[dest.id] = dest.mesh;
+        }
+    });
+    nebulaOrder.forEach((id) => {
+        if (!nebulaMeshes[id]) {
+            return;
+        }
+        if (!moonGroups.orion) {
+            moonGroups.orion = [];
+        }
+        moonGroups.orion.push(nebulaMeshes[id]);
+    });
+    const moonList = document.getElementById('moon-quest-list');
+    Object.keys(moonGroups).forEach((parentId) => {
+        moonGroups[parentId].forEach((moon) => {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'moon-jump';
+            button.dataset.parent = parentId;
+            button.dataset.id = moon.infoId;
+            button.textContent = moon.dockLabel || moon.planetName;
+            button.addEventListener('click', (event) => {
+                event.stopPropagation();
+                appState.visitMoon(moon);
+            });
+            moonList.appendChild(button);
+        });
+    });
+    document.getElementById('moon-quest-return').addEventListener('click', (event) => {
+        event.stopPropagation();
+        appState.returnToTourStop();
+    });
+
     const minimapWrap = document.createElement('div');
     minimapWrap.id = 'minimap-wrap';
     minimapWrap.innerHTML = `<canvas id="minimap" width="180" height="180"></canvas><div id="minimap-names"></div><div id="minimap-label">Click chart to warp</div>`;
     body.appendChild(minimapWrap);
 
+    document.getElementById('nav-collapse').addEventListener('click', (event) => {
+        event.stopPropagation();
+        nav.classList.add('collapsed');
+    });
+    peek.addEventListener('click', (event) => {
+        event.stopPropagation();
+        nav.classList.remove('collapsed');
+    });
     document.getElementById('nav-home').addEventListener('click', (event) => {
         event.stopPropagation();
         appState.goHome();
@@ -187,12 +294,76 @@ export const createSpaceHud = ({ flight, pickables, destinations, appState }) =>
             row.classList.toggle('selected', appState.selected && String(appState.selected.infoId) === id);
             row.classList.toggle('visited', appState.visited.has(id));
         });
+        const touring = appState.mode === 'tour';
+        document.body.classList.toggle('mode-tour', touring);
         const tourButton = document.getElementById('tour-button');
-        if (appState.tourIndex >= 0) {
-            const next = uniqueDestinations.find((item) => item.id === TOUR_IDS[appState.tourIndex + 1]);
-            tourButton.textContent = next ? `Next: ${next.name}` : 'Finish tour';
-        } else {
-            tourButton.textContent = 'Start tour';
+        tourButton.textContent = touring ? 'Explore' : 'Tour';
+        const help = document.getElementById('hud-help');
+        if (help) {
+            help.textContent = touring ? '' : 'Drag to look · scroll to zoom · WASD to fly';
+        }
+        const progress = document.getElementById('tour-progress');
+        const index = appState.tourIndex;
+        if (progress) {
+            const current = tourStops[index];
+            progress.textContent = current
+                ? `${index + 1} / ${tourStops.length}`
+                : `1 / ${tourStops.length}`;
+        }
+        tour.querySelectorAll('.tour-stop').forEach((button) => {
+            const stopIndex = Number(button.dataset.index);
+            button.classList.toggle('current', stopIndex === index);
+            button.classList.toggle('visited', appState.visited.has(button.dataset.id));
+        });
+        const currentStop = tour.querySelector('.tour-stop.current');
+        const back = document.getElementById('tour-back');
+        const next = document.getElementById('tour-next');
+        if (back) {
+            back.disabled = index <= 0;
+        }
+        if (next) {
+            next.textContent = index >= tourStops.length - 1 ? 'Finish' : 'Next';
+        }
+        const stopId = touring && index >= 0 ? TOUR_IDS[index] : null;
+        const selectedId = appState.selected ? String(appState.selected.infoId) : '';
+        let dockParent = null;
+        if (touring && moonGroups[stopId]) {
+            dockParent = stopId;
+        } else if (!touring && moonGroups[selectedId]) {
+            dockParent = selectedId;
+        } else if (!touring && appState.selected && appState.selected.parentId && moonGroups[appState.selected.parentId]) {
+            dockParent = appState.selected.parentId;
+        }
+        const questMoons = dockParent ? moonGroups[dockParent] : null;
+        const dockEl = document.getElementById('moon-dock');
+        if (dockEl) {
+            dockEl.hidden = !questMoons;
+        }
+        if (touring && refreshNav._shownIndex !== index && currentStop) {
+            const scroller = document.getElementById('tour-stops');
+            const stopLeft = currentStop.getBoundingClientRect().left - scroller.getBoundingClientRect().left + scroller.scrollLeft;
+            const left = stopLeft - (scroller.clientWidth - currentStop.clientWidth) / 2;
+            scroller.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
+        }
+        refreshNav._shownIndex = index;
+        if (questMoons) {
+            const parentDest = uniqueDestinations.find((item) => item.id === dockParent);
+            const parentName = (parentDest && parentDest.name) || 'this world';
+            const nebulaDock = questMoons.some((moon) => moon.celestialKind === 'nebula');
+            document.getElementById('moon-quest-title').textContent = nebulaDock ? 'Nebulae' : 'In orbit';
+            const onMoon = !!(appState.selected && String(appState.selected.infoId) !== dockParent);
+            moonList.querySelectorAll('.moon-jump').forEach((button) => {
+                button.hidden = button.dataset.parent !== dockParent;
+                button.classList.toggle('current', selectedId === button.dataset.id || appState.moonDetourId === button.dataset.id);
+            });
+            const moonReturn = document.getElementById('moon-quest-return');
+            if (moonReturn) {
+                moonReturn.hidden = !onMoon;
+                moonReturn.textContent = `Back to ${parentName}`;
+            }
+            if (progress && touring && onMoon && appState.selected) {
+                progress.textContent = `${index + 1} / ${tourStops.length} · ${appState.selected.planetName}`;
+            }
         }
         document.getElementById('look-lock-button').classList.toggle('active', appState.pointerLocked);
     };
@@ -285,7 +456,7 @@ export const createSpaceHud = ({ flight, pickables, destinations, appState }) =>
                 viewport
             );
             const onScreen = projected.z > 0 && projected.z < 1 && projected.x > 40 && projected.x < viewport.width - 40 && projected.y > 40 && projected.y < viewport.height - 40;
-            arrow.classList.toggle('visible', !onScreen);
+            arrow.classList.toggle('visible', appState.mode !== 'tour' && !onScreen);
             if (!onScreen) {
                 const angle = Math.atan2(projected.y - viewport.height / 2, projected.x - viewport.width / 2);
                 arrow.style.transform = `translate(-50%, -50%) rotate(${angle}rad)`;

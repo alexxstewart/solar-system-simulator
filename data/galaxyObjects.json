@@ -5,7 +5,7 @@
       "name": "Pluto",
       "group": "Solar System",
       "type": "planet",
-      "orbit": 78,
+      "orbit": 128,
       "alpha": 2.4,
       "alphaIncrement": 0.00022,
       "rotationIncrement": 0.003,
@@ -18,13 +18,13 @@
       "name": "Asteroid Belt",
       "group": "Solar System",
       "type": "belt",
-      "inner": 22.5,
-      "outer": 27.8,
+      "inner": 30,
+      "outer": 36.5,
       "count": 700,
       "ySpread": 1.4,
       "scaleMin": 0.035,
       "scaleMax": 0.2,
-      "markerOrbit": 25,
+      "markerOrbit": 33,
       "cameraDistance": 16
     },
     {
@@ -32,13 +32,13 @@
       "name": "Kuiper Belt",
       "group": "Solar System",
       "type": "belt",
-      "inner": 70,
-      "outer": 92,
+      "inner": 118,
+      "outer": 150,
       "count": 420,
       "ySpread": 3.5,
       "scaleMin": 0.03,
       "scaleMax": 0.12,
-      "markerOrbit": 80,
+      "markerOrbit": 134,
       "cameraDistance": 28
     },
     {
@@ -46,7 +46,7 @@
       "name": "Voyager 1",
       "group": "Solar System",
       "type": "probe",
-      "position": [12, 6, 102],
+      "position": [18, 8, 178],
       "cameraDistance": 4
     },
     {
@@ -54,8 +54,8 @@
       "name": "Oort Cloud",
       "group": "Solar System",
       "type": "cloud",
-      "inner": 160,
-      "outer": 250,
+      "inner": 230,
+      "outer": 360,
       "count": 280,
       "cameraDistance": 40
     },
@@ -79,7 +79,7 @@
           "radius": 0.7,
           "orbit": 7.5,
           "alphaIncrement": 0.004,
-          "texture": "style/textures/mars.jpg",
+          "texture": "imagined",
           "cameraDistance": 5
         }
       ]
@@ -273,6 +273,7 @@
     {
       "id": "horsehead",
       "name": "Horsehead Nebula",
+      "dockLabel": "Horsehead",
       "group": "Nebulae",
       "type": "nebula",
       "raHours": 5.679,
@@ -301,6 +302,7 @@
     {
       "id": "helix",
       "name": "Helix Nebula",
+      "dockLabel": "Helix",
       "group": "Nebulae",
       "type": "nebula",
       "raHours": 22.493,
@@ -315,6 +317,7 @@
     {
       "id": "crab",
       "name": "Crab Nebula",
+      "dockLabel": "Crab",
       "group": "Nebulae",
       "type": "nebula",
       "raHours": 5.5756,
@@ -329,6 +332,7 @@
     {
       "id": "eagle",
       "name": "Pillars of Creation",
+      "dockLabel": "Pillars",
       "group": "Nebulae",
       "type": "nebula",
       "raHours": 18.3117,
@@ -343,6 +347,7 @@
     {
       "id": "carina",
       "name": "Carina Nebula",
+      "dockLabel": "Carina",
       "group": "Nebulae",
       "type": "nebula",
       "raHours": 10.752,
@@ -355,6 +360,82 @@
       "cameraDistance": 85
     },
     {
+      "id": "rosette",
+      "name": "Rosette Nebula",
+      "dockLabel": "Rosette",
+      "presentation": "field",
+      "group": "Nebulae",
+      "type": "nebula",
+      "raHours": 6.5625,
+      "decDeg": 4.998,
+      "distanceLy": 5200,
+      "scaleMode": "compressed",
+      "width": 150,
+      "height": 100,
+      "texture": "style/textures/galaxy/rosette.jpg",
+      "cameraDistance": 90
+    },
+    {
+      "id": "ring",
+      "name": "Ring Nebula",
+      "dockLabel": "Ring",
+      "group": "Nebulae",
+      "type": "nebula",
+      "raHours": 18.8931,
+      "decDeg": 33.029,
+      "distanceLy": 2567,
+      "scaleMode": "compressed",
+      "width": 120,
+      "height": 120,
+      "texture": "style/textures/galaxy/ring.jpg",
+      "cameraDistance": 85
+    },
+    {
+      "id": "catseye",
+      "name": "Cat's Eye Nebula",
+      "dockLabel": "Cat's Eye",
+      "group": "Nebulae",
+      "type": "nebula",
+      "raHours": 17.9759,
+      "decDeg": 66.633,
+      "distanceLy": 3300,
+      "scaleMode": "compressed",
+      "width": 110,
+      "height": 110,
+      "texture": "style/textures/galaxy/catseye.jpg",
+      "cameraDistance": 80
+    },
+    {
+      "id": "lagoon",
+      "name": "Lagoon Nebula",
+      "dockLabel": "Lagoon",
+      "group": "Nebulae",
+      "type": "nebula",
+      "raHours": 18.0603,
+      "decDeg": -24.387,
+      "distanceLy": 4100,
+      "scaleMode": "compressed",
+      "width": 96,
+      "height": 121,
+      "texture": "style/textures/galaxy/lagoon.jpg",
+      "cameraDistance": 90
+    },
+    {
+      "id": "butterfly",
+      "name": "Butterfly Nebula",
+      "dockLabel": "Butterfly",
+      "group": "Nebulae",
+      "type": "nebula",
+      "raHours": 17.2289,
+      "decDeg": -37.104,
+      "distanceLy": 3800,
+      "scaleMode": "compressed",
+      "width": 104,
+      "height": 121,
+      "texture": "style/textures/galaxy/butterfly.jpg",
+      "cameraDistance": 90
+    },
+    {
       "id": "sgr-a",
       "name": "Sagittarius A*",
       "group": "Deep Galaxy",
@@ -364,8 +445,9 @@
       "distanceLy": 26600,
       "scaleMode": "compressed",
       "radius": 6,
-      "diskRadius": 28,
-      "cameraDistance": 70
+      "diskRadius": 26,
+      "cameraDistance": 76,
+      "texture": "style/textures/galaxy/sgr-a.jpg"
     },
     {
       "id": "andromeda",

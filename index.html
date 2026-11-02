@@ -4,18 +4,42 @@
         <title>Milky Way Explorer</title>
         <script src="https://cdn.jsdelivr.net/npm/babylonjs@9.22.2/babylon.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/babylonjs-gui@9.22.2/babylon.gui.min.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="./style/index.css">
     </head>
     <body id="body">
         <div id="loading-screen">
+            <img id="loading-screen-image" src="style/textures/introduction/stars.jpg" alt="">
+            <div class="load-shade"></div>
             <div id="loading-content-section">
-                <h1 id="loading-screen-title">Milky Way Explorer</h1>
-                <div class="loader"></div>
-                <p id="loading-screen-text">Charting nearby stars and nebulae ... </p>
+                <p class="load-kicker">A sky full of worlds</p>
+                <h1 id="loading-screen-title">Milky Way<br>Explorer</h1>
+                <div class="orbit-loader" aria-hidden="true"><span></span><i></i></div>
+                <p id="loading-screen-text">The Sun fuses 600 million tonnes of hydrogen every second.</p>
             </div>
-            <img id="loading-screen-image" src="style/textures/introduction/stars.jpg">
         </div>
+        <script>
+            window.__milkyLoadStart = Date.now();
+            (function () {
+                var lines = [
+                    'The Sun fuses 600 million tonnes of hydrogen every second.',
+                    'A day on Venus lasts longer than its year.',
+                    'Saturn is light enough to float in water.',
+                    'Light from the nearest star takes 4.2 years to arrive.',
+                    'Charting nearby stars and nebulae…'
+                ];
+                var el = document.getElementById('loading-screen-text');
+                var i = 0;
+                setInterval(function () {
+                    if (!el || !el.isConnected) return;
+                    i = (i + 1) % lines.length;
+                    el.textContent = lines[i];
+                }, 2200);
+            })();
+        </script>
         <canvas id="canvas"></canvas>
         <script type="module" src="./src/index.js"></script>
     </body>

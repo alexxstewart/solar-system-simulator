@@ -16,103 +16,103 @@
         "planetSegments": "32",
         "radius": "1",
         "urlPath": "style/textures/mercury.jpg",
-        "orbit": "6",
+        "orbit": "8",
         "alpha": "6.28",
         "alphaIncrement": "0.003",
         "rotation": "0.001",
         "rotationIncrement": "0.001",
-        "cameraDistance": "8"
+        "cameraDistance": "10"
     },
     "2": {
         "planetName": "Venus",
         "planetSegments": "32",
         "radius": "1",
         "urlPath": "style/textures/venus.jpg",
-        "orbit": "10",
+        "orbit": "13",
         "alpha": "6.28",
         "alphaIncrement": "0.002",
         "rotation": "0.001",
         "rotationIncrement": "0.001",
-        "cameraDistance": "12"
+        "cameraDistance": "15"
     },
     "3": {
         "planetName": "Earth",
         "planetSegments": "32",
         "radius": "1",
         "urlPath": "style/textures/earth.jpg",
-        "orbit": "15",
+        "orbit": "19",
         "alpha": "6.28",
         "alphaIncrement": "0.002",
         "rotation": "0.01",
         "rotationIncrement": "0.015",
-        "cameraDistance": "17"
+        "cameraDistance": "21"
     },
     "4": {
         "planetName": "Mars",
         "planetSegments": "32",
         "radius": "1",
         "urlPath": "style/textures/mars.jpg",
-        "orbit": "20",
+        "orbit": "25",
         "alpha": "6.28",
         "alphaIncrement": "0.0015",
         "rotation": "0.01",
         "rotationIncrement": "0.01",
-        "cameraDistance": "22"
+        "cameraDistance": "27"
     },
     "5": {
         "planetName": "Jupiter",
         "planetSegments": "32",
         "radius": "2.5",
         "urlPath": "style/textures/jupiter.jpg",
-        "orbit": "30",
+        "orbit": "48",
         "alpha": "6.28",
         "alphaIncrement": "0.0009",
         "rotation": "0.01",
         "rotationIncrement": "0.01",
-        "cameraDistance": "35.5"
+        "cameraDistance": "54"
     },
     "6": {
         "planetName": "Saturn",
         "planetSegments": "32",
         "radius": "2",
         "urlPath": "style/textures/saturn.jpg",
-        "orbit": "40",
+        "orbit": "66",
         "alpha": "6.28",
         "alphaIncrement": "0.0007",
         "rotation": "0.01",
         "rotationIncrement": "0.01",
-        "cameraDistance": "47"
+        "cameraDistance": "72"
     },
     "7": {
         "planetName": "Uranus",
         "planetSegments": "32",
         "radius": "1.8",
         "urlPath": "style/textures/uranus.jpg",
-        "orbit": "50",
+        "orbit": "84",
         "alpha": "6.28",
         "alphaIncrement": "0.0006",
         "rotation": "0.01",
         "rotationIncrement": "0.01",
-        "cameraDistance": "53.8"
+        "cameraDistance": "88"
     },
     "8": {
         "planetName": "Neptune",
         "planetSegments": "32",
         "radius": "1.6",
         "urlPath": "style/textures/neptune.jpg",
-        "orbit": "60",
+        "orbit": "104",
         "alpha": "6.28",
         "alphaIncrement": "0.0005",
         "rotation": "0.01",
         "rotationIncrement": "0.01",
-        "cameraDistance": "63.6"
+        "cameraDistance": "108"
     },
     "9": {
         "planetName": "The Moon",
         "planetSegments": "32",
         "radius": "0.4",
         "urlPath": "style/textures/earthMoon.jpg",
-        "orbit": "1.5",
+        "orbit": "2.4",
         "alpha": "0",
         "alphaIncrement": "0.01",
         "rotation": "0.01",
