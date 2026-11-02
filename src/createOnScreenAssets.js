@@ -237,8 +237,6 @@ const bakeEarthClouds = (earth) => {
         texture.getContext().drawImage(canvas, 0, 0);
         texture.update(false);
         texture.hasAlpha = false;
-        texture.vScale = -1;
-        texture.vOffset = 1;
         earth.material.diffuseTexture = texture;
         earth.material.useAlphaFromDiffuseTexture = false;
         earth.material.transparencyMode = BABYLON.Material.MATERIAL_OPAQUE;
