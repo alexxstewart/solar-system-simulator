@@ -1,5 +1,5 @@
 import { createWelcomeSection, deleteLoadingScreen, showObjectCard, closeObjectCard } from './GUIManager.js';
-import { createLighting, createGroundMesh, createSkyImage, createPlanets, createMusic, addShadowCaster, attachGlowOccluders } from './createOnScreenAssets.js?v=north';
+import { createLighting, createGroundMesh, createSkyImage, createPlanets, createMusic, addShadowCaster, attachGlowOccluders } from './createOnScreenAssets.js?v=spin';
 import { renderPlanets, highlightLayerLogic } from './renderer.js';
 import { loadTextures } from './loadAssets.js';
 import { createExplorationCamera, warpToMesh, goHome, turnToward, findNearestCelestial, updateExamineCamera, endExamine } from './explorationCamera.js';
@@ -19,7 +19,7 @@ const UI_SELECTOR = '#nav-panel, #nav-peek, #tour-panel, #moon-dock, #space-hud,
 const init = () => {
     Promise.all([
         fetch('data/planetInfo.json').then((response) => response.json()),
-        fetch('data/planetData.json').then((response) => response.json()),
+        fetch('data/planetData.json?v=spin').then((response) => response.json()),
         fetch('data/galaxyObjects.json').then((response) => response.json()),
         fetch('data/galaxyInfo.json').then((response) => response.json())
     ]).then(([planetInfo, planetData, galaxyCatalog, galaxyInfo]) => {
