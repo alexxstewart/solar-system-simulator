@@ -234,12 +234,14 @@ const bakeEarthClouds = (earth) => {
             width,
             height
         }, earth.getScene(), false, BABYLON.Texture.TRILINEAR_SAMPLINGMODE, undefined, true);
-        texture.getContext().drawImage(canvas, 0, 0);
+        const gpu = texture.getContext();
+        gpu.save();
+        gpu.translate(0, height);
+        gpu.scale(1, -1);
+        gpu.drawImage(canvas, 0, 0, width, height);
+        gpu.restore();
         texture.update(false);
         texture.hasAlpha = false;
-        // The source map has the south pole at the top of the file.
-        texture.vScale = -1;
-        texture.vOffset = 1;
         earth.material.diffuseTexture = texture;
         earth.material.useAlphaFromDiffuseTexture = false;
         earth.material.transparencyMode = BABYLON.Material.MATERIAL_OPAQUE;

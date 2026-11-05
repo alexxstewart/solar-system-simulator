@@ -1,5 +1,5 @@
 import { createWelcomeSection, deleteLoadingScreen, showObjectCard, closeObjectCard } from './GUIManager.js';
-import { createLighting, createGroundMesh, createSkyImage, createPlanets, createMusic, addShadowCaster, attachGlowOccluders } from './createOnScreenAssets.js?v=spin';
+import { createLighting, createGroundMesh, createSkyImage, createPlanets, createMusic, addShadowCaster, attachGlowOccluders } from './createOnScreenAssets.js?v=poles';
 import { renderPlanets, highlightLayerLogic } from './renderer.js';
 import { loadTextures } from './loadAssets.js';
 import { createExplorationCamera, warpToMesh, goHome, turnToward, findNearestCelestial, updateExamineCamera, endExamine } from './explorationCamera.js';
